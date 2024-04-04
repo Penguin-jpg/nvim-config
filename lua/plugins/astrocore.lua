@@ -7,24 +7,27 @@
 return {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
-  opts = {
+  opts = function(plugin, opts)
     -- Configure core features of AstroNvim
-    features = {
+    local features = opts.features
+    require("astrocore").extend_tbl(features, {
       large_buf = { size = 1024 * 500, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
       diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
-    },
+    })
+
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
-    diagnostics = {
+    require("astrocore").extend_tbl(opts.diagnostics, {
       virtual_text = true,
       underline = true,
       update_in_insert = false,
-    },
+    })
+    
     -- Configuration table of session options for AstroNvim's session management powered by Resession
-    sessions = {
+    require("astrocore").extend_tbl(opts.sessions, {
       -- Configure auto saving
       autosave = {
         last = true, -- auto save last session
@@ -36,10 +39,12 @@ return {
         filetypes = { "gitcommit", "gitrebase" }, -- filetypes to ignore sessions
         buftypes = {}, -- buffer types to ignore sessions
       },
-    },
+    })
+
     -- vim options can be configured here
-    options = {
-      opt = { -- vim.opt.<key>
+    -- vim.opt.<key>
+    require("astrocore").extend_tbl(options, {
+      opt = {
         relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell
@@ -53,24 +58,14 @@ return {
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         -- This can be found in the `lua/lazy_setup.lua` file
       },
-    },
+    })
+
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    mappings = {
+    require("astrocore").extend_tbl(opts.mappings, {
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map
-
-        -- navigate buffer tabs with `H` and `L`
-        -- L = {
-        --   function() require("astrocore.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
-        --   desc = "Next buffer",
-        -- },
-        -- H = {
-        --   function() require("astrocore.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
-        --   desc = "Previous buffer",
-        -- },
-
         -- mappings seen under group name "Buffer"
         ["<Leader>bD"] = {
           function()
@@ -80,16 +75,7 @@ return {
           end,
           desc = "Pick to close",
         },
-        -- tables with just a `desc` key will be registered with which-key if it's installed
-        -- this is useful for naming menus
-        ["<Leader>b"] = { desc = "Buffers" },
-        -- quick save
-        -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
       },
-      t = {
-        -- setting a mapping to false will disable it
-        -- ["<esc>"] = false,
-      },
-    },
-  },
+    })
+  end
 }
