@@ -21,6 +21,21 @@ return {
     diagnostics = {
       virtual_text = true,
       underline = true,
+      update_in_insert = false,
+    },
+    -- Configuration table of session options for AstroNvim's session management powered by Resession
+    sessions = {
+      -- Configure auto saving
+      autosave = {
+        last = true, -- auto save last session
+        cwd = true, -- auto save session for each working directory
+      },
+      -- Patterns to ignore when saving sessions
+      ignore = {
+        dirs = {}, -- working directories to ignore sessions in
+        filetypes = { "gitcommit", "gitrebase" }, -- filetypes to ignore sessions
+        buftypes = {}, -- buffer types to ignore sessions
+      },
     },
     -- vim options can be configured here
     options = {
@@ -30,6 +45,8 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "auto", -- sets vim.opt.signcolumn to auto
         wrap = false, -- sets vim.opt.wrap
+        mouse = "a", -- sets vim.opt.mouse
+        mousemoveevent = true, -- sets vim.opt.mousemoveevent
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
