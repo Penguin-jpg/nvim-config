@@ -20,4 +20,4 @@ return {
     }
     return opts
   end,
-},
+}
