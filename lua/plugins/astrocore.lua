@@ -61,6 +61,7 @@ return {
 
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    require "plugins.core.mappings".extend_mappings(opts.mappings)
+    local mappings = opts.mappings
+    mappings.n["<Leader>x"] = { "<cmd>echo hello<cr>", desc = "Say hello" }
   end
 }
