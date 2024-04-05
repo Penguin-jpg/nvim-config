@@ -46,5 +46,8 @@ return {
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     opts.mappings = require "plugins.core.mappings"(opts.mappings)
+
+    -- Autocommands can be configured here
+    opts.autocmds = require "plugins.core.autocmds"(opts.autocmds)
   end
 }
