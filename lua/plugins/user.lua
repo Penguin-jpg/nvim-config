@@ -3,6 +3,26 @@
 
 ---@type LazySpec
 return {
+  {
+    "rcarriga/nvim-notify",
+    opts = function(_, opts)
+      -- Do this to prevent the warning
+      opts.background_colour = "#000000"
+    end,
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    opts = function(_, opts)
+      -- Use powershell for toggleterm on windows
+      if vim.fn.has "win32" then opts.shell = "pwsh.exe" end
+    end,
+  },
+  {
+    "max397574/better-escape.nvim",
+    opts = {
+      mapping = { "jj", "xx" },
+    },
+  },
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
     "L3MON4D3/LuaSnip",
