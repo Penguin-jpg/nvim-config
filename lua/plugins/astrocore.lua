@@ -9,8 +9,7 @@ return {
   ---@type AstroCoreOpts
   opts = function(plugin, opts)
     -- Configure core features of AstroNvim
-    local features = opts.features
-    require("astrocore").extend_tbl(features, {
+    require("astrocore").extend_tbl(opts.features, {
       large_buf = { size = 1024 * 500, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
@@ -43,7 +42,7 @@ return {
 
     -- vim options can be configured here
     -- vim.opt.<key>
-    require("astrocore").extend_tbl(options, {
+    require("astrocore").extend_tbl(opts.options, {
       opt = {
         relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
@@ -62,6 +61,6 @@ return {
 
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    opts.mappings = require "plugins.core.mappings"
+    require "plugins.core.mappings".extend_mappings(opts.mappings)
   end
 }
