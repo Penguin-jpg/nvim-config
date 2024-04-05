@@ -1,5 +1,4 @@
 -- Some commands that I want to execute in specific timing
-vim.api.nvim_create_augroup("auto-commands", { clear = true })
 
 return function(autocmds)
   -- autcommands to be executed only once
