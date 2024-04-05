@@ -11,9 +11,8 @@ return {
     },
     event = "User AstroGitFile",
     opts = function(_, opts)
-      local core = require "astrocore"
       local fold_signs = { core.get_icon "FoldClosed", core.get_icon "FoldOpened" }
-      return core.extend_tbl(opts, {
+      return require "astrocore".extend_tbl(opts, {
         disable_builtin_notifications = true,
         telescope_sorter = function()
           if core.is_available "telescope-fzf-native.nvim" then

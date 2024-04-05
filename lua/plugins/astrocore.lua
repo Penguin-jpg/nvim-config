@@ -9,7 +9,7 @@ return {
   ---@type AstroCoreOpts
   opts = function(plugin, opts)
     -- Configure core features of AstroNvim
-    require("astrocore").extend_tbl(opts.features, {
+    require "astrocore".extend_tbl(opts.features, {
       large_buf = { size = 1024 * 500, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
@@ -19,14 +19,14 @@ return {
     })
 
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
-    require("astrocore").extend_tbl(opts.diagnostics, {
+    require "astrocore".extend_tbl(opts.diagnostics, {
       virtual_text = true,
       underline = true,
       update_in_insert = false,
     })
     
     -- Configuration table of session options for AstroNvim's session management powered by Resession
-    require("astrocore").extend_tbl(opts.sessions, {
+    require "astrocore".extend_tbl(opts.sessions, {
       -- Configure auto saving
       autosave = {
         last = true, -- auto save last session
@@ -41,13 +41,15 @@ return {
     })
 
     -- vim options can be configured here
-    opts.options = require "plugins.core.options"(opts.options)
+    opts.options = require("core.options")(opts.options)
 
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    opts.mappings = require "plugins.core.mappings"(opts.mappings)
+    opts.mappings = require("core.mappings")(opts.mappings)
 
     -- Autocommands can be configured here
-    opts.autocmds = require "plugins.core.autocmds"(opts.autocmds)
+    opts.autocmds = require("core.autocmds")(opts.autocmds)
+
+    return opts
   end
 }
