@@ -11,9 +11,8 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    opts = function(_, opts)
-      require "astrocore".extend_tbl(opts, require("plugins.configs.ui.colorscheme").catppuccin)
-      return opts
+    config = function()
+      require("plugins.ui.catppuccin")
     end
   },
   {
@@ -25,20 +24,6 @@ return {
         additional_vim_regex_highlighting = false,
       },
     },
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    opts = function(_, opts)
-      require "astrocore".extend_tbl(opts, require("plugins.configs.ui.colorscheme").kanagawa)
-      return opts
-    end,
-  },
-  {
-    "navarasu/onedark.nvim",
-    opts = function(_, opts)
-      require "astrocore".extend_tbl(opts, require("plugins.configs.ui.colorscheme").onedark)
-      return opts
-    end,
   },
   {
     "folke/noice.nvim",
