@@ -87,3 +87,5 @@ M.ondark = {
     ["@punctuation.bracket"] = { fg = "$orange" },
   },
 }
+
+return M

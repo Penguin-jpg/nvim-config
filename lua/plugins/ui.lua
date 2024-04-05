@@ -56,7 +56,7 @@ return {
       end,
     },
     opts = function(_, opts)
-      return require "astrocore".extend_tbl(opts, require("plugins.configs.ui.noice")
+      return require "astrocore".extend_tbl(opts, require("plugins.configs.ui.noice"))
     end,
     init = function() vim.g.lsp_handlers_enabled = false end,
   },
