@@ -1,9 +1,9 @@
 -- Some commands that I want to execute in specific timing
 vim.api.nvim_create_augroup("auto-commands", { clear = true })
 
-return {
+return function(autocmds)
   -- autcommands to be executed only once
-  oncecmds = {
+  autocmds.oncecmds = {
     -- each augroup contains a list of auto commands
     {
       event = "VimEnter",
@@ -23,8 +23,9 @@ return {
       group = "oncecmds",
       command = "set ve+=onemore",
     },
-  },
-  diagnosticscmds = {
+  }
+
+  autocmds.diagnosticscmds = {
     {
       event = "User",
       pattern = "AstroFile",
@@ -42,5 +43,6 @@ return {
         vim.diagnostic.open_float(nil, opts)
       end,
     },
-  },
-}
+  }
+  return autocmds
+end
