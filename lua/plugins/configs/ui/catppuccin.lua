@@ -1,3 +1,8 @@
+local ok, catppuccin = pcall(require, "catppuccin")
+if not ok then
+  return
+end
+
 return function()
   require "catppuccin".setup({
     flavour = "mocha", -- latte, frappe, macchiato, mocha

@@ -10,6 +10,7 @@ return {
   },
   {
     "catppuccin/nvim",
+    event = "VeryLazy",
     name = "catppuccin",
     config = function()
       require("plugins.ui.catppuccin")
