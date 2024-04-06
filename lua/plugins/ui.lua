@@ -8,6 +8,18 @@ return {
       return opts
     end,
   },
+  -- Statusline
+  {
+    "sontungexpt/sttusline",
+    branch = "table_version",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+    },
+    event = "BufEnter",
+    config = function(_, opts)
+        require("sttusline").setup()
+    end,
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
