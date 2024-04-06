@@ -17,7 +17,8 @@ return {
     },
     event = "BufEnter",
     config = function(_, opts)
-        require("sttusline").setup()
+      opts = require "plugins.configs.ui.sttusline"(opts)
+      require("sttusline").setup(opts)
     end,
   },
   {
