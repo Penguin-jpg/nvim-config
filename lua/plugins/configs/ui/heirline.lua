@@ -9,7 +9,11 @@ return function(opts)
       mode_text = { padding = { left = 1, right = 1 } } 
     }),
     status.component.git_branch(),
-    status.component.file_info { filename = { fallback = "Empty" }, file_modified = false },
+    status.component.file_info {
+      filename = { fallback = "Empty" },
+      filetype = false,
+      file_modified = false,
+    },
     status.component.git_diff {},
     status.component.diagnostics(),
     status.component.fill(),
