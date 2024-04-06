@@ -67,9 +67,8 @@ return {
           crust = "#0e0f16",
         },
       },
-    },
-    integrations = {
-      aerial = true,
+      integrations = {
+        aerial = true,
         alpha = true,
         cmp = true,
         dap = true,
@@ -88,6 +87,7 @@ return {
         ts_rainbow = false,
         which_key = true,
         window_picker = true,
+      },
     },
   },
   {
