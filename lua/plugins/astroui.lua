@@ -3,19 +3,25 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+
 ---@type LazySpec
 return {
   "AstroNvim/astroui",
   ---@type AstroUIOpts
-  opts = {
+  opts = function(_, opts)
     -- change colorscheme
-    colorscheme = "catppuccin",
+    opts.colorscheme = "catppuccin"
+
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
-    highlights = require "plugins.configs.ui.highlights",
+    opts.highlights = require("plugins.configs.ui.highlights")
+
     -- Icons can be configured throughout the interface
-    icons = require "plugins.configs.ui.icons",
-    attributes = {
+    opts.icons = require("plugins.configs.ui.icons")(opts.icons)
+
+    opts.attributes = {
       mode = { bold = true },
-    },
-  },
+    }
+     
+    return opts
+  end
 }
