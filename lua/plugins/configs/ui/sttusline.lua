@@ -1,7 +1,7 @@
 return function(opts)
   opts.components = {
     "mode",
-    "git-branch"
+    "git-branch",
     "git-diff",
     "%=", -- add empty space
     "os-uname",
@@ -11,6 +11,6 @@ return function(opts)
     "pos-cursor",
     "pos-cursor-progress",
   }
-  
+
   return opts
 end
