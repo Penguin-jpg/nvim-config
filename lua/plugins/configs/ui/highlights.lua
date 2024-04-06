@@ -1,5 +1,5 @@
-return function(highlights)
-  highlights.init = { -- this table overrides highlights in all themes
+return { 
+  init = { -- this table overrides highlights in all themes
     -- For nvim-cmp menu
     PmenuSel = { bg = "#282C34", fg = "NONE" },
     Pmenu = { fg = "#C5CDD9", bg = "#22252A" },
@@ -32,11 +32,8 @@ return function(highlights)
     CmpItemKindInterface = { fg = "#D8EEEB", bg = "#58B5A8" },
     CmpItemKindColor = { fg = "#D8EEEB", bg = "#58B5A8" },
     CmpItemKindTypeParameter = { fg = "#D8EEEB", bg = "#58B5A8" },
-  }
-  
-  highlights.astrotheme = { -- a table of overrides/changes when applying the astrotheme theme
+  },
+  astrotheme = { -- a table of overrides/changes when applying the astrotheme theme
     -- Normal = { bg = "#000000" },
-  }
-
-  return highlights
-end
+  },
+}

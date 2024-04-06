@@ -11,9 +11,9 @@ return {
     -- change colorscheme
     colorscheme = "catppuccin",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
-    highlights = require "plugins.configs.ui.highlights"(highlights),
+    highlights = require "plugins.configs.ui.highlights",
     -- Icons can be configured throughout the interface
-    icons = require "plugins.configs.ui.icons"(icons),
+    icons = require "plugins.configs.ui.icons",
     attributes = {
       mode = { bold = true },
     },
