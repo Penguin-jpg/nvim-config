@@ -32,6 +32,10 @@ return {
       LSPLoading8 = "⠧",
       LSPLoading9 = "⠇",
       LSPLoading10 = "⠏",
+      Clock = "",
+    },
+    attributes = {
+      mode = { bold = true },
     },
   },
 }

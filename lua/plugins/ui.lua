@@ -17,10 +17,17 @@ return {
   --   },
   --   event = "BufEnter",
   --   config = function(_, opts)
-  --     opts = require "plugins.configs.ui.sttusline"(opts)
+  --     opts = require(plugins.configs.ui.sttusline)(opts)
   --     require("sttusline").setup(opts)
   --   end,
   -- },
+  {
+    "rebelot/heirline.nvim",
+    opts = function(_, opts)
+      opts = require("plugins.configs.ui.heirline")(opts)
+      return opts
+    end,
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
