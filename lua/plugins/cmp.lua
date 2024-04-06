@@ -9,7 +9,26 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
     end
 
-    return require "astrocore".extend_tbl(opts, {
+    opts = require "astrocore".extend_tbl(opts, {
+      -- Configure window style
+      window = {
+        completion = {
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+          col_offset = -3,
+          side_padding = 0,
+        },
+      },
+      formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+          -- Show type of current item at the end
+          local kind = require "lspkind".cmp_format({ mode = "symbol_text", maxwidth=50 })(entry, vim_item)
+          local strings = vim.split(kind.kind, "%s", { trimetry = true })
+          kind.kind = " " .. (strings[1] or "") .. " "
+          kind.kind = "    (" .. (strings[2] or "") .. ")"
+          return kind
+        end,
+      },
       -- Always select the first option
       completion = {
         completeopt = "menu,menuone,noinsert",
@@ -43,5 +62,6 @@ return {
         end, { "i", "s" }),
       },
     })
+    return opts
   end,
 }
