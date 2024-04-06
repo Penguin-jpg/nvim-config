@@ -11,8 +11,9 @@ return {
     },
     event = "User AstroGitFile",
     opts = function(_, opts)
+      local ui = require "astroui"
       local core = require "astrocore"
-      local fold_signs = { core.get_icon "FoldClosed", core.get_icon "FoldOpened" }
+      local fold_signs = { ui.get_icon "FoldClosed", ui.get_icon "FoldOpened" }
       return core.extend_tbl(opts, {
         disable_builtin_notifications = true,
         telescope_sorter = function()
