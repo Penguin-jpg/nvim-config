@@ -9,18 +9,18 @@ return {
     end,
   },
   -- Statusline
-  {
-    "sontungexpt/sttusline",
-    branch = "table_version",
-    dependencies = {
-        "nvim-tree/nvim-web-devicons",
-    },
-    event = "BufEnter",
-    config = function(_, opts)
-      opts = require "plugins.configs.ui.sttusline"(opts)
-      require("sttusline").setup(opts)
-    end,
-  },
+  -- {
+  --   "sontungexpt/sttusline",
+  --   branch = "table_version",
+  --   dependencies = {
+  --       "nvim-tree/nvim-web-devicons",
+  --   },
+  --   event = "BufEnter",
+  --   config = function(_, opts)
+  --     opts = require "plugins.configs.ui.sttusline"(opts)
+  --     require("sttusline").setup(opts)
+  --   end,
+  -- },
   {
     "catppuccin/nvim",
     name = "catppuccin",
