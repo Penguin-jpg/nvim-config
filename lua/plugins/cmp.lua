@@ -13,7 +13,7 @@ return {
       -- Configure window style
       window = {
         completion = {
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
           col_offset = -3,
           side_padding = 0,
         },
@@ -22,10 +22,10 @@ return {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
           -- Show type of current item at the end
-          local kind = require "lspkind".cmp_format({ mode = "symbol_text", maxwidth=50 })(entry, vim_item)
+          local kind = require "lspkind".cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
           local strings = vim.split(kind.kind, "%s", { trimetry = true })
           kind.kind = " " .. (strings[1] or "") .. " "
-          kind.kind = "    (" .. (strings[2] or "") .. ")"
+          kind.menu = "    (" .. (strings[2] or "") .. ")"
           return kind
         end,
       },

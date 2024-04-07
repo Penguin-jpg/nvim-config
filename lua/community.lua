@@ -8,5 +8,4 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.recipes.heirline-vscode-winbar" },
-  { import = "astrocommunity.recipes.vscode-icons" },
 }
