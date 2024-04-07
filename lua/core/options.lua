@@ -11,6 +11,7 @@ return function(options)
     clipboard = "unnamedplus", -- sets vim.opt.clipboard
     mouse = "a", -- sets vim.opt.mouse
     mousemoveevent = true, -- sets vim.opt.mousemoveevent
+    laststatus = 2, -- sets vim.opt.laststatus
   }
 
   -- vim.g.<key>
