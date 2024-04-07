@@ -13,7 +13,8 @@ return {
       -- Configure window style
       window = {
         completion = {
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+          winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:None",
+          border = "none",
           col_offset = -3,
           side_padding = 0,
         },

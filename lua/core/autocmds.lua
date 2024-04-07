@@ -6,21 +6,9 @@ return function(autocmds)
     -- each augroup contains a list of auto commands
     {
       event = "VimEnter",
-      desc = "Automatically change cursor type to default setting",
-      group = "oncecmds",
-      command = "set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20",
-    },
-    {
-      event = "VimEnter",
       desc = "Disable auto insert comment header",
       group = "oncecmds",
       command = "set formatoptions-=cro",
-    },
-    {
-      event = "VimEnter",
-      desc = "Allow cursor to move one more character after end of line",
-      group = "oncecmds",
-      command = "set ve+=onemore",
     },
   }
 
