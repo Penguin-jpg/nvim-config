@@ -104,7 +104,6 @@ return function(opts)
             local time = os.date("%H:%M") -- show hour and minute in 24 hour format
             ---@cast time string
             return status.utils.stylize(time, {
-              icon = { kind = "Clock", padding = { right = 1 } }, -- use our new clock icon
               padding = { left = 1, right = 1 }, -- pad the right side so it's not cramped
             })
           end,
