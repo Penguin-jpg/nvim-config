@@ -18,9 +18,7 @@ return {
     -- Icons can be configured throughout the interface
     opts.icons = require("plugins.configs.ui.icons")(opts.icons)
 
-    opts.attributes = {
-      mode = { bold = true },
-    }
+    opts.status = require("plugins.configs.ui.status")(opts.status)
      
     return opts
   end

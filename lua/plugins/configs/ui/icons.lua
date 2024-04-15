@@ -51,7 +51,7 @@ return function(icons)
       DiagnosticWarn = "",
       -- Misc
       Clock = "",
-      ScrollText = "",
+      Navigation = "",
     }
   )
 end

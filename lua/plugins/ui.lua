@@ -8,19 +8,6 @@ return {
       return opts
     end,
   },
-  -- Statusline
-  -- {
-  --   "sontungexpt/sttusline",
-  --   branch = "table_version",
-  --   dependencies = {
-  --       "nvim-tree/nvim-web-devicons",
-  --   },
-  --   event = "BufEnter",
-  --   config = function(_, opts)
-  --     opts = require(plugins.configs.ui.sttusline)(opts)
-  --     require("sttusline").setup(opts)
-  --   end,
-  -- },
   {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
