@@ -8,18 +8,6 @@ return function(mappings)
   local core = require "astrocore"
   local is_available = core.is_available
 
-  -- tables with the `name` key will be registered with which-key if it's installed
-  -- this is useful for naming menus
-  mappings.n["<leader>b"] = { name = "Buffers" }
-  mappings.n["<Leader>bD"] = {
-    function()
-      require("astroui.status.heirline").buffer_picker(
-        function(bufnr) require("astrocore.buffer").close(bufnr) end
-      )
-    end,
-    desc = "Pick to close",
-  }
-
   ------ Utility functions ------
   mappings.n["<C-a>"] = { "ggVG", desc = "Select all lines" }
   if is_available "Comment.nvim" then
@@ -41,6 +29,8 @@ return function(mappings)
   mappings.n["<C-Left>"] = { "<Plug>WordMotion_b", desc = "Previous word" }
   -- Use <C-H> since <C-BS> sometimes fails (<C-H> also makes <C-BS> work)
   mappings.i["<C-H>"] = { "<C-w>", desc = { "Delete a word forward" } }
+  mappings.t["<C-H>"] = false -- disable the original <C-H> function
+  mappings.t["<C-H>"] = { "<C-w>", desc = { "Delete a word forward" } }
   -- <C-o> will exit insert mode tempoarily and back to insert mode again
   mappings.i["<C-Del>"] = { "<C-o>dw", desc = "Delete a word backward" }
   mappings.i["<C-z>"] = { "<C-o>u", desc = "Undo" }
@@ -119,10 +109,6 @@ return function(mappings)
     mappings.n["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" }
     mappings.n["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" }
   end
-
-  -- Terminal mode
-  -- setting a mapping to false will disable it
-  -- mappings.t["<esc>"] = false
 
   return mappings
 end
