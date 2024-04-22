@@ -26,6 +26,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 
 vim.api.nvim_create_autocmd("VimEnter", {
   desc = "Restore previous directory session if neovim opened with no arguments",
+  group = "restore_seesion",
   nested = true, -- trigger other autocommands as buffers open
   callback = function()
     -- Only load the session if nvim was started with no args
