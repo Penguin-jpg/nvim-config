@@ -9,7 +9,7 @@ return function(mappings)
   local is_available = core.is_available
 
   ------ Utility functions ------
-  mappings.n["<C-a>"] = { "ggVG", desc = "Select all lines" }
+  mappings.n["<S-a>"] = { "ggVG", desc = "Select all lines" }
   if is_available "Comment.nvim" then
     mappings.n["<C-_>"] = {
       function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
