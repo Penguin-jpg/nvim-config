@@ -10,13 +10,13 @@ return {
       opts.background_colour = "#000000"
     end,
   },
-  {
-    "akinsho/toggleterm.nvim",
-    opts = function(_, opts)
-      -- Use powershell for toggleterm on windows
-      if vim.fn.has "win32" then opts.shell = "pwsh.exe" end
-    end,
-  },
+  -- {
+  --   "akinsho/toggleterm.nvim",
+  --   opts = function(_, opts)
+  --     -- Use powershell for toggleterm on windows
+  --     if vim.fn.has "win32" then opts.shell = "pwsh.exe" end
+  --   end,
+  -- },
   {
     "max397574/better-escape.nvim",
     opts = {
