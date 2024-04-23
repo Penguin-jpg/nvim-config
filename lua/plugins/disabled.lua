@@ -5,5 +5,4 @@ return {
   { "s1n7ax/nvim-window-picker", enabled = false },
   { "HiPhish/rainbow-delimiters.nvim", enabled = false },
   { "akinsho/toggleterm.nvim", enabled = false },
-  { "goolord/alpha-nvim", enabled = false },
 }

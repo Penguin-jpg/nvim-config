@@ -1,13 +1,13 @@
 -- Plugins related to UI
 return {
-  -- {
-  --   "goolord/alpha-nvim",
-  --   opts = function(_, opts)
-  --     -- customize the dashboard header
-  --     opts.section.header.val = require("plugins.configs.ui.alpha").UWU
-  --     return opts
-  --   end,
-  -- },
+  {
+    "goolord/alpha-nvim",
+    opts = function(_, opts)
+      -- customize the dashboard header
+      opts.section.header.val = require("plugins.configs.ui.alpha").UWU
+      return opts
+    end,
+  },
   {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
