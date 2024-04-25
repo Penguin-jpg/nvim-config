@@ -107,4 +107,22 @@ return {
     end,
     init = function() vim.g.lsp_handlers_enabled = false end,
   },
+  {
+    "nvim-focus/focus.nvim",
+    version = "*",
+    opts = {
+      autoresize = {
+        enable = true,
+        width = 40,
+        height = 40,
+        minwidth = 10,
+        minheight = 10,
+        maxwidth = 120,
+        maxheight = 80,
+      },
+      ui = {
+        winhighlight = true,
+      },
+    },
+  },
 }
