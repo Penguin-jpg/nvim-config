@@ -101,7 +101,7 @@ return {
     "Exafunction/codeium.vim",
     event = "User AstroFile",
     config = function()
-      vim.keymap.set("i", "<C-a>", function() return vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
+      vim.keymap.set("i", "<S-Tab>", function() return vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
       vim.keymap.set(
         "i",
         "<S-Right>",
@@ -128,5 +128,5 @@ return {
   {
     "mg979/vim-visual-multi",
     event = "User AstroFile",
-  }
+  },
 }
