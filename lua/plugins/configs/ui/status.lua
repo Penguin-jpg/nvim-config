@@ -1,5 +1,5 @@
 return function(status)
-  status = require "astrocore".extend_tbl(status, {
+  return require("astrocore").extend_tbl(status, {
     separators = {
       left = { " ", " " }, -- separator for the left side of the statusline
       right = { " ", "" }, -- separator for the right side of the statusline
@@ -17,5 +17,4 @@ return function(status)
       mode = { bold = true },
     },
   })
-  return status
 end

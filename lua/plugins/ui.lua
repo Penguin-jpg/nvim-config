@@ -11,8 +11,7 @@ return {
   {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
-      opts = require("plugins.configs.ui.heirline")(opts)
-      return opts
+      return require("plugins.configs.ui.heirline")(opts)
     end,
   },
   {
@@ -95,7 +94,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       opts = function(_, opts)
         if opts.ensure_installed ~= "all" then
-          opts.ensure_installed = require "astrocore".list_insert_unique(
+          opts.ensure_installed = require("astrocore").list_insert_unique(
             opts.ensure_installed,
             { "bash", "markdown", "markdown_inline", "regex", "vim" }
           )
@@ -103,26 +102,8 @@ return {
       end,
     },
     opts = function(_, opts)
-      return require "astrocore".extend_tbl(opts, require("plugins.configs.ui.noice"))
+      return require("astrocore").extend_tbl(opts, require("plugins.configs.ui.noice"))
     end,
     init = function() vim.g.lsp_handlers_enabled = false end,
-  },
-  {
-    "nvim-focus/focus.nvim",
-    version = "*",
-    opts = {
-      autoresize = {
-        enable = true,
-        width = 40,
-        height = 40,
-        minwidth = 10,
-        minheight = 10,
-        maxwidth = 120,
-        maxheight = 80,
-      },
-      ui = {
-        winhighlight = true,
-      },
-    },
   },
 }

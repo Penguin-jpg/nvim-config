@@ -9,15 +9,15 @@ return {
   {
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
-      local cmp = require "cmp"
-      local luasnip = require "luasnip"
+      local cmp = require("cmp")
+      local luasnip = require("luasnip")
 
       local function has_words_before()
         local line, col = (unpack or table.unpack)(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
       end
 
-      opts = require "astrocore".extend_tbl(opts, {
+      return require("astrocore").extend_tbl(opts, {
         -- Configure window style
         window = {
           completion = {
@@ -31,7 +31,7 @@ return {
           -- Show icon at the beginning and menu at the end
           fields = { "kind", "abbr", "menu" },
           format = function(entry, vim_item)
-            local kind = require "lspkind".cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
             local strings = vim.split(kind.kind, "%s", { trimetry = true })
             kind.kind = " " .. (strings[1] or "") .. " "
             kind.menu = "    (" .. (strings[2] or "") .. ")"
@@ -71,7 +71,6 @@ return {
           end, { "i", "s" }),
         },
       })
-      return opts
     end,
   },
 }

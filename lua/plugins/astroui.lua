@@ -9,17 +9,14 @@ return {
   "AstroNvim/astroui",
   ---@type AstroUIOpts
   opts = function(_, opts)
-    -- change colorscheme
-    opts.colorscheme = "catppuccin"
-
-    -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
-    opts.highlights = require("plugins.configs.ui.highlights")
-
-    -- Icons can be configured throughout the interface
-    opts.icons = require("plugins.configs.ui.icons")(opts.icons)
-
-    opts.status = require("plugins.configs.ui.status")(opts.status)
-     
-    return opts
+    return require("astrocore").extend_tbl(opts, {
+      -- change colorscheme
+      colorscheme = "catppuccin",
+      -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
+      highlights = require("plugins.configs.ui.highlights"),
+      -- Icons can be configured throughout the interface
+      icons = require("plugins.configs.ui.icons")(opts.icons),
+      status = require("plugins.configs.ui.status")(opts.status),
+    })
   end
 }

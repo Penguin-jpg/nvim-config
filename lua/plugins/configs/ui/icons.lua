@@ -1,5 +1,5 @@
 return function(icons)
-  return require "astrocore".extend_tbl(icons,
+  return require("astrocore").extend_tbl(icons,
     {
       -- LSP
       ActiveLSP = "",

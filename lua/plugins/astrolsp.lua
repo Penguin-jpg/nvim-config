@@ -16,14 +16,14 @@ return {
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
     -- customize lsp formatting options
-    formatting = require "plugins.configs.lsp.formatting",
+    formatting = require("plugins.configs.lsp.formatting"),
     -- enable servers that you already have installed without mason
-    servers = require "plugins.configs.lsp.servers",
+    servers = require("plugins.configs.lsp.servers"),
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      clangd = require "plugins.configs.lsp.config.clangd",
-      ruff_lsp = require "plugins.configs.lsp.config.ruff_lsp",
+      clangd = require("plugins.configs.lsp.config.clangd"),
+      ruff_lsp = require("plugins.configs.lsp.config.ruff_lsp"),
     },
     -- customize how language servers are attached
     handlers = {
