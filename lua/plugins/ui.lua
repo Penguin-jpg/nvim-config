@@ -15,6 +15,29 @@ return {
     end,
   },
   {
+    "rebelot/kanagawa.nvim",
+    opts = {
+      compile = true,
+      commentStyle = { italic = false },
+      keywordStyle = { italic = false },
+      dimInactive = true,
+      colors = {
+        theme = {
+          all = {
+            ui = {
+                bg_gutter = "none"
+            }
+          }
+        }
+      },
+      theme = "wave",
+      background = {
+        dark = "wave",
+        light = "lotus",
+      },
+    },
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     opts = {

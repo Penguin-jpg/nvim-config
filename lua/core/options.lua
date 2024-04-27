@@ -21,6 +21,6 @@ return function(options)
     -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
     -- This can be found in the `lua/lazy_setup.lua` file
   }
-  
+
   return options
 end

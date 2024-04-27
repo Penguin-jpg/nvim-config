@@ -6,4 +6,5 @@ return {
   { "HiPhish/rainbow-delimiters.nvim", enabled = false },
   { "akinsho/toggleterm.nvim", enabled = false },
   { "NvChad/nvim-colorizer.lua", enabled = false },
+  { "catppuccin/nvim", name = "catppuccin", enabled = false },
 }
