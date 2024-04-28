@@ -16,7 +16,7 @@ return function(mappings)
       desc = "Comment line",
     }
     mappings.v["<C-_>"] = {
-      "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+      "<esc><Cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
       desc = "Comment block",
     }
     mappings.i["<C-_>"] = {
@@ -35,20 +35,17 @@ return function(mappings)
   mappings.i["<C-Del>"] = { "<C-o>dw", desc = "Delete a word backward" }
   mappings.i["<C-z>"] = { "<C-o>u", desc = "Undo" }
   mappings.i["<C-r>"] = { "<C-o><C-r>", desc = "Redo" }
-  mappings.i["<C-s>"] = { "<cmd>w!<cr>", desc = "Save file" } 
+  mappings.i["<C-s>"] = { "<Cmd>w!<CR>", desc = "Save file" } 
   mappings.v["<C-c>"] = { "y", desc = "Copy selected block" }
   mappings.i["<S-Tab>"] = { "<C-d>", desc = "Unindent line" }
   -- Delete without yanking
   mappings.n["D"] = { '"_dd', desc = "Delete without yanking" }
   mappings.v["D"] = { '"_d', desc = "Delete without yanking" }
-
-  -- Custom mappings for nvim-notify
-  if is_available "nvim-notify" then
-    mappings.n["<leader>un"] = {
-      function() require("notify").dismiss { silent = true, pending = true } end,
-      desc = "Dismiss all notifications",
-    }
-  end
+  -- <C-M> means ctrl + alt
+  mappings.n["<C-M-Up>"] = { "<Cmd>resize -2<CR>", desc = "Resize split up" }
+  mappings.n["<C-M-Down>"] = { "<Cmd>resize +2<CR>", desc = "Resize split down" }
+  mappings.n["<C-M-Left>"] = { "<Cmd>vertical resize -2<CR>", desc = "Resize split left" }
+  mappings.n["<C-M-Right>"] = { "<Cmd>vertical resize +2<CR>", desc = "Resize split right" }
 
   ------ Custom mappings for nvim-gomove ------
   if is_available "nvim-gomove" then
@@ -69,46 +66,69 @@ return function(mappings)
   ------ Custom mappings for substitution.nvim ------
   if is_available "substitute.nvim" then
     local replace_icon = vim.g.icon_enabled and "⟺ " or ""
-    mappings.n["<leader>s"] = { desc = replace_icon .. "Substitute" }
-    mappings.n["<leader>sv"] = {
+    mappings.n["<Leader>s"] = { desc = replace_icon .. "Substitute" }
+    mappings.n["<Leader>sv"] = {
       function() require("substitute").line() end,
       desc = "Replace line with register value",
     }
-    -- mappings.n["<leader>re"] = {
+    -- mappings.n["<Leader>re"] = {
     --   function() require("substitute").eol() end,
     --   desc = "Replace from cursor to eol with register value",
     -- }
-    mappings.n["<leader>sr"] = {
+    mappings.n["<Leader>sr"] = {
       function() require("substitute.range").operator { subject = { motion = "iw" }, range = { motion = "ap" } } end,
       desc = "Replace matched words with input value",
     }
-    mappings.n["<leader>sa"] = {
+    mappings.n["<Leader>sa"] = {
       function() require("substitute.range").operator { subject = { motion = "iw" }, range = "%" } end,
       desc = "Replace all matched words with input value",
     }
-    mappings.v["<leader>sv"] = {
+    mappings.v["<Leader>sv"] = {
       function() require("substitute").visual() end,
       desc = "Replace selected block with register value",
     }
-    mappings.v["<leader>sr"] = {
+    mappings.v["<Leader>sr"] = {
       function() require("substitute.range").visual { subject = { motion = "iw" }, range = { motion = "ap" } } end,
       desc = "Replace matched words with input value",
     }
-    mappings.v["<leader>sa"] = {
+    mappings.v["<Leader>sa"] = {
       function() require("substitute.range").visual { subject = { motion = "iw" }, range = "%" } end,
       desc = "Replace all matched words with input value",
     }
   end
 
-  ------ Custom mappings for trouble.nvim ------
-  if is_available "trouble.nvim" then
-    local trouble_icon = vim.g.icon_enabled and "󱍼 " or ""
-    mappings.n["<leader>x"] = { desc = trouble_icon .. "Trouble" }
-    mappings.n["<leader>xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" }
-    mappings.n["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" }
-    mappings.n["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" }
-    mappings.n["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" }
+  ------ Custom mappings for nvim-ufo.nvim ------
+  if is_available "nvim-ufo" then
+    mappings.n["<Leader>Fa"] = { function() require("ufo").openAllFolds() end, desc = "Open all folds" }
+    mappings.n["<Leader>Fc"] = { function() require("ufo").closeAllFolds() end, desc = "Close all folds" }
+    mappings.n["<Leader>Fl"] = { function() require("ufo").openFoldsExceptKinds() end, desc = "Fold less" }
+    mappings.n["<Leader>fm"] = { function() require("ufo").closeFoldsWith() end, desc = "Fold more" }
+    mappings.n["<Leader>Fp"] = { function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek fold" }
   end
+
+  -- Custom mappings for multiple-cursors.nvim ------
+  if is_available "multiple-cursors.nvim" then
+    for key, map in pairs {
+      ["<C-Down>"] = { "<Cmd>MultipleCursorsAddDown<CR>", desc = "Add a cursor down" },
+      ["<C-Up>"] = { "<Cmd>MultipleCursorsAddUp<CR>", desc = "Add a cursor up" },
+      ["<C-LeftMouse>"] = { "<Cmd>MultipleCursorsMouseAddDelete<CR>", desc = "Add a cursor with mouse" },
+    } do
+      mappings.n[key] = map
+      mappings.i[key] = map
+    end
+
+    for key, map in pairs {
+      ["<Leader>a"] = { "<Cmd>MultipleCursorsAddMatches<CR>", desc = "Add cursor matches" },
+      -- ["<Leader>A"] = { "<Cmd>MultipleCursorsAddMatchesV<CR>", desc = "Add cursor matches in previous visual area" },
+      ["<C-d>"] = { "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", desc = "Add cursor and jump to next match" },
+      -- ["<Leader>cJ"] = { "<Cmd>MultipleCursorsJumpNextMatch<CR>", desc = "Move cursor to next match" },
+      -- ["<Leader>cl"] = { "<Cmd>MultipleCursorsLock<CR>", desc = "Lock virtual cursors" },
+    } do
+      mappings.n[key] = map
+      mappings.v[key] = map
+    end
+  end
+
 
   return mappings
 end

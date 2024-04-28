@@ -8,21 +8,21 @@ vim.api.nvim_create_autocmd("InsertEnter", {
   command = "set formatoptions-=cro",
 })
 
-vim.api.nvim_create_autocmd("CursorHold", {
-  desc = "Show diagnostics text when cursor hovers that line",
-  group = "auto_commands",
-  callback = function()
-    local opts = {
-      focusable = false,
-      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-      border = "rounded",
-      source = "always",
-      prefix = " ",
-      scope = "cursor",
-    }
-    vim.diagnostic.open_float(nil, opts)
-  end,
-})
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--   desc = "Show diagnostics text when cursor hovers that line",
+--   group = "auto_commands",
+--   callback = function()
+--     local opts = {
+--       focusable = false,
+--       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+--       border = "rounded",
+--       source = "always",
+--       prefix = " ",
+--       scope = "cursor",
+--     }
+--     vim.diagnostic.open_float(nil, opts)
+--   end,
+-- })
 
 -- vim.api.nvim_create_autocmd("VimEnter", {
 --   desc = "Restore previous directory session if neovim opened with no arguments",

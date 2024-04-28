@@ -126,7 +126,19 @@ return {
   },
   -- Multi-cursors support
   {
-    "mg979/vim-visual-multi",
+    "brenton-leighton/multiple-cursors.nvim",
+    version = "*",  -- Use the latest tagged version
     event = "User AstroFile",
+    opts = {},  -- This causes the plugin setup function to be called
+    cmd = {
+      "MultipleCursorsAddDown",
+      "MultipleCursorsAddUp",
+      "MultipleCursorsMouseAddDelete",
+      "MultipleCursorsAddMatches",
+      "MultipleCursorsAddMatchesV",
+      "MultipleCursorsAddJumpNextMatch",
+      "MultipleCursorsJumpNextMatch",
+      "MultipleCursorsLock",
+    },
   },
 }
