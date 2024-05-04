@@ -5,13 +5,13 @@ return {
     opts = function(_, opts)
       -- customize the dashboard header
       opts.section.header.val = require("plugins.configs.ui.alpha").UWU
-      return opts
     end,
   },
   {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
-      return require("plugins.configs.ui.heirline")(opts)
+      opts.statusline = require("plugins.configs.ui.heirline").statusline
+      opts.winbar = require("plugins.configs.ui.heirline").winbar
     end,
   },
   {
@@ -100,16 +100,6 @@ return {
     },
   },
   {
-    "nvim-telescope/telescope.nvim",
-    optional = true,
-    opts = {
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-    },
-  },
-  {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -121,6 +111,20 @@ return {
             opts.ensure_installed,
             { "bash", "markdown", "markdown_inline", "regex", "vim" }
           )
+        end
+      end,
+      "AstroNvim/astrolsp",
+      optional = true,
+      ---@param opts AstroLSPOpts
+      opts = function(_, opts)
+        local noice_opts = require("astrocore").plugin_opts "noice.nvim"
+        -- disable the necessary handlers in AstroLSP
+        if not opts.lsp_handlers then opts.lsp_handlers = {} end
+        if vim.tbl_get(noice_opts, "lsp", "hover", "enabled") ~= false then
+          opts.lsp_handlers["textDocument/hover"] = false
+        end
+        if vim.tbl_get(noice_opts, "lsp", "signature", "enabled") ~= false then
+          opts.lsp_handlers["textDocument/signatureHelp"] = false
         end
       end,
     },

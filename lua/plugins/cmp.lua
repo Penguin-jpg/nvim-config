@@ -2,8 +2,7 @@ return {
   {
     "onsails/lspkind.nvim",
     opts = function(_, opts)
-      opts = require("plugins.configs.ui.lspkind")(opts)
-      return opts
+      opts.symbol_map = require("plugins.configs.ui.lspkind")
     end
   },
   {

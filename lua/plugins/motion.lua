@@ -22,23 +22,6 @@ return {
     "chaoren/vim-wordmotion",
     event = "User AstroFile",
   },
-  -- Word/line substitution support
-  {
-    "gbprod/substitute.nvim",
-    event = "User AstroFile",
-    opts = {},
-  },
-  -- Split or join blocks of code
-  {
-    "Wansmer/treesj",
-    event = "User AstroFile",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = { use_default_keymaps = false },
-    config = function(_, opts) require("treesj").setup(opts) end,
-    keys = {
-      { "sj", mode = { "n", "x" }, function() require("treesj").toggle() end, desc = "Split or join" },
-    },
-  },
   -- Faster change/delete/replace delimiter pairs
   {
     "echasnovski/mini.surround",

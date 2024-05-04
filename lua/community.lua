@@ -9,7 +9,6 @@ return {
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
-  { import = "astrocommunity.recipes.heirline-vscode-winbar" },
   { import = "astrocommunity.color.nvim-highlight-colors" },
   { import = "astrocommunity.diagnostics.trouble-nvim" },
 }

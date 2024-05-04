@@ -6,13 +6,6 @@ return {
   --   event = "User AstroFile",
   --   opts = {},
   -- },
-  -- Bracket pair colorize
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    event = "User AstroFile",
-    config = function(_, opts) require "rainbow-delimiters.setup"(opts) end,
-  },
   -- Better indent blankline
   {
     "shellRaining/hlchunk.nvim",
@@ -81,19 +74,6 @@ return {
     },
     keys = {
       { "<leader>uT", "<cmd>TransparentToggle<CR>", desc = "Toggle transparency" },
-    },
-  },
-  -- Diagnostics list
-  {
-    "folke/trouble.nvim",
-    event = "User AstroFile",
-    cmd = { "TroubleToggle", "Trouble" },
-    opts = {
-      use_diagnostic_signs = true,
-      action_keys = {
-        close = { "q", "<esc>" },
-        cancel = "<c-e>",
-      },
     },
   },
   -- AI code completion

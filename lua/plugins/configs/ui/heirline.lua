@@ -1,8 +1,9 @@
-return function(opts)
-  local status = require("astroui.status")
+local M = {}
+local status = require("astroui.status")
 
-  -- My custom statusline
-  opts.statusline = {
+-- My custom statusline
+M.statusline = function()
+  return {
     hl = { fg = "fg", bg = "bg" },
     -- Show mode text
     status.component.mode({
@@ -66,7 +67,7 @@ return function(opts)
       status.component.builder({
         { provider = require("astroui").get_icon("Navigation") },
         -- add padding after icon
-        padding = { right = 1 },
+        padding = { left = 2, right = 1 },
         -- set the icon foreground
         hl = { fg = "bg" },
         -- use the right separator and define the background color
@@ -84,56 +85,58 @@ return function(opts)
         surround = { separator = "none", color = "blank_bg" },
       }),
     },
+  }
+end
+
+-- My custom winbar
+M.winbar = function(winbar)
+  local path_func = status.provider.filename { modify = ":.:h", fallback = "" }
+
+  return {
+    -- store the current buffer number
+    init = function(self) self.bufnr = vim.api.nvim_get_current_buf() end,
+    fallthrough = false, -- pick the correct winbar based on condition
+    -- inactive winbar
     {
-      status.component.builder({
-        { provider = require("astroui").get_icon("Clock") },
-        -- add padding after icon
-        padding = { right = 1 },
-        -- set the icon foreground
-        hl = { fg = "bg" },
-        -- use the right separator and define the background color
-        -- as well as the color to the left of the separator
-        surround = {
-          separator = "right",
-          color = { main = "clock_bg", left = "blank_bg" },
-        },
-      }),
-      status.component.builder({
-        {
-          provider = function()
-            local time = os.date("%H:%M") -- show hour and minute in 24 hour format
-            ---@cast time string
-            return status.utils.stylize(time, {
-              padding = { left = 1, right = 1 }, -- pad the right side so it's not cramped
-            })
-          end,
-        },
-        surround = { separator = "none", color = "blank_bg" },
-        update = { -- update should happen when the mode has changed as well as when the time has changed
-          "User", -- We can use the User autocmd event space to tell the component when to update
-          callback = vim.schedule_wrap(function(_, args)
-            if -- update on user UpdateTime event and mode change
-              (args.event == "User" and args.match == "UpdateTime")
-            then
-              vim.cmd.redrawstatus() -- redraw on update
-            end
-          end),
-        },
-      }),
+      condition = function() return not status.condition.is_active() end,
+      -- show the path to the file relative to the working directory
+      status.component.separated_path { path_func = path_func },
+      -- add the file name and icon
+      status.component.file_info {
+        file_icon = { hl = status.hl.file_icon "winbar", padding = { left = 0 } },
+        filename = {},
+        filetype = false,
+        file_modified = false,
+        file_read_only = false,
+        hl = status.hl.get_attributes("winbarnc", true),
+        surround = false,
+        update = "BufEnter",
+      },
+    },
+    -- active winbar
+    {
+      -- show the path to the file relative to the working directory
+      status.component.separated_path { path_func = path_func },
+      -- add the file name and icon
+      status.component.file_info { -- add file_info to breadcrumbs
+        file_icon = { hl = status.hl.filetype_color, padding = { left = 0 } },
+        filename = {},
+        filetype = false,
+        file_modified = false,
+        file_read_only = false,
+        hl = status.hl.get_attributes("winbar", true),
+        surround = false,
+        update = "BufEnter",
+      },
+      -- show the breadcrumbs
+      status.component.breadcrumbs {
+        icon = { hl = true },
+        hl = status.hl.get_attributes("winbar", true),
+        prefix = true,
+        padding = { left = 0 },
+      },
     },
   }
-
-  -- Now that we have the component, we need a timer to emit the User UpdateTime event
-  vim.uv.new_timer():start( -- timer for updating the time
-    (60 - tonumber(os.date("%S"))) * 1000, -- offset timer based on current seconds past the minute
-    60000, -- update every 60 seconds
-    vim.schedule_wrap(function()
-      vim.api.nvim_exec_autocmds( -- emit our new User event
-        "User",
-        { pattern = "UpdateTime", modeline = false }
-      )
-    end)
-  )
-
-  return opts
 end
+
+return M
