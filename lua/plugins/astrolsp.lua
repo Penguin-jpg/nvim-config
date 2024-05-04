@@ -16,9 +16,9 @@ return {
       semantic_tokens = true, -- enable/disable semantic token highlighting
     }
     -- customize lsp formatting options
-    opts.formatting = require("plugins.configs.lsp.formatting")(opts.formatting),
+    opts.formatting = require("plugins.configs.lsp.formatting")(opts.formatting)
     -- enable servers that you already have installed without mason
-    opts.servers = {},
+    opts.servers = {}
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     opts.config = {
@@ -58,7 +58,7 @@ return {
           callback = function() vim.lsp.buf.clear_references() end,
         },
       },
-    },
+    }
     -- mappings to be set up on attaching of a language server
     opts.mappings = {
       n = {
@@ -75,13 +75,13 @@ return {
         --   cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
         -- },
       },
-    },
+    }
     -- A custom `on_attach` function to be run after the default `on_attach` function
     -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
     opts.on_attach = function(client, bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
-    end,
+    end
 
   -- Don't return since I don't want to overwrite the entire table
   end

@@ -20,4 +20,4 @@ return function(formatting)
     --   return true
     -- end
   })
-}
+end
