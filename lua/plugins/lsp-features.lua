@@ -3,7 +3,7 @@ return {
   -- Signature help
   {
     "ray-x/lsp_signature.nvim",
-    event = "BufRead",
+    event = "User AstroFile",
     config = function() require("lsp_signature").setup() end,
   },
   -- Additional features for Clangd

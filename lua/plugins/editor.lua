@@ -1,11 +1,5 @@
 -- Plugins that enhance editor experience
 return {
-  -- TODO comment support (already installed in AstroNvim v4)
-  -- {
-  --   "folke/todo-comments.nvim",
-  --   event = "User AstroFile",
-  --   opts = {},
-  -- },
   -- Better indent blankline
   {
     "shellRaining/hlchunk.nvim",
@@ -29,51 +23,6 @@ return {
     opts = {
       color = "#ea7183",
       paint_arg_usages = true,
-    },
-  },
-  -- Transparent background
-  {
-    "xiyaowong/transparent.nvim",
-    lazy = false,
-    opts = {
-      -- table: default groups
-      groups = {
-        "Normal",
-        "NormalNC",
-        "Comment",
-        "Constant",
-        "Special",
-        "Identifier",
-        "Statement",
-        "PreProc",
-        "Type",
-        "Underlined",
-        "Todo",
-        "String",
-        "Function",
-        "Conditional",
-        "Repeat",
-        "Operator",
-        "Structure",
-        "LineNr",
-        "NonText",
-        "SignColumn",
-        "CursorLineNr",
-        "EndOfBuffer",
-      },
-      -- table: additional groups that should be cleared
-      extra_groups = {
-        "NormalFloat",
-        "NvimTreeNormal",
-        "NeoTreeNormal",
-        "NeoTreeFloatBorder",
-        "NeoTreeNormalNC",
-      },
-      -- table: groups you don't want to clear
-      exclude_groups = {},
-    },
-    keys = {
-      { "<leader>uT", "<cmd>TransparentToggle<CR>", desc = "Toggle transparency" },
     },
   },
   -- AI code completion

@@ -19,8 +19,40 @@ return {
   },
   -- Better move by word support
   {
-    "chaoren/vim-wordmotion",
-    event = "User AstroFile",
+    "chrisgrieser/nvim-spider",
+    lazy = true,
+    dependencies = {
+      "AstroNvim/astrocore",
+      opts = function(_, opts)
+        local key_maps = {
+          ["w"] = {
+            "<Cmd>lua require('spider').motion('w')<CR>",
+            desc = "Next word",
+          },
+
+          ["e"] = {
+            "<Cmd>lua require('spider').motion('e')<CR>",
+            desc = "Next end of word",
+          },
+          ["b"] = {
+            "<Cmd>lua require('spider').motion('b')<CR>",
+            desc = "Previous word",
+          },
+          ["ge"] = {
+            "<Cmd>lua require('spider').motion('ge')<CR>",
+            desc = "Previous end of word",
+          },
+        }
+
+        for key, map in pairs(key_maps) do
+          opts.mappings.n[key] = map
+          opts.mappings.x[key] = map
+          opts.mappings.o[key] = map
+        end
+
+      end
+    },
+    opts = {},
   },
   -- Faster change/delete/replace delimiter pairs
   {
