@@ -1,9 +1,9 @@
 return {
   {
     "onsails/lspkind.nvim",
-    opts = function(_, opts)
-      opts.symbol_map = require("plugins.configs.ui.lspkind")
-    end
+    opts = {
+      symbol_map = require("plugins.configs.ui.lspkind"),
+    }
   },
   {
     "hrsh7th/nvim-cmp",

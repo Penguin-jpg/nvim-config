@@ -4,9 +4,10 @@
 -- lower level configuration and more robust one. (which-key will
 -- automatically pick-up stored data by this setting.)
 
-return function(mappings)
+return function()
   local core = require "astrocore"
   local is_available = core.is_available
+  local mappings = core.empty_map_table()
 
   ------ Utility functions ------
   if is_available "Comment.nvim" then
@@ -23,12 +24,13 @@ return function(mappings)
       desc = "Comment line",
     }
   end
+
   mappings.n["<C-z>"] = { "u", desc = "Undo" }
+  mappings.i["<C-z>"] = { "<C-o>u", desc = "Undo" }
   -- Use <C-H> since <C-BS> sometimes fails (<C-H> also makes <C-BS> work)
   mappings.i["<C-H>"] = { "<C-w>", desc = { "Delete a word forward" } }
   -- <C-o> will exit insert mode tempoarily and back to insert mode again
   mappings.i["<C-Del>"] = { "<C-o>dw", desc = "Delete a word backward" }
-  mappings.i["<C-z>"] = { "<C-o>u", desc = "Undo" }
   mappings.i["<C-r>"] = { "<C-o><C-r>", desc = "Redo" }
   mappings.i["<C-s>"] = { "<Cmd>w!<CR>", desc = "Save file" } 
   mappings.v["<C-c>"] = { "y", desc = "Copy selected block" }
@@ -41,7 +43,8 @@ return function(mappings)
   mappings.n["<C-M-Down>"] = { "<Cmd>resize +2<CR>", desc = "Resize split down" }
   mappings.n["<C-M-Left>"] = { "<Cmd>vertical resize -2<CR>", desc = "Resize split left" }
   mappings.n["<C-M-Right>"] = { "<Cmd>vertical resize +2<CR>", desc = "Resize split right" }
-  -- Motions related to jumping or selecting
+
+  ------ Motions related to jumping or selecting ------
   for key, map in pairs {
     ["gh"] = { "^", desc = "Jump to beginning of line" },
     ["gl"] = { "$", desc = "Jump to end of line" },

@@ -8,16 +8,13 @@
 return {
   "AstroNvim/astroui",
   ---@type AstroUIOpts
-  opts = function(_, opts)
+  opts = {
     -- change colorscheme
-    -- opts.colorscheme = "catppuccin",
-    opts.colorscheme = "kanagawa"
+    colorscheme = "kanagawa",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
-    opts.highlights = require("plugins.configs.ui.highlights")
+    highlights = require("plugins.configs.ui.highlights"),
     -- Icons can be configured throughout the interface
-    opts.icons = require("plugins.configs.ui.icons")(opts.icons)
-    opts.status = require("plugins.configs.ui.status")(opts.status)
-
-    -- Don't return since I don't want to overwrite the entire table
-  end
+    icons = require("plugins.configs.ui.icons"),
+    status = require("plugins.configs.ui.status"),
+  },
 }

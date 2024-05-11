@@ -1,4 +1,4 @@
-return { 
+return {
   init = function() -- this table overrides highlights in all themes
     local colors = require("kanagawa.colors").setup()
     local theme = colors.theme

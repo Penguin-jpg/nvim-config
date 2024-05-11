@@ -61,13 +61,13 @@ M.statusline = {
     }
   },
   status.component.virtual_env(),
-  { 
+  {
     -- make nav section with icon border
     -- define a custom component with just a file icon
     status.component.builder({
       { provider = require("astroui").get_icon("Navigation") },
       -- add padding after icon
-      padding = { left = 2, right = 1 },
+      padding = { right = 1 },
       -- set the icon foreground
       hl = { fg = "bg" },
       -- use the right separator and define the background color

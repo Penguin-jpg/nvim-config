@@ -7,24 +7,24 @@
 return {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
-  opts = function(_, opts)
+  opts = {
     -- Configure core features of AstroNvim
-    opts.features = {
+    features = {
       large_buf = { size = 1024 * 500, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
       diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
-    }
+    },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
-    opts.diagnostics = {
+    diagnostics = {
       virtual_text = true,
       underline = true,
       update_in_insert = false,
-    }
+    },
     -- Configuration table of session options for AstroNvim's session management powered by Resession
-    opts.sessions = {
+    sessions = {
       -- Configure auto saving
       autosave = {
         last = true, -- auto save last session
@@ -36,13 +36,11 @@ return {
         filetypes = { "gitcommit", "gitrebase" }, -- filetypes to ignore sessions
         buftypes = {}, -- buffer types to ignore sessions
       },
-    }
+    },
     -- vim options can be configured here
-    opts.options = require("core.options")(opts.options)
+    options = require("core.options"),
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    opts.mappings = require("core.mappings")(opts.mappings)
-
-    -- Don't return since I don't want to overwrite the entire table
-  end
+    mappings = require("core.mappings")(),
+  },
 }
