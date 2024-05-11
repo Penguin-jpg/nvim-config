@@ -30,7 +30,7 @@ return {
     "Exafunction/codeium.vim",
     event = "User AstroFile",
     config = function()
-      vim.keymap.set("i", "<S-a>", function() return vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
+      vim.keymap.set("i", "<S-Tab>", function() return vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
       vim.keymap.set(
         "i",
         "<S-Right>",
@@ -57,17 +57,13 @@ return {
   {
     "brenton-leighton/multiple-cursors.nvim",
     version = "*",  -- Use the latest tagged version
-    event = "User AstroFile",
-    opts = {},  -- This causes the plugin setup function to be called
-    cmd = {
-      "MultipleCursorsAddDown",
-      "MultipleCursorsAddUp",
-      "MultipleCursorsMouseAddDelete",
-      "MultipleCursorsAddMatches",
-      "MultipleCursorsAddMatchesV",
-      "MultipleCursorsAddJumpNextMatch",
-      "MultipleCursorsJumpNextMatch",
-      "MultipleCursorsLock",
+    opts = {},
+    keys = {
+      {"<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = {"n", "i", "x"} },
+      {"<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = {"n", "i", "x"} },
+      {"<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = {"n", "i"} },
+      {"<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", mode = {"n", "x"} },
+      {"<C-n>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x"} },
     },
   },
   -- Better code folding
@@ -103,5 +99,20 @@ return {
         return newVirtText
       end,
     },
+  },
+  -- Tmux integration
+  {
+    "aserowy/tmux.nvim",
+    opts = {
+      resize = {
+        enable_default_keybindings = false,
+      }
+    },
+    keys = {
+      { "<A-Left>", [[<cmd>lua require("tmux").resize_left()<cr>]], mode = { "n" } },
+      { "<A-Right>", [[<cmd>lua require("tmux").resize_right()<cr>]], mode = { "n" } },
+      { "<A-Down>", [[<cmd>lua require("tmux").resize_bottom()<cr>]], mode = { "n" } },
+      { "<A-Up>", [[<cmd>lua require("tmux").resize_top()<cr>]], mode = { "n" } },
+    }
   },
 }

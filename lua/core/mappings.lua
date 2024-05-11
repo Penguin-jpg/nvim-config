@@ -54,40 +54,5 @@ return function()
     mappings.v[key] = map
   end
 
-  ------ Custom mappings for nvim-gomove ------
-  if is_available "nvim-gomove" then
-    mappings.n["<A-k>"] = { "<Plug>GoNSMUp", desc = "Move line up" }
-    mappings.n["<A-j>"] = { "<Plug>GoNSMDown", desc = "Move line down" }
-    mappings.n["<S-k>"] = { "<Plug>GoNSDUp", desc = "Duplicate line and paste it above" }
-    mappings.n["<S-j>"] = { "<Plug>GoNSDDown", desc = "Duplicate line and paste it below" }
-    mappings.v["<A-k>"] = { "<Plug>GoVSMUp", desc = "Move block up" }
-    mappings.v["<A-j>"] = { "<Plug>GoVSMDown", desc = "Move block down" }
-    mappings.v["<S-k>"] = { "<Plug>GoVSDUp", desc = "Duplicate block and paste it above" }
-    mappings.v["<S-j>"] = { "<Plug>GoVSDDown", desc = "Duplicate block and paste it below" }
-  end
-
-  -- Custom mappings for multiple-cursors.nvim ------
-  if is_available "multiple-cursors.nvim" then
-    for key, map in pairs {
-      ["<C-Down>"] = { "<Cmd>MultipleCursorsAddDown<CR>", desc = "Add a cursor down" },
-      ["<C-Up>"] = { "<Cmd>MultipleCursorsAddUp<CR>", desc = "Add a cursor up" },
-      ["<C-LeftMouse>"] = { "<Cmd>MultipleCursorsMouseAddDelete<CR>", desc = "Add a cursor with mouse" },
-    } do
-      mappings.n[key] = map
-      mappings.i[key] = map
-    end
-
-    for key, map in pairs {
-      ["<Leader>a"] = { "<Cmd>MultipleCursorsAddMatches<CR>", desc = "Add cursor matches" },
-      -- ["<Leader>A"] = { "<Cmd>MultipleCursorsAddMatchesV<CR>", desc = "Add cursor matches in previous visual area" },
-      ["<C-n>"] = { "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", desc = "Add cursor and jump to next match" },
-      -- ["<Leader>cJ"] = { "<Cmd>MultipleCursorsJumpNextMatch<CR>", desc = "Move cursor to next match" },
-      -- ["<Leader>cl"] = { "<Cmd>MultipleCursorsLock<CR>", desc = "Lock virtual cursors" },
-    } do
-      mappings.n[key] = map
-      mappings.v[key] = map
-    end
-  end
-
   return mappings
 end
