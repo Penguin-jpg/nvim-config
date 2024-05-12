@@ -34,6 +34,8 @@ return {
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
+    -- add this to lazy load dap-related plugins
+    init = function() end,
     -- overrides `require("mason-nvim-dap").setup(...)`
     opts = function(_, opts)
       -- add more things to the ensure_installed table protecting against community packs modifying it

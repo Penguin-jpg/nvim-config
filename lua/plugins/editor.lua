@@ -1,5 +1,20 @@
 -- Plugins that enhance editor experience
 return {
+  -- Built-in terminal support
+  {
+    "akinsho/toggleterm.nvim",
+    opts = function(_, opts)
+      -- Use powershell for toggleterm on windows
+      if vim.fn.has "win32" then opts.shell = "pwsh.exe" end
+    end,
+  },
+  -- Better escape support
+  {
+    "max397574/better-escape.nvim",
+    opts = {
+      mapping = { "jj", "kk", "jk" },
+    },
+  },
   -- Better indent blankline
   {
     "shellRaining/hlchunk.nvim",

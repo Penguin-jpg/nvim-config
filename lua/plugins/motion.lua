@@ -36,13 +36,25 @@ return {
     "echasnovski/mini.surround",
     opts = { n_lines = 200 },
     keys = {
-      { "s", desc = vim.g.icon_enabled and "󰑤 " or "".. "Surround" },
-      { "sa", mode = { "n", "v" }, desc = "Add surrounding" },
-      { "sd", desc = "Delete surrounding" },
-      { "sf", desc = "Find right surrounding" },
-      { "sF", desc = "Find left surrounding" },
-      { "sr", desc = "Highlight surrounding" },
-      { "sn", desc = "Replace surrounding" },
+      { "sa", mode = { "n", "x" }, desc = "Add surrounding" },
+      { "sd", mode = { "n", "x" }, desc = "Delete surrounding" },
+      { "sr", mode = { "n", "x" }, desc = "Replace surrounding" },
+      { "sf", mode = { "n", "x" }, desc = "Find right surrounding" },
+      { "sF", mode = { "n", "x" }, desc = "Find left surrounding" },
+      { "sh", mode = { "n", "x" }, desc = "Highlight surrounding" },
+      { "sn", mode = { "n", "x" }, desc = "Update `MiniSurround.config.n_lines`" },
+    },
+  },
+  -- Better character motion support
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      { "gs", function() require("flash").jump() end, mode = { "n", "x", "o" }, desc = "Flash" },
+      { "gS", function() require("flash").treesitter() end, mode = { "n", "x", "o" }, desc = "Flash Treesitter" },
+      { "r", function() require("flash").remote() end, mode = "o", desc = "Remote Flash" },
+      { "R", function() require("flash").treesitter_search() end, mode = { "x", "o" }, desc = "Treesitter Search" },
     },
   },
 }
