@@ -43,12 +43,20 @@ return function()
   mappings.n["<C-M-Down>"] = { "<Cmd>resize +2<CR>", desc = "Resize split down" }
   mappings.n["<C-M-Left>"] = { "<Cmd>vertical resize -2<CR>", desc = "Resize split left" }
   mappings.n["<C-M-Right>"] = { "<Cmd>vertical resize +2<CR>", desc = "Resize split right" }
+  -- Disable defaults ctrl + arrow keys
+  mappings.n["<C-Left>"] = false
+  mappings.n["<C-Right>"] = false
+  mappings.n["<C-Up>"] = false
+  mappings.n["<C-Down>"] = false
+  mappings.n["<C-Left>"] = false
 
   ------ Motions related to jumping or selecting ------
   for key, map in pairs {
     ["gh"] = { "^", desc = "Jump to beginning of line" },
     ["gl"] = { "$", desc = "Jump to end of line" },
     ["ga"] = { "ggVG", desc = "Select all lines" },
+    ["K"] = { "5k", desc = "Move up 5 lines" },
+    ["J"] = { "5j", desc = "Move down 5 lines" },
   } do
     mappings.n[key] = map
     mappings.v[key] = map

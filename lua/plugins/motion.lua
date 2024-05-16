@@ -6,14 +6,16 @@ return {
     version = "*",
     opts = {
       mappings = {
+        -- Move in visual mode
         left = "<A-h>",
         right = "<A-l>",
         down = "<A-j>",
         up = "<A-k>",
-        line_left = "<A-H>",
-        line_right = "<A-L>",
-        line_down = "<A-J>",
-        line_up = "<A-K>",
+        -- Move in normal mode
+        line_left = "<A-h>",
+        line_right = "<A-l>",
+        line_down = "<A-j>",
+        line_up = "<A-k>",
       },
       options = {
         reindent_linewise = true,
@@ -25,10 +27,10 @@ return {
     "chrisgrieser/nvim-spider",
     opts = {},
     keys = {
-      { "w", "<Cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
-      { "e", "<Cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
-      { "b", "<Cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
-      { "ge", "<Cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
+      { "w", "<Cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" }, desc = "Spider-w" },
+      { "e", "<Cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "Spider-e" },
+      { "b", "<Cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "Spider-b" },
+      { "ge", "<Cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" }, desc = "Spider-ge" },
     },
   },
   -- Faster change/delete/replace delimiter pairs

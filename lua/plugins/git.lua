@@ -24,6 +24,9 @@ return {
         signs = { section = fold_signs, item = fold_signs },
       })
     end,
+    keys = {
+      { "<Leader>gg", "<Cmd>Neogit<CR>", desc = "Open Neogit" },
+    },
   },
   -- Diff page view
   {
