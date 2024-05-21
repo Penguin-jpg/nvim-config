@@ -9,6 +9,14 @@ return function()
   local is_available = core.is_available
   local mappings = core.empty_map_table()
 
+  ------ Disable default mappings ------
+  -- Disable defaults ctrl + arrow keys
+  mappings.n["<C-Left>"] = false
+  mappings.n["<C-Right>"] = false
+  mappings.n["<C-Up>"] = false
+  mappings.n["<C-Down>"] = false
+  mappings.n["<C-Left>"] = false
+
   ------ Utility functions ------
   if is_available "Comment.nvim" then
     mappings.n["<C-_>"] = {
@@ -38,17 +46,6 @@ return function()
   -- Delete without yanking
   mappings.n["D"] = { '"_dd', desc = "Delete without yanking" }
   mappings.v["D"] = { '"_d', desc = "Delete without yanking" }
-  -- <C-M> means ctrl + alt
-  mappings.n["<C-M-Up>"] = { "<Cmd>resize -2<CR>", desc = "Resize split up" }
-  mappings.n["<C-M-Down>"] = { "<Cmd>resize +2<CR>", desc = "Resize split down" }
-  mappings.n["<C-M-Left>"] = { "<Cmd>vertical resize -2<CR>", desc = "Resize split left" }
-  mappings.n["<C-M-Right>"] = { "<Cmd>vertical resize +2<CR>", desc = "Resize split right" }
-  -- Disable defaults ctrl + arrow keys
-  mappings.n["<C-Left>"] = false
-  mappings.n["<C-Right>"] = false
-  mappings.n["<C-Up>"] = false
-  mappings.n["<C-Down>"] = false
-  mappings.n["<C-Left>"] = false
 
   ------ Motions related to jumping or selecting ------
   for key, map in pairs {

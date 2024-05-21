@@ -21,12 +21,14 @@ return {
     event = "User AstroFile",
     config = function()
       require("hlchunk").setup {
-        -- Disable line number and blank highlight
-        line_num = {
-          enable = false,
+        chunk = {
+          notify = false,
         },
         blank = {
           enable = false,
+        },
+        line_num = {
+          use_treesitter = true,
         },
       }
     end,
@@ -129,5 +131,23 @@ return {
       { "<A-Down>", [[<cmd>lua require("tmux").resize_bottom()<cr>]], mode = { "n" } },
       { "<A-Up>", [[<cmd>lua require("tmux").resize_top()<cr>]], mode = { "n" } },
     }
+  },
+  -- Find and replace
+  {
+    "MagicDuck/grug-far.nvim",
+    config = function()
+      require('grug-far').setup({});
+    end,
+    cmd = { "GrugFar" },
+  },
+  -- Smooth scrolling
+  {
+    "karb94/neoscroll.nvim",
+    event = "VeryLazy",
+    config = function ()
+      require('neoscroll').setup {
+        hide_cursor = false,
+      }
+    end
   },
 }

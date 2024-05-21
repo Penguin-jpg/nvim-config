@@ -7,5 +7,4 @@ return {
   { "NvChad/nvim-colorizer.lua", enabled = false },
   { "catppuccin/nvim", name = "catppuccin", enabled = false },
   { "b0o/SchemaStore.nvim", enabled = false },
-  { "stevearc/resession.nvim", enabled = false },
 }
