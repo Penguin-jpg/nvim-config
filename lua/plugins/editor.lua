@@ -134,11 +134,24 @@ return {
   },
   -- Find and replace
   {
-    "MagicDuck/grug-far.nvim",
+    "nvim-pack/nvim-spectre",
     config = function()
-      require('grug-far').setup({});
+      require("spectre").setup({
+        mapping = {
+          ["run_replace"] = {
+            map = "<leader>r",
+            cmd = "<Cmd>lua require('spectre.actions').run_replace()<CR>",
+            desc = "Replace all",
+          },
+        },
+      })
     end,
-    cmd = { "GrugFar" },
+    keys = {
+      { "<Leader>s", function() require("spectre").toggle() end, mode = { "n" }, desc = "Toggle Spectre" },
+      { "<Leader>sw", function() require("spectre").open_visual({ select_word = true }) end, mode = { "n" }, desc = "Search current word" },
+      { "<Leader>sw", function() require("spectre").open_visual() end, mode = { "v" }, desc = "Search current word" },
+      { "<Leader>sf", function() require("spectre").open_file_search({ select_word = true }) end, mode = { "n" }, desc = "Search on current file" },
+    },
   },
   -- Smooth scrolling
   {
