@@ -126,31 +126,28 @@ return {
       }
     },
     keys = {
-      { "<A-Left>", [[<cmd>lua require("tmux").resize_left()<cr>]], mode = { "n" } },
-      { "<A-Right>", [[<cmd>lua require("tmux").resize_right()<cr>]], mode = { "n" } },
-      { "<A-Down>", [[<cmd>lua require("tmux").resize_bottom()<cr>]], mode = { "n" } },
-      { "<A-Up>", [[<cmd>lua require("tmux").resize_top()<cr>]], mode = { "n" } },
+      { "<A-Left>", "<Cmd>lua require('tmux').resize_left()<CR>", mode = { "n" } },
+      { "<A-Right>", "<Cmd>lua require('tmux').resize_right()<CR>", mode = { "n" } },
+      { "<A-Down>", "<Cmd>lua require('tmux').resize_bottom()<CR>", mode = { "n" } },
+      { "<A-Up>", "<Cmd>lua require('tmux').resize_top()<CR>", mode = { "n" } },
     }
   },
   -- Find and replace
   {
-    "nvim-pack/nvim-spectre",
+    "MagicDuck/grug-far.nvim",
+    cmd = "GrugFar",
     config = function()
-      require("spectre").setup({
-        mapping = {
-          ["run_replace"] = {
-            map = "<leader>r",
-            cmd = "<Cmd>lua require('spectre.actions').run_replace()<CR>",
-            desc = "Replace all",
-          },
-        },
-      })
+      require('grug-far').setup({});
     end,
     keys = {
-      { "<Leader>s", function() require("spectre").toggle() end, mode = { "n" }, desc = "Toggle Spectre" },
-      { "<Leader>sw", function() require("spectre").open_visual({ select_word = true }) end, mode = { "n" }, desc = "Search current word" },
-      { "<Leader>sw", function() require("spectre").open_visual() end, mode = { "v" }, desc = "Search current word" },
-      { "<Leader>sf", function() require("spectre").open_file_search({ select_word = true }) end, mode = { "n" }, desc = "Search on current file" },
+      {
+        "<Leader>r",
+        function()
+         require("grug-far").grug_far({ prefills = { search = vim.fn.expand("<cword>") } })
+        end,
+        mode = { "n" },
+        desc = "Open GrugFar"
+      },
     },
   },
   -- Smooth scrolling
@@ -163,4 +160,33 @@ return {
       }
     end
   },
+  -- Python import module highlight
+  {
+		"wookayin/semshi", -- maintained fork
+		ft = "python",
+		init = function()
+			vim.g.python3_host_prog = vim.fn.exepath("python3")
+			-- better done by LSP
+			vim.g["semshi#error_sign"] = false
+			vim.g["semshi#simplify_markup"] = false
+			vim.g["semshi#mark_selected_nodes"] = false
+			vim.g["semshi#update_delay_factor"] = 0.001
+
+			vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+				callback = function()
+					vim.cmd([[
+						highlight! semshiGlobal gui=italic
+						highlight! link semshiImported @lsp.type.namespace
+						highlight! link semshiParameter @lsp.type.parameter
+						highlight! link semshiParameterUnused DiagnosticUnnecessary
+						highlight! link semshiBuiltin @function.builtin
+						highlight! link semshiAttribute @field
+						highlight! link semshiSelf @lsp.type.selfKeyword
+						highlight! link semshiUnresolved @lsp.type.unresolvedReference
+						highlight! link semshiFree @comment
+					]])
+				end,
+			})
+		end,
+	},
 }
