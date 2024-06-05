@@ -36,7 +36,7 @@ return function()
   mappings.n["<C-Z>"] = { "u", desc = "Undo" }
   mappings.i["<C-Z>"] = { "<C-o>u", desc = "Undo" }
   -- Use <C-H> since <C-BS> sometimes fails (<C-H> also makes <C-BS> work)
-  mappings.i["<C-H>"] = { "<C-w>", desc = { "Delete a word forward" } }
+  mappings.i["<C-H>"] = { "<C-w>", desc = "Delete a word forward" }
   -- <C-o> will exit insert mode tempoarily and back to insert mode again
   mappings.i["<C-Del>"] = { "<C-o>dw", desc = "Delete a word backward" }
   mappings.i["<C-s>"] = { "<Cmd>w!<CR>", desc = "Save file" } 
