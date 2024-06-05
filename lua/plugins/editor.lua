@@ -163,9 +163,9 @@ return {
   -- Python import module highlight
   {
 		"wookayin/semshi", -- maintained fork
+		build = ":UpdateRemotePlugins",
 		ft = "python",
 		init = function()
-			vim.g.python3_host_prog = vim.fn.exepath("python3")
 			-- better done by LSP
 			vim.g["semshi#error_sign"] = false
 			vim.g["semshi#simplify_markup"] = false

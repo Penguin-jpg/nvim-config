@@ -32,7 +32,7 @@ M.statusline = {
     },
   }),
   status.component.git_branch({
-    git_branch = { padding = { left = 1 } },
+    git_branch = { padding = { left = 2 } },
     surround = {
       separator = "none",
       color = "bg",
@@ -40,51 +40,30 @@ M.statusline = {
   }),
   status.component.git_diff({
     padding = { left = 1 },
-    surround = { 
+    surround = {
       separator = "none",
       color = "bg",
     },
   }),
   status.component.fill(),
   status.component.cmd_info(),
-  -- status.component.fill(),
   -- Show file encoding
-  -- status.component.builder({
-  --   {
-  --     provider = "file_encoding",
-  --     opts = { padding = { left = 1, right = 1 } },
-  --   },
-  -- }),
+  status.component.builder({
+    {
+      provider = "file_encoding",
+      icon = require("astroui").get_icon("Encoding"),
+      opts = { padding = { left = 1, right = 1 } },
+    },
+  }),
   status.component.lsp {
-    surround = {
-      color = function() return { main = "bg" } end
-    }
+    surround = { color = "bg" },
   },
   status.component.virtual_env(),
-  {
-    -- make nav section with icon border
-    -- define a custom component with just a file icon
-    status.component.builder({
-      { provider = require("astroui").get_icon("Navigation") },
-      -- add padding after icon
-      padding = { right = 1 },
-      -- set the icon foreground
-      hl = { fg = "bg" },
-      -- use the right separator and define the background color
-      -- as well as the color to the left of the separator
-      surround = {
-        separator = "right",
-        color = "nav_icon_bg",
-      },
-    }),
-    -- add a navigation component and just display the percentage of progress in the file
-    status.component.nav({
-      -- add some padding for the percentage provider
-      -- percentage = { padding = { left = 1 } },
-      -- use no separator and define the background color
-      surround = { separator = "none", color = "blank_bg" },
-    }),
-  },
+  -- add a navigation component and just display the percentage of progress in the file
+  status.component.nav({
+    padding = { right = 1 },
+    surround = { separator = "none", color = "bg" },
+  }),
 }
 
 -- My custom winbar

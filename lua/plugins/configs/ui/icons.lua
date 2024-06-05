@@ -49,4 +49,5 @@ return {
   DiagnosticWarn = "",
   -- Misc
   Navigation = "",
+  Encoding = "󱇧",
 }
