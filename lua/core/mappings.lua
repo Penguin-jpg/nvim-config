@@ -36,8 +36,6 @@ return function()
 
   mappings.n["<C-z>"] = { "u", desc = "Undo" }
   mappings.i["<C-z>"] = { "<C-o>u", desc = "Undo" }
-  -- Use <C-H> since <C-BS> sometimes fails (<C-H> also makes <C-BS> work)
-  mappings.i["<C-H>"] = { "<C-w>", desc = "Delete a word forward" }
   -- <C-o> will exit insert mode tempoarily and back to insert mode again
   mappings.i["<C-Del>"] = { "<C-o>dw", desc = "Delete a word backward" }
   mappings.i["<C-s>"] = { "<Cmd>w!<CR>", desc = "Save file" }
@@ -46,6 +44,11 @@ return function()
   -- Delete without yanking
   mappings.n["D"] = { '"_dd', desc = "Delete without yanking" }
   mappings.v["D"] = { '"_d', desc = "Delete without yanking" }
+  -- Move in insert mode
+  mappings.i["<C-h>"] = { "<Left>", desc = "Move left in insert mode" }
+  mappings.i["<C-l>"] = { "<Right>", desc = "Move right in insert mode" }
+  mappings.i["<C-k>"] = { "<Up>", desc = "Move up in insert mode" }
+  mappings.i["<C-j>"] = { "<Down>", desc = "Move down in insert mode" }
 
   -- Duplicate line/block up/down
   mappings.n["<A-K>"] = { '"ayy"aP' }

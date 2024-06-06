@@ -3,7 +3,6 @@ return {
   -- Move lines up/down/left/right
   {
     "echasnovski/mini.move",
-    version = "*",
     opts = {
       mappings = {
         -- Move in visual mode
@@ -22,17 +21,6 @@ return {
       },
     },
   },
-  -- Better move by word support
-  {
-    "chrisgrieser/nvim-spider",
-    opts = {},
-    keys = {
-      { "w", "<Cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" }, desc = "Spider-w" },
-      { "e", "<Cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "Spider-e" },
-      { "b", "<Cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "Spider-b" },
-      { "ge", "<Cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" }, desc = "Spider-ge" },
-    },
-  },
   -- Faster change/delete/replace delimiter pairs
   {
     "echasnovski/mini.surround",
@@ -47,16 +35,43 @@ return {
       { "sn", mode = { "n", "x" }, desc = "Update `MiniSurround.config.n_lines`" },
     },
   },
+  -- More bracket motion support
+  {
+    "echasnovski/mini.bracketed",
+    event = "User AstroFile",
+    opts = {},
+  },
+  -- Better move by word support
+  {
+    "chrisgrieser/nvim-spider",
+    opts = {},
+    keys = {
+      { "w",  "<Cmd>lua require('spider').motion('w')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-w" },
+      { "e",  "<Cmd>lua require('spider').motion('e')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-e" },
+      { "b",  "<Cmd>lua require('spider').motion('b')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-b" },
+      { "ge", "<Cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" }, desc = "Spider-ge" },
+    },
+  },
   -- Better character motion support
   {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "gs", function() require("flash").jump() end, mode = { "n", "x", "o" }, desc = "Flash" },
-      { "gS", function() require("flash").treesitter() end, mode = { "n", "x", "o" }, desc = "Flash Treesitter" },
-      { "r", function() require("flash").remote() end, mode = "o", desc = "Remote Flash" },
-      { "R", function() require("flash").treesitter_search() end, mode = { "x", "o" }, desc = "Treesitter Search" },
+      { "gs", function() require("flash").jump() end,   mode = { "n", "x", "o" }, desc = "Flash" },
+      {
+        "gS",
+        function() require("flash").treesitter() end,
+        mode = { "n", "x", "o" },
+        desc = "Flash Treesitter",
+      },
+      { "r",  function() require("flash").remote() end, mode = "o",               desc = "Remote Flash" },
+      {
+        "R",
+        function() require("flash").treesitter_search() end,
+        mode = { "x", "o" },
+        desc = "Treesitter Search",
+      },
     },
   },
 }
