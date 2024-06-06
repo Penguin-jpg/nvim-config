@@ -33,7 +33,7 @@ return {
       }
     end,
   },
-  -- Semantic tokens highlight 
+  -- Semantic tokens highlight
   {
     "m-demare/hlargs.nvim",
     event = "User AstroFile",
@@ -73,14 +73,14 @@ return {
   -- Multi-cursors support
   {
     "brenton-leighton/multiple-cursors.nvim",
-    version = "*",  -- Use the latest tagged version
+    version = "*", -- Use the latest tagged version
     opts = {},
     keys = {
-      {"<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = {"n", "i", "x"} },
-      {"<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = {"n", "i", "x"} },
-      {"<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = {"n", "i"} },
-      {"<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", mode = {"n", "x"} },
-      {"<C-n>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x"} },
+      { "<C-Down>",      "<Cmd>MultipleCursorsAddDown<CR>",          mode = { "n", "i", "x" } },
+      { "<C-Up>",        "<Cmd>MultipleCursorsAddUp<CR>",            mode = { "n", "i", "x" } },
+      { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>",   mode = { "n", "i" } },
+      { "<Leader>a",     "<Cmd>MultipleCursorsAddMatches<CR>",       mode = { "n", "x" } },
+      { "<C-n>",         "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" } },
     },
   },
   -- Better code folding
@@ -90,7 +90,7 @@ return {
       -- Add virtual text to show how many lines are folded
       fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
-        local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+        local suffix = (" 󰁂 %d "):format(endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
@@ -98,21 +98,21 @@ return {
           local chunkText = chunk[1]
           local chunkWidth = vim.fn.strdisplaywidth(chunkText)
           if targetWidth > curWidth + chunkWidth then
-              table.insert(newVirtText, chunk)
+            table.insert(newVirtText, chunk)
           else
             chunkText = truncate(chunkText, targetWidth - curWidth)
             local hlGroup = chunk[2]
-            table.insert(newVirtText, {chunkText, hlGroup})
+            table.insert(newVirtText, { chunkText, hlGroup })
             chunkWidth = vim.fn.strdisplaywidth(chunkText)
             -- str width returned from truncate() may less than 2nd argument, need padding
             if curWidth + chunkWidth < targetWidth then
-                suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
             end
             break
           end
           curWidth = curWidth + chunkWidth
         end
-        table.insert(newVirtText, {suffix, 'MoreMsg'})
+        table.insert(newVirtText, { suffix, "MoreMsg" })
         return newVirtText
       end,
     },
@@ -123,30 +123,30 @@ return {
     opts = {
       resize = {
         enable_default_keybindings = false,
-      }
+      },
     },
     keys = {
-      { "<A-Left>", "<Cmd>lua require('tmux').resize_left()<CR>", mode = { "n" } },
-      { "<A-Right>", "<Cmd>lua require('tmux').resize_right()<CR>", mode = { "n" } },
-      { "<A-Down>", "<Cmd>lua require('tmux').resize_bottom()<CR>", mode = { "n" } },
-      { "<A-Up>", "<Cmd>lua require('tmux').resize_top()<CR>", mode = { "n" } },
-    }
+      { "<A-Left>",  "<Cmd>lua require('tmux').resize_left()<CR>",   mode = { "n" } },
+      { "<A-Right>", "<Cmd>lua require('tmux').resize_right()<CR>",  mode = { "n" } },
+      { "<A-Down>",  "<Cmd>lua require('tmux').resize_bottom()<CR>", mode = { "n" } },
+      { "<A-Up>",    "<Cmd>lua require('tmux').resize_top()<CR>",    mode = { "n" } },
+    },
   },
   -- Find and replace
   {
     "MagicDuck/grug-far.nvim",
     cmd = "GrugFar",
     config = function()
-      require('grug-far').setup({});
+      require("grug-far").setup {
+        windowCreationCommand = "tabnew",
+      }
     end,
     keys = {
       {
         "<Leader>r",
-        function()
-         require("grug-far").grug_far({ prefills = { search = vim.fn.expand("<cword>") } })
-        end,
+        function() require("grug-far").grug_far { prefills = { search = vim.fn.expand "<cword>" } } end,
         mode = { "n" },
-        desc = "Open GrugFar"
+        desc = "Open GrugFar",
       },
     },
   },
@@ -154,39 +154,39 @@ return {
   {
     "karb94/neoscroll.nvim",
     event = "VeryLazy",
-    config = function ()
-      require('neoscroll').setup {
+    config = function()
+      require("neoscroll").setup {
         hide_cursor = false,
       }
-    end
+    end,
   },
   -- Python import module highlight
   {
-		"wookayin/semshi", -- maintained fork
-		build = ":UpdateRemotePlugins",
-		ft = "python",
-		init = function()
-			-- better done by LSP
-			vim.g["semshi#error_sign"] = false
-			vim.g["semshi#simplify_markup"] = false
-			vim.g["semshi#mark_selected_nodes"] = false
-			vim.g["semshi#update_delay_factor"] = 0.001
+    "wookayin/semshi", -- maintained fork
+    build = ":UpdateRemotePlugins",
+    ft = "python",
+    init = function()
+      -- better done by LSP
+      vim.g["semshi#error_sign"] = false
+      vim.g["semshi#simplify_markup"] = false
+      vim.g["semshi#mark_selected_nodes"] = false
+      vim.g["semshi#update_delay_factor"] = 0.001
 
-			vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
-				callback = function()
-					vim.cmd([[
-						highlight! semshiGlobal gui=italic
-						highlight! link semshiImported @lsp.type.namespace
-						highlight! link semshiParameter @lsp.type.parameter
-						highlight! link semshiParameterUnused DiagnosticUnnecessary
-						highlight! link semshiBuiltin @function.builtin
-						highlight! link semshiAttribute @field
-						highlight! link semshiSelf @lsp.type.selfKeyword
-						highlight! link semshiUnresolved @lsp.type.unresolvedReference
-						highlight! link semshiFree @comment
-					]])
-				end,
-			})
-		end,
-	},
+      vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+        callback = function()
+          vim.cmd [[
+  				highlight! semshiGlobal gui=italic
+  				highlight! link semshiImported @lsp.type.namespace
+  				highlight! link semshiParameter @lsp.type.parameter
+  				highlight! link semshiParameterUnused DiagnosticUnnecessary
+  				highlight! link semshiBuiltin @function.builtin
+  				highlight! link semshiAttribute @field
+  				highlight! link semshiSelf @lsp.type.selfKeyword
+  				highlight! link semshiUnresolved @lsp.type.unresolvedReference
+  				highlight! link semshiFree @comment
+  			]]
+        end,
+      })
+    end,
+  },
 }

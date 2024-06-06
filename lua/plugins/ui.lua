@@ -25,9 +25,10 @@ return {
   {
     "xiyaowong/transparent.nvim",
     lazy = false,
-    opts = function(_, opts)
-      opts = require("plugins.configs.ui.transparent")(opts)
-    end,
+    opts = function(_, opts) opts = require "plugins.configs.ui.transparent"(opts) end,
+    keys = {
+      { "<Leader>uT", "<Cmd>TransparentToggle<CR>", desc = "Toggle transparent" },
+    },
   },
   -- Enhance UI
   {
@@ -45,9 +46,7 @@ return {
         end
       end,
     },
-    opts = function(_, opts)
-      return require("astrocore").extend_tbl(opts, require("plugins.configs.ui.noice"))
-    end,
+    opts = function(_, opts) return require("astrocore").extend_tbl(opts, require "plugins.configs.ui.noice") end,
     init = function() vim.g.lsp_handlers_enabled = false end,
   },
 }

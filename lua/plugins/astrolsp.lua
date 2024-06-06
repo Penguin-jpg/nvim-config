@@ -9,20 +9,21 @@ return {
   opts = {
     -- Configuration table of features provided by AstroLSP
     features = {
-      autoformat = true, -- enable or disable auto formatting on start
-      codelens = true, -- enable/disable codelens refresh on start
-      inlay_hints = true, -- enable/disable inlay hints on start
+      autoformat = true,      -- enable or disable auto formatting on start
+      codelens = true,        -- enable/disable codelens refresh on start
+      inlay_hints = true,     -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
     -- customize lsp formatting options
-    formatting = require("plugins.configs.lsp.formatting"),
+    formatting = require "plugins.configs.lsp.formatting",
     -- enable servers that you already have installed without mason
     servers = {},
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      clangd = require("plugins.configs.lsp.config.clangd"),
-      ruff_lsp = require("plugins.configs.lsp.config.ruff_lsp"),
+      clangd = require "plugins.configs.lsp.config.clangd",
+      ruff_lsp = require "plugins.configs.lsp.config.ruff_lsp",
+      basedpyright = require "plugins.configs.lsp.config.basedpyright",
     },
     -- customize how language servers are attached
     handlers = {
