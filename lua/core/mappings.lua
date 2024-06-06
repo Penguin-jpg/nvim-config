@@ -16,6 +16,7 @@ return function()
   mappings.n["<C-Up>"] = false
   mappings.n["<C-Down>"] = false
   mappings.n["<C-Left>"] = false
+  mappings.n["<C-z>"] = false
 
   ------ Utility functions ------
   if is_available "Comment.nvim" then
@@ -33,23 +34,24 @@ return function()
     }
   end
 
-  mappings.n["<C-Z>"] = { "u", desc = "Undo" }
-  mappings.i["<C-Z>"] = { "<C-o>u", desc = "Undo" }
+  mappings.n["<C-z>"] = { "u", desc = "Undo" }
+  mappings.i["<C-z>"] = { "<C-o>u", desc = "Undo" }
   -- Use <C-H> since <C-BS> sometimes fails (<C-H> also makes <C-BS> work)
   mappings.i["<C-H>"] = { "<C-w>", desc = "Delete a word forward" }
   -- <C-o> will exit insert mode tempoarily and back to insert mode again
   mappings.i["<C-Del>"] = { "<C-o>dw", desc = "Delete a word backward" }
-  mappings.i["<C-s>"] = { "<Cmd>w!<CR>", desc = "Save file" } 
+  mappings.i["<C-s>"] = { "<Cmd>w!<CR>", desc = "Save file" }
   mappings.v["<C-c>"] = { "y", desc = "Copy selected block" }
   mappings.i["<S-Tab>"] = { "<C-d>", desc = "Unindent line" }
   -- Delete without yanking
   mappings.n["D"] = { '"_dd', desc = "Delete without yanking" }
   mappings.v["D"] = { '"_d', desc = "Delete without yanking" }
 
-  ------ Motions to duplicate line or block up/down ------
-  mappings.n["<A-K>"] = {"<Cmd>co.-1<CR>"}
-  mappings.n["<A-J>"] = {"<Cmd>co.<CR>"}
-  mappings.v["<A-J>"] = {"<Cmd>co.<CR>"}
+  -- Duplicate line/block up/down
+  mappings.n["<A-K>"] = { '"ayy"aP' }
+  mappings.n["<A-J>"] = { '"ayy"ap' }
+  mappings.v["<A-K>"] = { '"ay"aP' }
+  mappings.v["<A-J>"] = { '"ay"ap' }
 
   ------ Motions related to jumping or selecting ------
   for key, map in pairs {
