@@ -1,5 +1,21 @@
 return {
   {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "night",
+      light_style = "day",
+      styles = {
+        comments = { italic = false },
+        keywords = { italic = false },
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+      dim_inactive = true,
+    },
+  },
+  {
     "rebelot/kanagawa.nvim",
     opts = {
       compile = true,
@@ -10,10 +26,10 @@ return {
         theme = {
           all = {
             ui = {
-                bg_gutter = "none"
-            }
-          }
-        }
+              bg_gutter = "none",
+            },
+          },
+        },
       },
       theme = "wave",
       background = {

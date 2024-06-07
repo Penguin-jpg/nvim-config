@@ -22,7 +22,6 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       clangd = require "plugins.configs.lsp.config.clangd",
-      ruff_lsp = require "plugins.configs.lsp.config.ruff_lsp",
       basedpyright = require "plugins.configs.lsp.config.basedpyright",
     },
     -- customize how language servers are attached
@@ -58,23 +57,49 @@ return {
           callback = function() vim.lsp.buf.clear_references() end,
         },
       },
+      -- disable inlay hints in insert mode
+      disable_inlay_hints_on_insert = {
+        -- only create for language servers that support inlay hints
+        -- (and only if vim.lsp.inlay_hint is available)
+        cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
+        {
+          -- when going into insert mode
+          event = "InsertEnter",
+          desc = "disable inlay hints on insert",
+          callback = function(args)
+            local filter = { bufnr = args.buf }
+            -- if the inlay hints are currently enabled
+            if vim.lsp.inlay_hint.is_enabled(filter) then
+              -- disable the inlay hints
+              vim.lsp.inlay_hint.enable(false, filter)
+              -- create a single use autocommand to turn the inlay hints back on
+              -- when leaving insert mode
+              vim.api.nvim_create_autocmd("InsertLeave", {
+                buffer = args.buf,
+                once = true,
+                callback = function() vim.lsp.inlay_hint.enable(true, filter) end,
+              })
+            end
+          end,
+        },
+      },
     },
     -- mappings to be set up on attaching of a language server
     mappings = {
       n = {
         K = false,
-        -- gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
+        gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
         -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
-        -- gD = {
-        --   function() vim.lsp.buf.declaration() end,
-        --   desc = "Declaration of current symbol",
-        --   cond = "textDocument/declaration",
-        -- },
-        -- ["<Leader>uY"] = {
-        --   function() require("astrolsp.toggles").buffer_semantic_tokens() end,
-        --   desc = "Toggle LSP semantic highlight (buffer)",
-        --   cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
-        -- },
+        gD = {
+          function() vim.lsp.buf.declaration() end,
+          desc = "Declaration of current symbol",
+          cond = "textDocument/declaration",
+        },
+        ["<Leader>uY"] = {
+          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
+          desc = "Toggle LSP semantic highlight (buffer)",
+          cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
+        },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
@@ -82,6 +107,9 @@ return {
     on_attach = function(client, bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
+
+      -- Disable ruff_lsp hover in favor of pyright
+      if client.name == "ruff_lsp" then client.server_capabilities.hoverProvider = false end
     end,
   },
 }
