@@ -52,6 +52,16 @@ return {
       { "ge", "<Cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" }, desc = "Spider-ge" },
     },
   },
+  -- Duplicate line/block up/down support
+  {
+    "hinell/duplicate.nvim",
+    keys = {
+      { "<A-K>", "<Cmd>LineDuplicate -1<CR>",   mode = { "n" }, desc = "Duplicate line up" },
+      { "<A-J>", "<Cmd>LineDuplicate +1<CR>",   mode = { "n" }, desc = "Duplicate line down" },
+      { "<A-K>", "<Cmd>VisualDuplicate -1<CR>", mode = { "x" }, desc = "Duplicate block up" },
+      { "<A-J>", "<Cmd>VisualDuplicate +1<CR>", mode = { "x" }, desc = "Duplicate block down" },
+    },
+  },
   -- Better character motion support
   {
     "folke/flash.nvim",

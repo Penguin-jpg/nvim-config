@@ -51,10 +51,10 @@ return function()
   mappings.i["<C-j>"] = { "<Down>", desc = "Move down in insert mode" }
 
   -- Duplicate line/block up/down
-  mappings.n["<A-K>"] = { '"ayy"aP' }
-  mappings.n["<A-J>"] = { '"ayy"ap' }
-  mappings.v["<A-K>"] = { '"ay"aP' }
-  mappings.v["<A-J>"] = { '"ay"ap' }
+  -- mappings.n["<A-K>"] = { '"ayy"aP' }
+  -- mappings.n["<A-J>"] = { '"ayy"ap' }
+  -- mappings.v["<A-K>"] = { '"ay"aP' }
+  -- mappings.v["<A-J>"] = { '"ay"ap' }
 
   ------ Motions related to jumping or selecting ------
   for key, map in pairs {
