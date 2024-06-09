@@ -33,6 +33,13 @@ return {
       }
     end,
   },
+  -- Rainbow delimiters support
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    event = "User AstroFile",
+    main = "rainbow-delimiters.setup",
+    opts = {},
+  },
   -- Semantic tokens highlight
   {
     "m-demare/hlargs.nvim",
@@ -76,11 +83,11 @@ return {
     version = "*", -- Use the latest tagged version
     opts = {},
     keys = {
-      { "<C-Down>",      "<Cmd>MultipleCursorsAddDown<CR>",          mode = { "n", "i", "x" } },
-      { "<C-Up>",        "<Cmd>MultipleCursorsAddUp<CR>",            mode = { "n", "i", "x" } },
-      { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>",   mode = { "n", "i" } },
-      { "<Leader>a",     "<Cmd>MultipleCursorsAddMatches<CR>",       mode = { "n", "x" } },
-      { "<C-n>",         "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" } },
+      { "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" } },
+      { "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "i", "x" } },
+      { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = { "n", "i" } },
+      { "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", mode = { "n", "x" } },
+      { "<C-n>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" } },
     },
   },
   -- Better code folding
@@ -126,10 +133,10 @@ return {
       },
     },
     keys = {
-      { "<A-Left>",  "<Cmd>lua require('tmux').resize_left()<CR>",   mode = { "n" } },
-      { "<A-Right>", "<Cmd>lua require('tmux').resize_right()<CR>",  mode = { "n" } },
-      { "<A-Down>",  "<Cmd>lua require('tmux').resize_bottom()<CR>", mode = { "n" } },
-      { "<A-Up>",    "<Cmd>lua require('tmux').resize_top()<CR>",    mode = { "n" } },
+      { "<A-Left>", "<Cmd>lua require('tmux').resize_left()<CR>", mode = { "n" } },
+      { "<A-Right>", "<Cmd>lua require('tmux').resize_right()<CR>", mode = { "n" } },
+      { "<A-Down>", "<Cmd>lua require('tmux').resize_bottom()<CR>", mode = { "n" } },
+      { "<A-Up>", "<Cmd>lua require('tmux').resize_top()<CR>", mode = { "n" } },
     },
   },
   -- Find and replace

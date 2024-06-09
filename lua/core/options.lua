@@ -7,7 +7,6 @@ return {
     signcolumn = "auto",                                     -- sets vim.opt.signcolumn
     wrap = false,                                            -- auto wrap lines
     guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20", -- default cursor setting
-    ve = "onemore",                                          -- can move cursor next to the end of the line
     clipboard = "unnamedplus",                               -- enable system clipboard
     mouse = "a",                                             -- enable mouse
     mousemoveevent = true,                                   -- enable mousemove event
@@ -17,6 +16,8 @@ return {
     tabstop = 4,                                             -- set the number of space in a tab to 4
     softtabstop = 4,                                         -- can be differnt from tabstop
     showtabline = 2,                                         -- always show tabline
+    smartindent = true,
+    smarttab = true,
   },
   -- vim.g.<key>
   g = {

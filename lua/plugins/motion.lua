@@ -3,6 +3,7 @@ return {
   -- Move lines up/down/left/right
   {
     "echasnovski/mini.move",
+    event = "User AstroFile",
     opts = {
       mappings = {
         -- Move in visual mode
@@ -35,20 +36,14 @@ return {
       { "sn", mode = { "n", "x" }, desc = "Update `MiniSurround.config.n_lines`" },
     },
   },
-  -- More bracket motion support
-  {
-    "echasnovski/mini.bracketed",
-    event = "User AstroFile",
-    opts = {},
-  },
   -- Better move by word support
   {
     "chrisgrieser/nvim-spider",
     opts = {},
     keys = {
-      { "w",  "<Cmd>lua require('spider').motion('w')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-w" },
-      { "e",  "<Cmd>lua require('spider').motion('e')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-e" },
-      { "b",  "<Cmd>lua require('spider').motion('b')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-b" },
+      { "w", "<Cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" }, desc = "Spider-w" },
+      { "e", "<Cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "Spider-e" },
+      { "b", "<Cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "Spider-b" },
       { "ge", "<Cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" }, desc = "Spider-ge" },
     },
   },
@@ -56,8 +51,8 @@ return {
   {
     "hinell/duplicate.nvim",
     keys = {
-      { "<A-K>", "<Cmd>LineDuplicate -1<CR>",   mode = { "n" }, desc = "Duplicate line up" },
-      { "<A-J>", "<Cmd>LineDuplicate +1<CR>",   mode = { "n" }, desc = "Duplicate line down" },
+      { "<A-K>", "<Cmd>LineDuplicate -1<CR>", mode = { "n" }, desc = "Duplicate line up" },
+      { "<A-J>", "<Cmd>LineDuplicate +1<CR>", mode = { "n" }, desc = "Duplicate line down" },
       { "<A-K>", "<Cmd>VisualDuplicate -1<CR>", mode = { "x" }, desc = "Duplicate block up" },
       { "<A-J>", "<Cmd>VisualDuplicate +1<CR>", mode = { "x" }, desc = "Duplicate block down" },
     },
@@ -65,17 +60,16 @@ return {
   -- Better character motion support
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
     opts = {},
     keys = {
-      { "gs", function() require("flash").jump() end,   mode = { "n", "x", "o" }, desc = "Flash" },
+      { "gs", function() require("flash").jump() end, mode = { "n", "x", "o" }, desc = "Flash" },
       {
         "gS",
         function() require("flash").treesitter() end,
         mode = { "n", "x", "o" },
         desc = "Flash Treesitter",
       },
-      { "r",  function() require("flash").remote() end, mode = "o",               desc = "Remote Flash" },
+      { "r", function() require("flash").remote() end, mode = "o", desc = "Remote Flash" },
       {
         "R",
         function() require("flash").treesitter_search() end,

@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Enable wrap and spell for text like documents",
   pattern = { "gitcommit", "markdown", "text", "plaintext" },
   callback = function()
-    vim.opt_local.warp = true
+    vim.opt_local.wrap = true
     vim.opt_local.spell = true
   end,
 })
