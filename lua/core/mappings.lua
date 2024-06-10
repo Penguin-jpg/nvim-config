@@ -16,7 +16,6 @@ return function()
   mappings.n["<C-Up>"] = false
   mappings.n["<C-Down>"] = false
   mappings.n["<C-Left>"] = false
-  mappings.n["<C-z>"] = false
 
   ------ Utility functions ------
   if is_available "Comment.nvim" then

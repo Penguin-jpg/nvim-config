@@ -13,6 +13,7 @@ return {
         floats = "transparent",
       },
       dim_inactive = true,
+      on_colors = function(colors) colors.comment = "#8c99e0" end,
     },
   },
   {
@@ -43,7 +44,7 @@ return {
     name = "catppuccin",
     opts = {
       flavour = "mocha", -- latte, frappe, macchiato, mocha
-      background = {     -- :h background
+      background = { -- :h background
         light = "latte",
         dark = "mocha",
       },
