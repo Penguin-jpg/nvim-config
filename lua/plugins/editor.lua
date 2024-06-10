@@ -18,19 +18,30 @@ return {
   -- Better indent blankline
   {
     "shellRaining/hlchunk.nvim",
-    event = "User AstroFile",
-    config = function()
-      require("hlchunk").setup {
+    event = { "BufReadPre", "BufNewFile" },
+    config = function(_, opts)
+      require("hlchunk").setup(require("astrocore").extend_tbl(opts, {
         chunk = {
+          enable = true,
           notify = false,
+          chars = {
+            horizontal_line = "━",
+            vertical_line = "┃",
+            left_top = "┏",
+            left_bottom = "┗",
+            right_arrow = "➤",
+          },
+        },
+        indent = {
+          enable = true,
         },
         blank = {
           enable = false,
         },
         line_num = {
-          use_treesitter = true,
+          enable = true,
         },
-      }
+      }))
     end,
   },
   -- Rainbow delimiters support
