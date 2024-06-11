@@ -1,12 +1,12 @@
 local M = {}
-local status = require("astroui.status")
+local status = require "astroui.status"
 local path_func = status.provider.filename { modify = ":.:h", fallback = "" }
 
 -- My custom statusline
 M.statusline = {
   hl = { fg = "fg", bg = "bg" },
   -- Show mode text
-  status.component.mode({
+  status.component.mode {
     -- enable mode text with padding as well as an icon before it
     mode_text = {
       mode_text = { padding = { left = 1, right = 1 } },
@@ -15,8 +15,8 @@ M.statusline = {
     surround = {
       separator = "left",
     },
-  }),
-  status.component.file_info({
+  },
+  status.component.file_info {
     filename = { fallback = "Empty" },
     filetype = false,
     file_modified = false,
@@ -24,46 +24,50 @@ M.statusline = {
       separator = { "", " " },
       color = "bg",
     },
-  }),
-  status.component.diagnostics({
+  },
+  status.component.diagnostics {
     surround = {
       separator = "none",
       color = "bg",
     },
-  }),
-  status.component.git_branch({
+  },
+  status.component.git_branch {
     git_branch = { padding = { left = 2 } },
     surround = {
       separator = "none",
       color = "bg",
     },
-  }),
-  status.component.git_diff({
+  },
+  status.component.git_diff {
     padding = { left = 1 },
     surround = {
       separator = "none",
       color = "bg",
     },
-  }),
+  },
   status.component.fill(),
   status.component.cmd_info(),
   -- Show file encoding
-  status.component.builder({
+  status.component.builder {
     {
-      provider = "file_encoding",
-      icon = require("astroui").get_icon("Encoding"),
-      opts = { padding = { left = 1, right = 1 } },
+      provider = function()
+        return status.utils.stylize(vim.bo.fileencoding, {
+          icon = { kind = "Encoding", padding = { right = 1 } },
+          padding = { right = 1 },
+        })
+      end,
     },
-  }),
+  },
   status.component.lsp {
+    padding = { right = 1 },
     surround = { color = "bg" },
   },
   status.component.virtual_env(),
   -- add a navigation component and just display the percentage of progress in the file
-  status.component.nav({
+  status.component.nav {
     padding = { right = 1 },
     surround = { separator = "none", color = "bg" },
-  }),
+  },
 }
 
 -- My custom winbar
