@@ -48,6 +48,7 @@ return {
   DiagnosticInfo = "󰋼",
   DiagnosticWarn = "",
   -- Misc
-  Navigation = "",
-  Encoding = "󱇧",
+  FileEncoding = "",
+  ScrollText = "",
+  TabWidth = "",
 }

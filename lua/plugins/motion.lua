@@ -37,25 +37,15 @@ return {
   },
   {
     "echasnovski/mini.ai",
-    event = "VeryLazy",
+    event = "User AstroFile",
     opts = function()
+      -- Register to which-key
       local i = {
         [" "] = "Whitespace",
-        ['"'] = 'Balanced "',
-        ["'"] = "Balanced '",
-        ["`"] = "Balanced `",
-        ["("] = "Balanced (",
-        [")"] = "Balanced ) including white-space",
-        [">"] = "Balanced > including white-space",
-        ["<lt>"] = "Balanced <",
-        ["]"] = "Balanced ] including white-space",
-        ["["] = "Balanced [",
-        ["}"] = "Balanced } including white-space",
-        ["{"] = "Balanced {",
         ["?"] = "User Prompt",
         _ = "Underscore",
         a = "Argument",
-        b = "Balanced ), ], }",
+        b = "Paired ), ], }",
         c = "Class",
         d = "Digit(s)",
         e = "Word in CamelCase & snake_case",
@@ -83,6 +73,8 @@ return {
         i = i,
         a = a,
       }
+
+      -- define custom textobjects
       local ai = require "mini.ai"
       return {
         n_lines = 500,
@@ -92,14 +84,14 @@ return {
             i = { "@block.inner", "@conditional.inner", "@loop.inner" },
           },
           f = ai.gen_spec.treesitter { a = "@function.outer", i = "@function.inner" }, -- function
-          c = ai.gen_spec.treesitter { a = "@class.outer", i = "@class.inner" }, -- class
-          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
-          d = { "%f[%d]%d+" }, -- digits
-          e = { -- Word with case
+          c = ai.gen_spec.treesitter { a = "@class.outer", i = "@class.inner" },       -- class
+          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },          -- tags
+          d = { "%f[%d]%d+" },                                                         -- digits
+          e = {                                                                        -- Word with case
             { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
             "^().*()$",
           },
-          u = ai.gen_spec.function_call(), -- u for "Usage"
+          u = ai.gen_spec.function_call(),                          -- u for "Usage"
           U = ai.gen_spec.function_call { name_pattern = "[%w_]" }, -- without dot in function name
         },
       }
@@ -110,9 +102,9 @@ return {
     "chrisgrieser/nvim-spider",
     opts = {},
     keys = {
-      { "w", "<Cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" }, desc = "Spider-w" },
-      { "e", "<Cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "Spider-e" },
-      { "b", "<Cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "Spider-b" },
+      { "w",  "<Cmd>lua require('spider').motion('w')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-w" },
+      { "e",  "<Cmd>lua require('spider').motion('e')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-e" },
+      { "b",  "<Cmd>lua require('spider').motion('b')<CR>",  mode = { "n", "o", "x" }, desc = "Spider-b" },
       { "ge", "<Cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" }, desc = "Spider-ge" },
     },
   },
@@ -120,8 +112,8 @@ return {
   {
     "hinell/duplicate.nvim",
     keys = {
-      { "<A-K>", "<Cmd>LineDuplicate -1<CR>", mode = { "n" }, desc = "Duplicate line up" },
-      { "<A-J>", "<Cmd>LineDuplicate +1<CR>", mode = { "n" }, desc = "Duplicate line down" },
+      { "<A-K>", "<Cmd>LineDuplicate -1<CR>",   mode = { "n" }, desc = "Duplicate line up" },
+      { "<A-J>", "<Cmd>LineDuplicate +1<CR>",   mode = { "n" }, desc = "Duplicate line down" },
       { "<A-K>", "<Cmd>VisualDuplicate -1<CR>", mode = { "x" }, desc = "Duplicate block up" },
       { "<A-J>", "<Cmd>VisualDuplicate +1<CR>", mode = { "x" }, desc = "Duplicate block down" },
     },
@@ -132,14 +124,14 @@ return {
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "gj", function() require("flash").jump() end, mode = { "n", "x", "o" }, desc = "Flash" },
+      { "gj", function() require("flash").jump() end,   mode = { "n", "x", "o" }, desc = "Flash" },
       {
         "gJ",
         function() require("flash").treesitter() end,
         mode = { "n", "x", "o" },
         desc = "Flash Treesitter",
       },
-      { "r", function() require("flash").remote() end, mode = "o", desc = "Remote Flash" },
+      { "r",  function() require("flash").remote() end, mode = "o",               desc = "Remote Flash" },
       {
         "R",
         function() require("flash").treesitter_search() end,

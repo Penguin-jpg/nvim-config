@@ -2,7 +2,7 @@ local M = {}
 local status = require "astroui.status"
 local path_func = status.provider.filename { modify = ":.:h", fallback = "" }
 
--- My custom statusline
+-- custom statusline
 M.statusline = {
   hl = { fg = "fg", bg = "bg" },
   -- Show mode text
@@ -17,22 +17,23 @@ M.statusline = {
     },
   },
   status.component.file_info {
+    file_icon = { padding = { left = 0, right = 1 } },
     filename = { fallback = "Empty" },
     filetype = false,
     file_modified = false,
     surround = {
-      separator = { "", " " },
-      color = "bg",
-    },
-  },
-  status.component.diagnostics {
-    surround = {
-      separator = "none",
-      color = "bg",
+      separator = "left",
     },
   },
   status.component.git_branch {
-    git_branch = { padding = { left = 2 } },
+    -- git_branch = { padding = { left = 2 } },
+    surround = {
+      separator = "left",
+      -- color = "bg",
+    },
+  },
+  status.component.fill(),
+  status.component.diagnostics {
     surround = {
       separator = "none",
       color = "bg",
@@ -47,30 +48,62 @@ M.statusline = {
   },
   status.component.fill(),
   status.component.cmd_info(),
+  status.component.lsp {
+    lsp_client_names = {
+      icon = { kind = "ActiveLSP", padding = { right = 1 } },
+    },
+    surround = { separator = "left" },
+  },
   -- Show file encoding
   status.component.builder {
     {
       provider = function()
         return status.utils.stylize(vim.bo.fileencoding, {
-          icon = { kind = "Encoding", padding = { right = 1 } },
-          padding = { right = 1 },
+          icon = { kind = "FileEncoding", padding = { right = 1 } },
         })
       end,
     },
+    hl = { fg = "black" },
+    surround = {
+      separator = "left",
+      color = "file_encoding_bg",
+    },
   },
-  status.component.lsp {
-    padding = { right = 1 },
-    surround = { color = "bg" },
+  -- Show tab width
+  status.component.builder {
+    {
+      provider = function()
+        return status.utils.stylize(tostring(vim.bo.tabstop), {
+          icon = { kind = "TabWidth", padding = { right = 1 } },
+        })
+      end,
+    },
+    hl = { fg = "black" },
+    surround = {
+      separator = "left",
+      color = "tab_width_bg",
+    },
   },
-  status.component.virtual_env(),
-  -- add a navigation component and just display the percentage of progress in the file
-  status.component.nav {
-    padding = { right = 1 },
-    surround = { separator = "none", color = "bg" },
+  {
+    status.component.builder {
+      { provider = require("astroui").get_icon "ScrollText" },
+      padding = { right = 1 },
+      hl = { fg = "bg" },
+      surround = {
+        separator = { "", "" },
+        color = { main = "nav_icon_bg", left = "bg" },
+      },
+    },
+    status.component.nav {
+      percentage = { padding = { left = 0 } },
+      ruler = false,
+      scrollbar = false,
+      surround = { separator = { "", "" } },
+    },
   },
 }
 
--- My custom winbar
+-- custom winbar
 M.winbar = {
   -- store the current buffer number
   init = function(self) self.bufnr = vim.api.nvim_get_current_buf() end,
