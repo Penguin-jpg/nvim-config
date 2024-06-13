@@ -45,9 +45,8 @@ return {
         ["h"] = "actions.parent",
         ["<C-s>"] = false,
         ["?"] = "actions.show_help",
-        ["yp"] = "actions.copy_entry_path",
-        ["yf"] = "actions.copy_filename",
-      }
+        ["yp"] = "actions.yank_entry",
+      },
     },
   },
   {

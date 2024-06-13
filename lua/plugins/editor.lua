@@ -161,7 +161,7 @@ return {
     end,
     keys = {
       {
-        "<Leader>r",
+        "<Leader>R",
         function() require("grug-far").grug_far { prefills = { search = vim.fn.expand "<cword>" } } end,
         mode = { "n" },
         desc = "Open GrugFar",
@@ -176,12 +176,59 @@ return {
   },
   -- Smooth scrolling
   {
-    "karb94/neoscroll.nvim",
+    "echasnovski/mini.animate",
     event = "VeryLazy",
-    config = function()
-      require("neoscroll").setup {
-        hide_cursor = false,
+    opts = function()
+      -- don't use animate when scrolling with the mouse
+      local mouse_scrolled = false
+      for _, scroll in ipairs { "Up", "Down" } do
+        local key = "<ScrollWheel" .. scroll .. ">"
+        vim.keymap.set({ "", "i" }, key, function()
+          mouse_scrolled = true
+          return key
+        end, { expr = true })
+      end
+
+      local animate = require "mini.animate"
+      return {
+        resize = {
+          timing = animate.gen_timing.linear { duration = 100, unit = "total" },
+        },
+        scroll = {
+          timing = animate.gen_timing.linear { duration = 150, unit = "total" },
+          subscroll = animate.gen_subscroll.equal {
+            predicate = function(total_scroll)
+              if mouse_scrolled then
+                mouse_scrolled = false
+                return false
+              end
+              return total_scroll > 1
+            end,
+          },
+        },
+        cursor = {
+          timing = animate.gen_timing.linear { duration = 80, unit = "total" },
+        },
       }
     end,
+  },
+  -- Show available word motions under code
+  {
+    "tris203/precognition.nvim",
+    event = "User AstroFile",
+    opts = {
+      hints = {
+        Caret = { text = "H", prio = 2 },
+        Dollar = { text = "L", prio = 1 },
+        MatchingPair = { text = "%", prio = 5 },
+        Zero = { text = "0", prio = 1 },
+        w = { text = "w", prio = 10 },
+        b = { text = "b", prio = 9 },
+        e = { text = "e", prio = 8 },
+        W = { text = "W", prio = 7 },
+        B = { text = "B", prio = 6 },
+        E = { text = "E", prio = 5 },
+      },
+    },
   },
 }
