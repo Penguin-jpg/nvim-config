@@ -13,7 +13,17 @@ return {
         floats = "transparent",
       },
       dim_inactive = true,
-      on_colors = function(colors) colors.comment = "#8c99e0" end,
+      on_colors = function(colors)
+        colors.comment = "#8c99e0"
+        colors.git.add = "#76946a"
+        colors.git.change = "#dca561"
+        colors.git.delete = "#c34043"
+        colors.gitSigns = {
+          change = "#dca561",
+          add = "#76946a",
+          delete = "#c34043",
+        }
+      end,
     },
   },
   {
@@ -44,7 +54,7 @@ return {
     name = "catppuccin",
     opts = {
       flavour = "mocha", -- latte, frappe, macchiato, mocha
-      background = { -- :h background
+      background = {     -- :h background
         light = "latte",
         dark = "mocha",
       },

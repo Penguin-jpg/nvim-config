@@ -90,7 +90,7 @@ M.statusline = {
       padding = { right = 1 },
       hl = { fg = "bg" },
       surround = {
-        separator = { "", "" },
+        separator = { " ", "" },
         color = { main = "nav_icon_bg", left = "bg" },
       },
     },
