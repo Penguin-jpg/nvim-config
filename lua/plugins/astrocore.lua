@@ -38,9 +38,9 @@ return {
       },
     },
     -- vim options can be configured here
-    options = require("core.options"),
+    options = require "core.options",
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    mappings = require("core.mappings")(),
+    mappings = require "core.mappings"(),
   },
 }
