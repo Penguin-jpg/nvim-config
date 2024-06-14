@@ -9,9 +9,9 @@ return {
     -- use helper function to get highlight group properties
     hl.blank_bg = get_hlgroup("Visual").bg
     hl.file_info_fg = "black"
-    hl.file_info_bg = "#fbb389"
+    hl.file_info_bg = "#e2c88e"
     hl.git_branch_fg = "black"
-    hl.git_branch_bg = "#e2c88e"
+    hl.git_branch_bg = "#a58bce"
     hl.file_encoding_bg = "#f7768e"
     hl.tab_width_bg = "#ff966c"
     hl.lsp_fg = "black"

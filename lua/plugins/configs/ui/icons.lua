@@ -14,7 +14,6 @@ return {
   LSPLoading9 = "⠇",
   LSPLoading10 = "⠏",
   -- Git
-  Git = "",
   GitAdd = "",
   GitBranch = "",
   GitChange = "",
@@ -25,6 +24,7 @@ return {
   GitStaged = "✓",
   GitUnstaged = "✗",
   GitUntracked = "★",
+  Neogit = "",
   -- Files
   Ellipsis = "",
   DefaultFile = "",
