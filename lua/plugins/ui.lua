@@ -4,7 +4,7 @@ return {
     "goolord/alpha-nvim",
     opts = function(_, opts)
       -- customize the dashboard header
-      opts.section.header.val = require("plugins.configs.ui.alpha").UWU
+      opts.section.header.val = require("plugins.configs.ui.alpha").OH
     end,
   },
   {
@@ -25,7 +25,7 @@ return {
   {
     "xiyaowong/transparent.nvim",
     lazy = false,
-    opts = function(_, opts) opts = require "plugins.configs.ui.transparent" (opts) end,
+    opts = function(_, opts) opts = require "plugins.configs.ui.transparent"(opts) end,
     keys = {
       { "<Leader>uT", "<Cmd>TransparentToggle<CR>", desc = "Toggle transparent" },
     },
