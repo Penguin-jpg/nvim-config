@@ -51,15 +51,6 @@ return {
     main = "rainbow-delimiters.setup",
     opts = {},
   },
-  -- Semantic tokens highlight
-  {
-    "m-demare/hlargs.nvim",
-    event = "User AstroFile",
-    opts = {
-      color = "#ea7183",
-      paint_arg_usages = true,
-    },
-  },
   -- AI code completion
   {
     "Exafunction/codeium.vim",
