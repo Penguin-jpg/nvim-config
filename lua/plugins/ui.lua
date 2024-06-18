@@ -25,28 +25,9 @@ return {
   {
     "xiyaowong/transparent.nvim",
     lazy = false,
-    opts = function(_, opts) opts = require "plugins.configs.ui.transparent"(opts) end,
+    opts = function(_, opts) opts = require "plugins.configs.ui.transparent" (opts) end,
     keys = {
       { "<Leader>uT", "<Cmd>TransparentToggle<CR>", desc = "Toggle transparent" },
     },
-  },
-  -- Enhance UI
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      opts = function(_, opts)
-        if opts.ensure_installed ~= "all" then
-          opts.ensure_installed = require("astrocore").list_insert_unique(
-            opts.ensure_installed,
-            { "bash", "markdown", "markdown_inline", "regex", "vim" }
-          )
-        end
-      end,
-    },
-    opts = function(_, opts) return require("astrocore").extend_tbl(opts, require "plugins.configs.ui.noice") end,
-    init = function() vim.g.lsp_handlers_enabled = false end,
   },
 }

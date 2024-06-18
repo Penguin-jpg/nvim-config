@@ -177,7 +177,7 @@ return {
   -- Smooth scrolling
   {
     "echasnovski/mini.animate",
-    event = "VeryLazy",
+    event = "User AstroFile",
     opts = function()
       -- don't use animate when scrolling with the mouse
       local mouse_scrolled = false
