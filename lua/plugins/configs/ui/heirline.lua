@@ -1,5 +1,6 @@
 local M = {}
 local status = require "astroui.status"
+local core = require "astrocore"
 local path_func = status.provider.filename { modify = ":.:h", fallback = "" }
 
 -- custom statusline
@@ -26,7 +27,6 @@ M.statusline = {
     },
   },
   status.component.git_branch {
-    -- git_branch = { padding = { left = 2 } },
     surround = {
       separator = "left",
       -- color = "bg",
@@ -47,7 +47,35 @@ M.statusline = {
     },
   },
   status.component.fill(),
-  status.component.cmd_info(),
+  {
+    condition = function(self)
+      local query = vim.fn.getreg "/"
+      if query == "" then return false end
+      query = query:gsub([[^\V]], "")
+      query = query:gsub([[\<]], ""):gsub([[\>]], "")
+
+      local search_count = vim.fn.searchcount { recompute = 1, maxcount = -1 }
+      if search_count.total == 0 then return false end
+
+      self.query = query
+      self.count = search_count
+      return true
+    end,
+    status.component.builder {
+      {
+        provider = function(self)
+          return status.utils.stylize(" " .. self.query .. " " .. self.count.current .. "/" .. self.count.total, {
+            icon = { kind = "Search" },
+          })
+        end,
+      },
+      hl = { fg = "black", bold = true },
+      surround = {
+        separator = "left",
+        color = "search_bg",
+      },
+    },
+  },
   status.component.lsp {
     lsp_client_names = {
       icon = { kind = "ActiveLSP", padding = { right = 1 } },

@@ -51,4 +51,5 @@ return {
   FileEncoding = "",
   ScrollText = "",
   TabWidth = "",
+  Search = "",
 }
