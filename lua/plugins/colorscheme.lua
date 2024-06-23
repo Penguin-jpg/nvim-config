@@ -27,21 +27,27 @@ return {
     },
   },
   {
+    "f4z3r/gruvbox-material.nvim",
+    name = "gruvbox-material",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      constrast = "medium",
+      comments = {
+        italics = false,
+      },
+      background = {
+        transparent = true,
+      },
+    },
+  },
+  {
     "rebelot/kanagawa.nvim",
     opts = {
       compile = true,
       commentStyle = { italic = false },
       keywordStyle = { italic = false },
       dimInactive = true,
-      colors = {
-        theme = {
-          all = {
-            ui = {
-              bg_gutter = "none",
-            },
-          },
-        },
-      },
       theme = "wave",
       background = {
         dark = "wave",

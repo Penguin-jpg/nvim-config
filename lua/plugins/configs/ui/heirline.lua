@@ -1,6 +1,5 @@
 local M = {}
 local status = require "astroui.status"
-local core = require "astrocore"
 local path_func = status.provider.filename { modify = ":.:h", fallback = "" }
 
 -- custom statusline

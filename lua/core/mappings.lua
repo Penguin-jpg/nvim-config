@@ -5,9 +5,9 @@
 -- automatically pick-up stored data by this setting.)
 
 return function()
-  local core = require "astrocore"
-  local is_available = core.is_available
-  local mappings = core.empty_map_table()
+  local utils = require "astrocore"
+  local is_available = utils.is_available
+  local mappings = utils.empty_map_table()
 
   ------ Disable default mappings ------
   -- Disable defaults ctrl + arrow keys

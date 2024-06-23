@@ -4,7 +4,7 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     event = "User AstroFile",
-    config = function() require("lsp_signature").setup() end,
+    config = function() require("lsp_signature").setup { bind = true, handler_opts = { border = "rounded" } } end,
   },
   -- Additional features for Clangd
   {

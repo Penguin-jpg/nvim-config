@@ -9,7 +9,7 @@ return {
   ---@type AstroUIOpts
   opts = {
     -- change colorscheme
-    colorscheme = "tokyonight",
+    colorscheme = "kanagawa",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = require "plugins.configs.ui.highlights",
     -- Icons can be configured throughout the interface

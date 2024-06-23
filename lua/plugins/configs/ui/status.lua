@@ -7,13 +7,14 @@ return {
   colors = function(hl)
     local get_hlgroup = require("astroui").get_hlgroup
     -- use helper function to get highlight group properties
-    hl.normal = "#7aa2f7"
-    hl.insert = "#9ece6a"
-    hl.visual = "#bb9af7"
-    hl.replace = "#f7768e"
-    hl.command = "#e0af68"
+    hl.normal = "#7daea3"
+    hl.insert = "#a9b665"
+    hl.visual = "#e8b142"
+    hl.replace = "#ea6962"
+    hl.command = "#e78a4e"
+    hl.terminal = "#a89984"
     hl.file_info_fg = "black"
-    hl.file_info_bg = "#fab289"
+    hl.file_info_bg = "#ddc7a1"
     hl.git_branch_fg = "black"
     hl.git_branch_bg = "#e3c88f"
     hl.lsp_fg = "black"
@@ -31,10 +32,5 @@ return {
     file_info = { bold = true },
     git_branch = { bold = true },
     lsp = { bold = true },
-  },
-  icon_highlights = {
-    file_icon = {
-      statusline = false,
-    },
   },
 }
