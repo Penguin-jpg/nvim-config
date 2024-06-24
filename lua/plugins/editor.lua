@@ -29,6 +29,22 @@ return {
       if vim.fn.has "win32" then opts.shell = "pwsh.exe" end
     end,
   },
+  -- File tagging and navigation
+  {
+    "cbochs/grapple.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      scope = "git_branch",
+    },
+    cmd = { "Grapple" },
+    keys = {
+      { "<Leader><Leader>a", "<Cmd>Grapple toggle<CR>", desc = "Add a tag" },
+      { "<Leader><Leader>e", "<Cmd>Grapple toggle_tags<CR>", desc = "Select from tags" },
+      { "<Leader><Leader>s", "<Cmd>Grapple toggle_scopes<CR>", desc = "Select a project scope" },
+      { "<C-n>", "<Cmd>Grapple cycle forward<CR>", desc = "Select next tag" },
+      { "<C-p>", "<Cmd>Grapple cycle backward<CR>", desc = "Select previous tag" },
+    },
+  },
   -- Better escape support
   {
     "max397574/better-escape.nvim",
