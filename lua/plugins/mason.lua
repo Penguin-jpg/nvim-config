@@ -12,8 +12,7 @@ return {
         "lua_ls",
         "clangd",
         "basedpyright",
-        "ruff_lsp",
-        -- "tsserver",
+        "ruff",
       })
     end,
   },
@@ -28,7 +27,6 @@ return {
         "clang-format",
         "black",
         "prettier",
-        -- "eslint-lsp",
       })
     end,
   },

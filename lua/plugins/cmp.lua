@@ -16,13 +16,21 @@ return {
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
       end
 
+      -- Close codeium suggestion when menu open
+      local neocodeium = require "neocodeium"
+      local commands = require "neocodeium.commands"
+      cmp.event:on("menu_opened", function()
+        commands.disable()
+        neocodeium.clear()
+      end)
+      cmp.event:on("menu_closed", function() commands.enable() end)
+
       return require("astrocore").extend_tbl(opts, {
         -- Configure window style
         window = {
           completion = {
             winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:None",
             border = "none",
-            col_offset = -3,
             side_padding = 0,
           },
         },
