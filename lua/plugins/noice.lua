@@ -49,6 +49,10 @@ return {
           inc_rename = utils.is_available "inc-rename.nvim", -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = false, -- add a border to hover docs and signature help
         },
+        messages = {
+          -- disable search count vitrual text
+          view_search = false,
+        },
         routes = {
           -- disable "written" notification
           {

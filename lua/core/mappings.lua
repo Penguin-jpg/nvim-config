@@ -15,24 +15,8 @@ return function()
   mappings.n["<C-Right>"] = false
   mappings.n["<C-Up>"] = false
   mappings.n["<C-Down>"] = false
-  mappings.n["<C-Left>"] = false
 
   ------ Utility functions ------
-  if is_available "Comment.nvim" then
-    mappings.n["<C-_>"] = {
-      function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
-      desc = "Comment line",
-    }
-    mappings.v["<C-_>"] = {
-      "<esc><Cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-      desc = "Comment block",
-    }
-    mappings.i["<C-_>"] = {
-      function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
-      desc = "Comment line",
-    }
-  end
-
   mappings.n["<C-z>"] = { "u", desc = "Undo" }
   mappings.i["<C-z>"] = { "<C-o>u", desc = "Undo" }
   -- <C-o> will exit insert mode tempoarily and back to insert mode again
@@ -48,12 +32,6 @@ return function()
   mappings.i["<C-l>"] = { "<Right>", desc = "Move right in insert mode" }
   mappings.i["<C-k>"] = { "<Up>", desc = "Move up in insert mode" }
   mappings.i["<C-j>"] = { "<Down>", desc = "Move down in insert mode" }
-
-  -- Duplicate line/block up/down
-  -- mappings.n["<A-K>"] = { '"ayy"aP' }
-  -- mappings.n["<A-J>"] = { '"ayy"ap' }
-  -- mappings.v["<A-K>"] = { '"ay"aP' }
-  -- mappings.v["<A-J>"] = { '"ay"ap' }
 
   ------ Motions related to jumping or selecting ------
   for key, map in pairs {

@@ -1,5 +1,26 @@
 -- Plugins that enhance editor experience
 return {
+  {
+    "numToStr/Comment.nvim",
+    opts = {
+      -- Ignore empty line
+      ignore = "^$",
+    },
+    keys = {
+      {
+        "<C-_>",
+        function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
+        mode = { "n", "i" },
+        desc = "Comment line",
+      },
+      {
+        "<C-_>",
+        "<Esc><Cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+        mode = { "v" },
+        desc = "Comment block",
+      },
+    },
+  },
   -- Built-in terminal support
   {
     "akinsho/toggleterm.nvim",
@@ -53,30 +74,18 @@ return {
   },
   -- AI code completion
   {
-    "Exafunction/codeium.vim",
+    "monkoose/neocodeium",
     event = "LspAttach",
     config = function()
-      vim.keymap.set("i", "<S-Tab>", function() return vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
-      vim.keymap.set(
-        "i",
-        "<S-Right>",
-        function() return vim.fn["codeium#CycleCompletions"](1) end,
-        { expr = true, silent = true }
-      )
-      vim.keymap.set(
-        "i",
-        "<S-Left>",
-        function() return vim.fn["codeium#CycleCompletions"](-1) end,
-        { expr = true, silent = true }
-      )
-      vim.keymap.set("i", "<C-x>", function() return vim.fn["codeium#Clear"]() end, { expr = true, silent = true })
-      vim.keymap.set("n", "<leader>;", function()
-        if vim.g.codeium_enabled == true then
-          vim.cmd "CodeiumDisable"
-        else
-          vim.cmd "CodeiumEnable"
-        end
-      end, { noremap = true, desc = "Toggle Codeium active" })
+      local neocodeium = require "neocodeium"
+      neocodeium.setup()
+      vim.keymap.set("n", "<Leader>;", function() require("neocodeium.commands").toggle() end)
+      vim.keymap.set("i", "<A-a>", function() require("neocodeium").accept() end)
+      vim.keymap.set("i", "<C-Right>", function() require("neocodeium").accept_word() end)
+      vim.keymap.set("i", "<A-e>", function() require("neocodeium").accept_line() end)
+      vim.keymap.set("i", "<S-Right>", function() require("neocodeium").cycle_or_complete() end)
+      vim.keymap.set("i", "<S-Left>", function() require("neocodeium").cycle_or_complete(-1) end)
+      vim.keymap.set("i", "<C-x>", function() require("neocodeium").clear() end)
     end,
   },
   -- Multi-cursors support
@@ -85,11 +94,11 @@ return {
     version = "*", -- Use the latest tagged version
     opts = {},
     keys = {
-      { "<C-Down>",      "<Cmd>MultipleCursorsAddDown<CR>",          mode = { "n", "i", "x" } },
-      { "<C-Up>",        "<Cmd>MultipleCursorsAddUp<CR>",            mode = { "n", "i", "x" } },
-      { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>",   mode = { "n", "i" } },
-      { "<Leader>a",     "<Cmd>MultipleCursorsAddMatches<CR>",       mode = { "n", "x" } },
-      { "<C-n>",         "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" } },
+      { "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" } },
+      { "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "i", "x" } },
+      { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = { "n", "i" } },
+      { "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", mode = { "n", "x" } },
+      { "<C-n>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" } },
     },
   },
   -- Better code folding
@@ -135,10 +144,10 @@ return {
       },
     },
     keys = {
-      { "<A-Left>",  "<Cmd>lua require('tmux').resize_left()<CR>",   mode = { "n" } },
-      { "<A-Right>", "<Cmd>lua require('tmux').resize_right()<CR>",  mode = { "n" } },
-      { "<A-Down>",  "<Cmd>lua require('tmux').resize_bottom()<CR>", mode = { "n" } },
-      { "<A-Up>",    "<Cmd>lua require('tmux').resize_top()<CR>",    mode = { "n" } },
+      { "<A-Left>", "<Cmd>lua require('tmux').resize_left()<CR>", mode = { "n" } },
+      { "<A-Right>", "<Cmd>lua require('tmux').resize_right()<CR>", mode = { "n" } },
+      { "<A-Down>", "<Cmd>lua require('tmux').resize_bottom()<CR>", mode = { "n" } },
+      { "<A-Up>", "<Cmd>lua require('tmux').resize_top()<CR>", mode = { "n" } },
     },
   },
   -- Find and replace
