@@ -38,9 +38,11 @@ return {
     },
     cmd = { "Grapple" },
     keys = {
-      { "<Leader><Leader>a", "<Cmd>Grapple toggle<CR>", desc = "Add a tag" },
+      { "<Leader><Leader>a", "<Cmd>Grapple tag<CR>", desc = "Add tag to file" },
+      { "<Leader><Leader>d", "<Cmd>Grapple untag<CR>", desc = "Delete tag from file" },
       { "<Leader><Leader>e", "<Cmd>Grapple toggle_tags<CR>", desc = "Select from tags" },
       { "<Leader><Leader>s", "<Cmd>Grapple toggle_scopes<CR>", desc = "Select a project scope" },
+      { "<Leader><Leader>x", "<Cmd>Grapple reset<CR>", desc = "Clear tags" },
       { "<C-n>", "<Cmd>Grapple cycle forward<CR>", desc = "Select next tag" },
       { "<C-p>", "<Cmd>Grapple cycle backward<CR>", desc = "Select previous tag" },
     },
