@@ -20,6 +20,7 @@ return {
     hl.lsp_fg = "black"
     hl.lsp_bg = "#a7d0dd"
     hl.search_bg = "#e8b043"
+    hl.grapple_bg = "#eba0ac"
     hl.file_encoding_bg = "#f7768e"
     hl.tab_width_bg = "#ff966c"
     hl.nav_fg = "black"

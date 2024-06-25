@@ -52,4 +52,5 @@ return {
   ScrollText = "",
   TabWidth = "",
   Search = "",
+  Grapple = "",
 }

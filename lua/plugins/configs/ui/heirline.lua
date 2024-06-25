@@ -1,5 +1,6 @@
 local M = {}
 local status = require "astroui.status"
+local utils = require "astrocore"
 local path_func = status.provider.filename { modify = ":.:h", fallback = "" }
 
 -- custom statusline
@@ -80,6 +81,24 @@ M.statusline = {
       icon = { kind = "ActiveLSP", padding = { right = 1 } },
     },
     surround = { separator = "left" },
+  },
+  -- Show Grapple tag
+  status.component.builder {
+    condition = utils.is_available "grapple",
+    {
+      provider = function()
+        local tag = tostring(require("grapple").name_or_index())
+        if tag == "nil" then tag = "NO" end
+        return status.utils.stylize(tag, {
+          icon = { kind = "Grapple", padding = { right = 1 } },
+        })
+      end,
+    },
+    hl = { fg = "black" },
+    surround = {
+      separator = "left",
+      color = "grapple_bg",
+    },
   },
   -- Show file encoding
   status.component.builder {
