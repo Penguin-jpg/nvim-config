@@ -11,12 +11,13 @@ return {
     hl.visual = "#e8b142"
     hl.replace = "#ea6962"
     hl.terminal = "#a89984"
-    hl.file_info_fg = "black"
+    hl.file_info_fg = "#f9e2af"
     hl.file_info_bg = "#bac2de"
-    hl.git_branch_fg = "black"
+    hl.git_branch_fg = "#eba0ac"
     hl.git_branch_bg = "#f5c2e7"
     hl.lsp_fg = "black"
     hl.lsp_bg = "#a7d0dd"
+    hl.info_text_fg = "#91cee6"
     hl.search_bg = "#e8b043"
     hl.grapple_bg = "#eba0ac"
     hl.file_encoding_bg = "#f7768e"
@@ -28,8 +29,10 @@ return {
   end,
   attributes = {
     mode = { bold = true },
-    file_info = { bold = true },
-    git_branch = { bold = true },
-    lsp = { bold = true },
+    file_info = { bold = false },
+    git_branch = { bold = false },
+    diagnostics = { bold = false },
+    git_diff = { bold = false },
+    lsp = { bold = false },
   },
 }
