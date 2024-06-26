@@ -14,6 +14,7 @@ return {
   LSPLoading9 = "⠇",
   LSPLoading10 = "⠏",
   -- Git
+  Github = "",
   GitAdd = "",
   GitBranch = "",
   GitChange = "",
@@ -48,9 +49,10 @@ return {
   DiagnosticInfo = "󰋼",
   DiagnosticWarn = "",
   -- Misc
+  Mode = "󰇥",
   FileEncoding = "",
   ScrollText = "",
   TabWidth = "",
   Search = "",
-  Grapple = "",
+  Grapple = "󰓹",
 }

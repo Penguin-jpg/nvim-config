@@ -1,6 +1,8 @@
 local M = {}
+
 local status = require "astroui.status"
-local utils = require "astrocore"
+local get_icon = require("astroui").get_icon
+local is_available = require("astrocore").is_available
 local path_func = status.provider.filename { modify = ":.:h", fallback = "" }
 
 -- custom statusline
@@ -10,7 +12,7 @@ M.statusline = {
   status.component.mode {
     -- enable mode text with padding as well as an icon before it
     mode_text = {
-      mode_text = { padding = { left = 1, right = 1 } },
+      icon = { kind = "Mode", padding = { left = 0, right = 1 } },
     },
     -- surround the component with a separators
     surround = {
@@ -23,16 +25,29 @@ M.statusline = {
     filetype = false,
     file_modified = false,
     surround = {
-      separator = "left",
+      separator = "none",
+      color = "bg",
     },
   },
   status.component.git_branch {
+    padding = { left = 2, right = 1 },
     surround = {
-      separator = "left",
-      -- color = "bg",
+      separator = "none",
+      color = "bg",
     },
   },
-  status.component.fill(),
+  -- Add a icon to represent diagnostic and git git diff
+  status.component.builder {
+    {
+      provider = function() return get_icon "Diagnostic" .. "/" .. get_icon "Github" end,
+    },
+    hl = { fg = "black" },
+    surround = {
+      separator = { " ", "" },
+      -- color = "#8ecda7",
+      color = "#81ab9e",
+    },
+  },
   status.component.diagnostics {
     surround = {
       separator = "none",
@@ -76,44 +91,17 @@ M.statusline = {
       },
     },
   },
-  status.component.lsp {
-    lsp_client_names = {
-      icon = { kind = "ActiveLSP", padding = { right = 1 } },
-    },
-    surround = { separator = "left" },
-  },
-  -- Show Grapple tag
-  status.component.builder {
-    condition = utils.is_available "grapple",
-    {
-      provider = function()
-        local tag = tostring(require("grapple").name_or_index())
-        if tag == "nil" then tag = "NO" end
-        return status.utils.stylize(tag, {
-          icon = { kind = "Grapple", padding = { right = 1 } },
-        })
-      end,
-    },
-    hl = { fg = "black" },
-    surround = {
-      separator = "left",
-      color = "grapple_bg",
-    },
-  },
   -- Show file encoding
   status.component.builder {
     {
       provider = function()
-        return status.utils.stylize(vim.bo.fileencoding, {
+        return status.utils.stylize(string.upper(vim.bo.fileencoding), {
           icon = { kind = "FileEncoding", padding = { right = 1 } },
         })
       end,
     },
-    hl = { fg = "black" },
-    surround = {
-      separator = "left",
-      color = "file_encoding_bg",
-    },
+    hl = { fg = "info_text_fg" },
+    padding = { right = 1 },
   },
   -- Show tab width
   status.component.builder {
@@ -124,17 +112,35 @@ M.statusline = {
         })
       end,
     },
-    hl = { fg = "black" },
-    surround = {
-      separator = "left",
-      color = "tab_width_bg",
+    hl = { fg = "info_text_fg" },
+    padding = { right = 1 },
+  },
+  -- Show Grapple tag
+  status.component.builder {
+    condition = is_available "grapple",
+    {
+      provider = function()
+        local tag = tostring(require("grapple").name_or_index())
+        if tag == "nil" then tag = "NO" end
+        return status.utils.stylize(tag, {
+          icon = { kind = "Grapple", padding = { right = 1 } },
+        })
+      end,
     },
+    hl = { fg = "info_text_fg" },
+    padding = { right = 1 },
+  },
+  status.component.lsp {
+    lsp_client_names = {
+      icon = { kind = "ActiveLSP", padding = { right = 1 } },
+    },
+    surround = { separator = "left" },
   },
   {
     status.component.builder {
-      { provider = require("astroui").get_icon "ScrollText" },
+      { provider = get_icon "ScrollText" },
       padding = { right = 1 },
-      hl = { fg = "bg" },
+      hl = { fg = "black" },
       surround = {
         separator = { " ", "" },
         color = { main = "nav_icon_bg", left = "bg" },
