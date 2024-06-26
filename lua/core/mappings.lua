@@ -10,7 +10,6 @@ return function()
   -------------------------------------------
   ------- Disable default mappings ----------
   -------------------------------------------
-  -- Disable defaults ctrl + arrow keys
   mappings.n["<C-Left>"] = false
   mappings.n["<C-Right>"] = false
   mappings.n["<C-Up>"] = false
