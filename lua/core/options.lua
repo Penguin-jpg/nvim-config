@@ -6,7 +6,6 @@ return {
     spell = false, -- disable spell check
     wrap = false, -- disable auto wrap lines
     signcolumn = "yes", -- show changes of file
-    colorcolumn = "80", -- a line in the position of 80 chars
     foldcolumn = "1", -- show foldcolumn
     foldenable = true, -- enable fold for nvim-ufo
     foldlevel = 99, -- set high foldlevel for nvim-ufo

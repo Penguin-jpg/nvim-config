@@ -186,29 +186,4 @@ return {
       },
     },
   },
-  -- Dynamic colorcolumn
-  {
-    "Bekaboo/deadcolumn.nvim",
-    event = "User AstroFile",
-    opts = {},
-  },
-  -- Show available word motions under code
-  {
-    "tris203/precognition.nvim",
-    event = "User AstroFile",
-    opts = {
-      hints = {
-        Caret = { text = "H", prio = 2 },
-        Dollar = { text = "L", prio = 1 },
-        MatchingPair = { text = "%", prio = 5 },
-        Zero = { text = "0", prio = 1 },
-        w = { text = "w", prio = 10 },
-        b = { text = "b", prio = 9 },
-        e = { text = "e", prio = 8 },
-        W = { text = "W", prio = 7 },
-        B = { text = "B", prio = 6 },
-        E = { text = "E", prio = 5 },
-      },
-    },
-  },
 }
