@@ -38,13 +38,10 @@ M.statusline = {
   },
   -- Add a icon to represent diagnostic and git git diff
   status.component.builder {
-    {
-      provider = function() return get_icon "Diagnostic" .. "/" .. get_icon "Github" end,
-    },
+    provider = function() return get_icon "Diagnostic" .. "/" .. get_icon "Github" end,
     hl = { fg = "black" },
     surround = {
       separator = { " ", "" },
-      -- color = "#8ecda7",
       color = "#81ab9e",
     },
   },
@@ -62,6 +59,7 @@ M.statusline = {
     },
   },
   status.component.fill(),
+  -- Show search counts and results
   {
     condition = function(self)
       local query = vim.fn.getreg "/"
@@ -77,14 +75,12 @@ M.statusline = {
       return true
     end,
     status.component.builder {
-      {
-        provider = function(self)
-          return status.utils.stylize(" " .. self.query .. " " .. self.count.current .. "/" .. self.count.total, {
-            icon = { kind = "Search" },
-          })
-        end,
-      },
-      hl = { fg = "black", bold = true },
+      provider = function(self)
+        return status.utils.stylize(" " .. self.query .. " " .. self.count.current .. "/" .. self.count.total, {
+          icon = { kind = "Search" },
+        })
+      end,
+      hl = { fg = "black" },
       surround = {
         separator = "left",
         color = "search_bg",
@@ -93,40 +89,54 @@ M.statusline = {
   },
   -- Show file encoding
   status.component.builder {
-    {
-      provider = function()
-        return status.utils.stylize(string.upper(vim.bo.fileencoding), {
-          icon = { kind = "FileEncoding", padding = { right = 1 } },
-        })
-      end,
-    },
+    provider = function()
+      return status.utils.stylize(string.upper(vim.bo.fileencoding), {
+        icon = { kind = "FileEncoding", padding = { right = 1 } },
+      })
+    end,
     hl = { fg = "info_text_fg" },
     padding = { right = 1 },
   },
   -- Show tab width
   status.component.builder {
-    {
-      provider = function()
-        return status.utils.stylize(tostring(vim.bo.tabstop), {
-          icon = { kind = "TabWidth", padding = { right = 1 } },
-        })
-      end,
-    },
+    provider = function()
+      return status.utils.stylize(tostring(vim.bo.tabstop), {
+        icon = { kind = "TabWidth", padding = { right = 1 } },
+      })
+    end,
     hl = { fg = "info_text_fg" },
     padding = { right = 1 },
   },
   -- Show Grapple tag
   status.component.builder {
-    condition = is_available "grapple",
-    {
-      provider = function()
-        local tag = tostring(require("grapple").name_or_index())
-        if tag == "nil" then tag = "NO" end
-        return status.utils.stylize(tag, {
-          icon = { kind = "Grapple", padding = { right = 1 } },
-        })
-      end,
-    },
+    condition = function()
+      if status.condition.is_file and is_available "grapple.nvim" then return true end
+      return false
+    end,
+    provider = function()
+      local tag = tostring(require("grapple").name_or_index())
+      if tag == "nil" then tag = "NO" end
+      return status.utils.stylize(tag, {
+        icon = { kind = "Grapple", padding = { right = 1 } },
+      })
+    end,
+
+    hl = { fg = "info_text_fg" },
+    padding = { right = 1 },
+  },
+  -- Show Codeium status
+  status.component.builder {
+    condition = function()
+      if status.condition.lsp_attached and is_available "neocodeium" then return true end
+      return false
+    end,
+    provider = function()
+      local codeium_status = "OFF"
+      if require("neocodeium.options").options.enabled == true then codeium_status = "ON" end
+      return status.utils.stylize(codeium_status, {
+        icon = { kind = "Codeium", padding = { right = 1 } },
+      })
+    end,
     hl = { fg = "info_text_fg" },
     padding = { right = 1 },
   },
