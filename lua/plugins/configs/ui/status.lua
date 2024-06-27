@@ -18,7 +18,7 @@ return {
     hl.lsp_fg = "black"
     hl.lsp_bg = "#7fb4ca"
     hl.info_text_fg = "#b8b4d0"
-    hl.search_bg = "#e8b043"
+    hl.search_bg = "#c8c093"
     hl.grapple_bg = "#eba0ac"
     hl.file_encoding_bg = "#f7768e"
     hl.tab_width_bg = "#ff966c"

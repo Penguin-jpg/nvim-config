@@ -55,4 +55,5 @@ return {
   TabWidth = "",
   Search = "",
   Grapple = "󰓹",
+  Codeium = "󱚝",
 }
