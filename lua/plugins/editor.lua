@@ -78,10 +78,12 @@ return {
             left_bottom = "┗",
             right_arrow = "➤",
           },
+          style = "#cba6f7",
           delay = 100,
         },
         indent = {
           enable = true,
+          chars = { "┃" },
         },
         blank = {
           enable = false,
@@ -91,13 +93,6 @@ return {
         },
       }))
     end,
-  },
-  -- Rainbow delimiters support
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    event = "User AstroFile",
-    main = "rainbow-delimiters.setup",
-    opts = {},
   },
   -- AI code completion
   {

@@ -94,7 +94,7 @@ M.statusline = {
         icon = { kind = "FileEncoding", padding = { right = 1 } },
       })
     end,
-    hl = { fg = "info_text_fg" },
+    hl = { fg = "text_fg" },
     padding = { right = 1 },
   },
   -- Show tab width
@@ -104,7 +104,7 @@ M.statusline = {
         icon = { kind = "TabWidth", padding = { right = 1 } },
       })
     end,
-    hl = { fg = "info_text_fg" },
+    hl = { fg = "text_fg" },
     padding = { right = 1 },
   },
   -- Show Grapple tag
@@ -121,7 +121,7 @@ M.statusline = {
       })
     end,
 
-    hl = { fg = "info_text_fg" },
+    hl = { fg = "text_fg" },
     padding = { right = 1 },
   },
   -- Show Codeium status
@@ -137,7 +137,7 @@ M.statusline = {
         icon = { kind = "Codeium", padding = { right = 1 } },
       })
     end,
-    hl = { fg = "info_text_fg" },
+    hl = { fg = "text_fg" },
     padding = { right = 1 },
   },
   status.component.lsp {

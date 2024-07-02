@@ -49,7 +49,7 @@ return {
   DiagnosticInfo = "󰋼",
   DiagnosticWarn = "",
   -- Misc
-  Mode = "󰇥",
+  Mode = "󰊠",
   FileEncoding = "",
   ScrollText = "",
   TabWidth = "",
