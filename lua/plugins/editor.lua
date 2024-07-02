@@ -32,7 +32,15 @@ return {
   -- File tagging and navigation
   {
     "cbochs/grapple.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          opts.mappings.n["<Leader><Leader>"] = { desc = require("astroui").get_icon("Grapple", 1, true) .. "Grapple" }
+        end,
+      },
+    },
     opts = {
       scope = "git_branch",
     },
@@ -70,6 +78,7 @@ return {
             left_bottom = "┗",
             right_arrow = "➤",
           },
+          delay = 100,
         },
         indent = {
           enable = true,
@@ -109,7 +118,7 @@ return {
   -- Multi-cursors support
   {
     "brenton-leighton/multiple-cursors.nvim",
-    version = "*", -- Use the latest tagged version
+    version = "*",
     opts = {},
     keys = {
       { "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" } },
