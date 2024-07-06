@@ -190,4 +190,18 @@ return {
       },
     },
   },
+  -- Markdown preview support
+  {
+    "OXY2DEV/markview.nvim",
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        opts = function(_, opts)
+          opts.ensure_installed =
+            require("astrocore").list_insert_unique(opts.ensure_installed, { "markdown", "markdown_inline" })
+        end,
+      },
+    },
+    ft = { "markdown" },
+  },
 }
