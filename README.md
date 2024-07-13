@@ -37,5 +37,12 @@ My personal neovim config
   npm install -g neovim
   ```
 
+- Cargo
+  ```shell
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  rustup update
+  cargo install --locked yazi-fm yazi-cli
+  ```
 - Optional
   - [ripgrep (for live grep)](https://github.com/BurntSushi/ripgrep)
+  - [wezterm](https://wezfurlong.org/wezterm/index.html)
