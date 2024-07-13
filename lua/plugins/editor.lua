@@ -157,19 +157,66 @@ return {
       end,
     },
   },
-  -- Tmux integration
+  -- Better split navigation and resize
   {
-    "aserowy/tmux.nvim",
-    opts = {
-      resize = {
-        enable_default_keybindings = false,
-      },
-    },
+    "mrjones2014/smart-splits.nvim",
+    event = "VeryLazy", -- load on very lazy for mux detection
+    opts = function(_, opts)
+      local utils = require "smart-splits.mux.utils"
+      opts.ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" }
+      opts.ignored_buftypes = { "nofile" }
+
+      -- if utils.are_we_wezterm() and utils.is_WSL() then opts.wezterm_cli_path = "wezterm.exe" end
+    end,
     keys = {
-      { "<A-Left>", "<Cmd>lua require('tmux').resize_left()<CR>", mode = { "n" } },
-      { "<A-Right>", "<Cmd>lua require('tmux').resize_right()<CR>", mode = { "n" } },
-      { "<A-Down>", "<Cmd>lua require('tmux').resize_bottom()<CR>", mode = { "n" } },
-      { "<A-Up>", "<Cmd>lua require('tmux').resize_top()<CR>", mode = { "n" } },
+      {
+        "<C-h>",
+        function() require("smart-splits").move_cursor_left() end,
+        mode = { "n", "t" },
+        desc = "Move to left split",
+      },
+      {
+        "<C-l>",
+        function() require("smart-splits").move_cursor_right() end,
+        mode = { "n", "t" },
+        desc = "Move to right split",
+      },
+      {
+        "<C-k>",
+        function() require("smart-splits").move_cursor_up() end,
+        mode = { "n", "t" },
+        desc = "Move to above split",
+      },
+      {
+        "<C-j>",
+        function() require("smart-splits").move_cursor_down() end,
+        mode = { "n", "t" },
+        desc = "Move to below split",
+      },
+      {
+        "<A-Left>",
+        function() require("smart-splits").resize_left() end,
+        mode = { "n", "t" },
+        desc = "Resize split left",
+      },
+      {
+        "<A-Right>",
+        function() require("smart-splits").resize_right() end,
+        mode = { "n", "t" },
+        desc = "Resize split right",
+      },
+      {
+        "<A-Up>",
+        function() require("smart-splits").resize_up() end,
+        mode = { "n", "t" },
+        desc = "Resize split up",
+      },
+      {
+        "<A-Down>",
+        function() require("smart-splits").resize_down() end,
+        mode = { "n", "t" },
+        desc = "Resize split down",
+      },
     },
   },
   -- Find and replace
