@@ -23,22 +23,17 @@ return function()
   mappings.i["<C-Del>"] = { "<C-o>dw", desc = "Delete a word backward" }
   mappings.i["<C-s>"] = { "<Cmd>w!<CR>", desc = "Save file" }
   mappings.i["<S-Tab>"] = { "<C-d>", desc = "Unindent line" }
-  mappings.v["<S-Tab>"] = { "<C-d>", desc = "Unindent line" }
+  mappings.v["<Tab>"] = { ">gv", desc = "Indent line" }
+  mappings.v["<S-Tab>"] = { "<gv", desc = "Unindent line" }
 
   -- Separate cut and delete motion
   for key, map in pairs {
-    ["d"] = { '"_d', desc = "Delete (without yanking)" },
-    ["X"] = { "d", desc = "Cut (with yanking)" },
+    ["d"] = { '"_d', desc = "Delete" },
+    ["X"] = { "d", desc = "Cut" },
   } do
     mappings.n[key] = map
     mappings.v[key] = map
   end
-
-  -- Move in insert mode
-  mappings.i["<C-h>"] = { "<Left>", desc = "Move left in insert mode" }
-  mappings.i["<C-l>"] = { "<Right>", desc = "Move right in insert mode" }
-  mappings.i["<C-k>"] = { "<Up>", desc = "Move up in insert mode" }
-  mappings.i["<C-j>"] = { "<Down>", desc = "Move down in insert mode" }
 
   ------ Motions related to jumping or selecting ------
   for key, map in pairs {
@@ -50,7 +45,7 @@ return function()
     mappings.n[key] = map
     mappings.v[key] = map
   end
-  mappings.n["ga"] = { "ggVG", desc = "Select all lines" }
+  mappings.n["<C-a>"] = { "ggVG", desc = "Select all lines" }
 
   return mappings
 end
