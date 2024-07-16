@@ -10,6 +10,10 @@ return function()
   -------------------------------------------
   ------- Disable default mappings ----------
   -------------------------------------------
+  mappings.n["<C-H>"] = false
+  mappings.n["<C-L>"] = false
+  mappings.n["<C-K>"] = false
+  mappings.n["<C-J>"] = false
   mappings.n["<C-Left>"] = false
   mappings.n["<C-Right>"] = false
   mappings.n["<C-Up>"] = false

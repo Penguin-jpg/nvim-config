@@ -120,7 +120,7 @@ return {
       { "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "i", "x" } },
       { "<A-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = { "n", "i" } },
       { "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", mode = { "n", "x" } },
-      { "<C-n>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" } },
+      { "<C-D>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" } },
     },
   },
   -- Better code folding
@@ -162,17 +162,14 @@ return {
     "mrjones2014/smart-splits.nvim",
     event = "VeryLazy", -- load on very lazy for mux detection
     opts = function(_, opts)
-      local utils = require "smart-splits.mux.utils"
       opts.ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" }
       opts.ignored_buftypes = { "nofile" }
-
-      -- if utils.are_we_wezterm() and utils.is_WSL() then opts.wezterm_cli_path = "wezterm.exe" end
     end,
     keys = {
       {
         "<C-h>",
         function() require("smart-splits").move_cursor_left() end,
-        mode = { "n", "t" },
+        mode = { "n" },
         desc = "Move to left split",
       },
       {
@@ -184,37 +181,37 @@ return {
       {
         "<C-k>",
         function() require("smart-splits").move_cursor_up() end,
-        mode = { "n", "t" },
+        mode = { "n" },
         desc = "Move to above split",
       },
       {
         "<C-j>",
         function() require("smart-splits").move_cursor_down() end,
-        mode = { "n", "t" },
+        mode = { "n" },
         desc = "Move to below split",
       },
       {
         "<A-Left>",
         function() require("smart-splits").resize_left() end,
-        mode = { "n", "t" },
+        mode = { "n" },
         desc = "Resize split left",
       },
       {
         "<A-Right>",
         function() require("smart-splits").resize_right() end,
-        mode = { "n", "t" },
+        mode = { "n" },
         desc = "Resize split right",
       },
       {
         "<A-Up>",
         function() require("smart-splits").resize_up() end,
-        mode = { "n", "t" },
+        mode = { "n" },
         desc = "Resize split up",
       },
       {
         "<A-Down>",
         function() require("smart-splits").resize_down() end,
-        mode = { "n", "t" },
+        mode = { "n" },
         desc = "Resize split down",
       },
     },

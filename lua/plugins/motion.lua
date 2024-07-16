@@ -27,12 +27,14 @@ return {
   },
   -- Brackets splitjoin
   {
-    "echasnovski/mini.splitjoin",
+    "Wansmer/treesj",
+    cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     opts = {
-      mappings = { toggle = "gs", split = "", join = "" },
+      use_default_keymaps = false,
+      max_join_length = 150,
     },
     keys = {
-      { "gs", mode = { "n", "x" }, desc = "Toggle splitjoin" },
+      { "gs", "<Cmd>TSJToggle<CR>", mode = { "n" }, desc = "Toggle splitjoin" },
     },
   },
   {
