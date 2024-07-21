@@ -20,29 +20,27 @@ return {
     },
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    -- event = { "BufReadPre", "BufNewFile" },
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     lazy = true,
     opts = function(_, opts)
       opts.ensure_installed = {
-        "lua_ls",
+        -- lua
+        "lua-language-server",
+        "stylua",
+        "selene",
+        -- c/cpp
         "clangd",
-        "basedpyright",
+        "clang-format",
+        "codelldb",
+        -- python
         "ruff",
+        "black",
+        -- json
+        "json-lsp",
+        -- markdown
+        "marksman",
+        "prettierd",
       }
     end,
   },
-  -- {
-  --   "jay-babu/mason-nvim-dap.nvim",
-  --   -- add this to lazy load dap-related plugins
-  --   init = function() end,
-  --   -- overrides `require("mason-nvim-dap").setup(...)`
-  --   opts = function(_, opts)
-  --     -- add more things to the ensure_installed table protecting against community packs modifying it
-  --     opts.ensure_installed = {
-  --       "codelldb",
-  --       "python",
-  --     }
-  --   end,
-  -- },
 }

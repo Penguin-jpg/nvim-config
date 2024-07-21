@@ -120,8 +120,15 @@ return {
           ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
           -- manually trigger completion
           ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-          -- tab to select completion
+          -- tab or enter to select completion
           ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() and has_words_before() then
+              cmp.confirm { select = true }
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<CR>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
               cmp.confirm { select = true }
             else

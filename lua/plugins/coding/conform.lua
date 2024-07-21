@@ -1,6 +1,9 @@
 return {
   "stevearc/conform.nvim",
   event = require("utils.lazy").LazyFile,
+  specs = {
+    { "AstroNvim/astrolsp", optional = true, opts = { formatting = { disabled = true } } },
+  },
   keys = {
     {
       "<leader>f",
@@ -11,21 +14,20 @@ return {
   },
   opts = {
     notify_on_error = false,
+    default_format_opts = { lsp = "fallback" },
     format_on_save = function(bufnr)
-      -- Disable "format_on_save lsp_fallback" for languages that don't
-      -- have a well standardized coding style. You can add additional
-      -- languages here or re-enable it for the disabled ones.
-      local disable_filetypes = { c = true, cpp = true }
-      return {
-        timeout_ms = 500,
-        lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-      }
+      if vim.g.autoformat == nil then vim.g.autoformat = true end
+      local autoformat = vim.b[bufnr].autoformat
+      if autoformat == nil then autoformat = vim.g.autoformat end
+      if autoformat then return { timeout_ms = 500 } end
     end,
     formatters_by_ft = {
       lua = { "stylua" },
       c = { "clang-format" },
       cpp = { "clang-format" },
       python = { "black" },
+      json = { "prettier" },
+      markdown = { { "prettierd", "prettier" } },
     },
   },
 }

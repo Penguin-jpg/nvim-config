@@ -5,8 +5,20 @@ return {
   opts = function()
     local dashboard = require "alpha.themes.dashboard"
 
+    dashboard.section.header.val = require("utils.alpha").get_header "OH"
     dashboard.section.buttons.val = {
-      dashboard.button("abc", "Test", "<Cmd>echo Test<CR>"),
+      dashboard.button("SPC n", require("utils.icons").get_icon("files", "Default") .. " New File", "<Cmd>enew<CR>"),
+      dashboard.button(
+        "SPC f f",
+        require("utils.icons").get_icon("misc", "Search") .. " Find File",
+        "<Cmd>Telescope find_files<CR>"
+      ),
+      dashboard.button(
+        "SPC f w",
+        require("utils.icons").get_icon("misc", "WordSearch") .. " Find Word",
+        "<Cmd>Telescope live_grep<CR>"
+      ),
+      dashboard.button("CTRL q", require("utils.icons").get_icon("diagnostic", "Error") .. " Quit", "<Cmd>qa<CR>"),
     }
 
     return dashboard
