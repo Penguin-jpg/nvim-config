@@ -7,6 +7,11 @@ return {
 
     dashboard.section.header.val = require("utils.alpha").get_header "OH"
     dashboard.section.buttons.val = {
+      dashboard.button(
+        "SPC e",
+        require("utils.icons").get_icon("plugins", "Yazi") .. " File Explorer",
+        "<Cmd>lua require('yazi').yazi()<CR>"
+      ),
       dashboard.button("SPC n", require("utils.icons").get_icon("files", "Default") .. " New File", "<Cmd>enew<CR>"),
       dashboard.button(
         "SPC f f",
