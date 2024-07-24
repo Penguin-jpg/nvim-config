@@ -1,6 +1,10 @@
 local M = {}
 
 local icons = {
+  lsp = {
+    ActiveLSP = "",
+    ActiveTS = "",
+  },
   git = {
     hub = "",
     Add = "",
@@ -88,6 +92,7 @@ local icons = {
     TabWidth = "",
     Search = "",
     WordSearch = "󱎸",
+    Evil = "",
   },
 }
 

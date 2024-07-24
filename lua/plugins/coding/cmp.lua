@@ -128,13 +128,6 @@ return {
               fallback()
             end
           end, { "i", "s" }),
-          ["<CR>"] = cmp.mapping(function(fallback)
-            if cmp.visible() and has_words_before() then
-              cmp.confirm { select = true }
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
           -- use <C-n> and <C-p> to select luasnip
           ["<C-n>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(1) then

@@ -1,15 +1,32 @@
 return {
   "stevearc/conform.nvim",
   event = require("utils.lazy").LazyFile,
-  specs = {
-    { "AstroNvim/astrolsp", optional = true, opts = { formatting = { disabled = true } } },
-  },
   keys = {
     {
       "<leader>f",
       function() require("conform").format { async = true, lsp_fallback = true } end,
       mode = "",
       desc = "[F]ormat buffer",
+    },
+    {
+      "<Leader>uf",
+      function()
+        if vim.b.autoformat == nil then
+          if vim.g.autoformat == nil then vim.g.autoformat = true end
+          vim.b.autoformat = vim.g.autoformat
+        end
+        vim.b.autoformat = not vim.b.autoformat
+      end,
+      desc = "Toggle autoformatting (buffer)",
+    },
+    {
+      "<Leader>uF",
+      function()
+        if vim.g.autoformat == nil then vim.g.autoformat = true end
+        vim.g.autoformat = not vim.g.autoformat
+        vim.b.autoformat = nil
+      end,
+      desc = "Toggle autoformatting (global)",
     },
   },
   opts = {
