@@ -4,7 +4,7 @@ return {
   config = function()
     local neocodeium = require "neocodeium"
     neocodeium.setup()
-    vim.keymap.set("n", "<Leader>;", function() require("neocodeium.commands").toggle() end)
+    vim.keymap.set("n", "<Leader>t;", function() require("neocodeium.commands").toggle() end)
     vim.keymap.set("i", "<A-a>", function() require("neocodeium").accept() end)
     vim.keymap.set("i", "<C-Right>", function() require("neocodeium").accept_word() end)
     vim.keymap.set("i", "<A-e>", function() require("neocodeium").accept_line() end)
