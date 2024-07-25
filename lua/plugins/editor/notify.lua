@@ -19,6 +19,12 @@ return {
         mode = { "n" },
         desc = "Dismiss notifications",
       },
+      {
+        "<Leader>fn",
+        function() require("telescope.builtin").extensions.nofity.nofity() end,
+        mode = { "n" },
+        desc = "Find notifications",
+      },
     },
   },
 }

@@ -2,6 +2,7 @@ local create_augroup = function(name) vim.api.nvim_create_augroup(name, { clear 
 
 create_augroup "on_buffer_enter"
 create_augroup "on_filetypes"
+create_augroup "to_last_position"
 create_augroup "q_close_windows"
 create_augroup "clear_last_search"
 create_augroup "highlight_yank"
@@ -27,6 +28,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
   end,
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  desc = "Jump to last position when reopening a file",
+  group = "to_last_position",
+  pattern = "*",
+  command = [[ if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {

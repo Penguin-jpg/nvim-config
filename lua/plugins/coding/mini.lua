@@ -1,5 +1,4 @@
 return {
-  -- move lines up/down/left/right
   {
     "echasnovski/mini.move",
     opts = {},
@@ -10,7 +9,6 @@ return {
       { "<A-k>", mode = { "n", "x" }, desc = "Move line/block up" },
     },
   },
-  -- faster change/delete/replace delimiter pairs
   {
     "echasnovski/mini.surround",
     opts = { n_lines = 200 },

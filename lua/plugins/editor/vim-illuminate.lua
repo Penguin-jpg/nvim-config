@@ -23,13 +23,13 @@ return {
       desc = "Previous reference",
     },
     {
-      "<Leader>ur",
+      "<Leader>th",
       function() require("illuminate").toggle_buf() end,
       mode = { "n" },
       desc = "Toggle reference highlighting (buffer)",
     },
     {
-      "<Leader>uR",
+      "<Leader>tH",
       function() require("illuminate").toggle() end,
       mode = { "n" },
       desc = "Toggle reference highlighting (global)",

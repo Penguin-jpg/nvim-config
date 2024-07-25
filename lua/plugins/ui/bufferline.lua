@@ -7,8 +7,6 @@ return {
     { "<Leader>bc", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
     { "<Leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
     { "<Leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-    { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-    { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
     { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     { "<b", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },

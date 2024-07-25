@@ -9,7 +9,7 @@ return {
       desc = "[F]ormat buffer",
     },
     {
-      "<Leader>uf",
+      "<Leader>tf",
       function()
         if vim.b.autoformat == nil then
           if vim.g.autoformat == nil then vim.g.autoformat = true end
@@ -20,7 +20,7 @@ return {
       desc = "Toggle autoformatting (buffer)",
     },
     {
-      "<Leader>uF",
+      "<Leader>tF",
       function()
         if vim.g.autoformat == nil then vim.g.autoformat = true end
         vim.g.autoformat = not vim.g.autoformat
