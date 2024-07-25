@@ -5,7 +5,6 @@ return {
   opts = {
     -- configuration table of features provided by AstroLSP
     features = {
-      autoformat = true, -- enable or disable auto formatting on start
       codelens = true, -- enable/disable codelens refresh on start
       inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
@@ -18,11 +17,13 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      lua_ls = require "plugins.lsp.configs.lua_ls",
       clangd = require "plugins.lsp.configs.clangd",
       basedpyright = require "plugins.lsp.configs.basedpyright",
+      ruff_lsp = require "plugins.lsp.configs.ruff",
     },
-    -- customize how language servers are attached
     handlers = {
+      -- customize how language servers are attached
       function(server, server_opts) require("lspconfig")[server].setup(server_opts) end,
     },
     lsp_handlers = {
@@ -56,6 +57,16 @@ return {
           callback = function() vim.lsp.buf.clear_references() end,
         },
       },
+      lsp_codelens_refresh = {
+        cond = "textDocument/codeLens",
+        {
+          event = { "InsertLeave", "BufEnter" },
+          desc = "Refresh codelens (buffer)",
+          callback = function(args)
+            if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
+          end,
+        },
+      },
       -- disable inlay hints in insert mode
       disable_inlay_hints_on_insert = {
         -- only create for language servers that support inlay hints
@@ -84,12 +95,80 @@ return {
       },
     },
     -- mappings to be set up on attaching of a language server
-    mappings = require "plugins.lsp.configs.mappings",
-    -- a custom `on_attach` function to be run after the default `on_attach` function
-    -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
-    on_attach = function(client, bufnr)
-      -- disable ruff_lsp hover in favor of pyright
-      if client.name == "ruff" then client.server_capabilities.hoverProvider = false end
-    end,
+    mappings = {
+      n = {
+        ["<Leader>la"] = {
+          function() vim.lsp.buf.code_action() end,
+          desc = "LSP code action",
+          cond = "textDocument/codeAction",
+        },
+        ["<Leader>lr"] = {
+          function() vim.lsp.buf.rename() end,
+          desc = "Rename current symbol",
+          cond = "textDocument/rename",
+        },
+        ["<Leader>lR"] = {
+          function() vim.lsp.buf.references() end,
+          desc = "Search references",
+          cond = "textDocument/references",
+        },
+        ["gd"] = {
+          function() vim.lsp.buf.definition() end,
+          desc = "Show the definition of current symbol",
+          cond = "textDocument/definition",
+        },
+        ["gD"] = {
+          function() vim.lsp.buf.declaration() end,
+          desc = "Declaration of current symbol",
+          cond = "textDocument/declaration",
+        },
+        ["gr"] = {
+          function() vim.lsp.buf.references() end,
+          desc = "Reference of current symbol",
+          cond = "textDocument/references",
+        },
+        ["gh"] = { function() vim.lsp.buf.hover() end, desc = "Hover symbol details", cond = "textDocument/hover" },
+        ["gl"] = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
+        ["gi"] = {
+          function() vim.lsp.buf.implementation() end,
+          desc = "Implementation of current symbol",
+          cond = "textDocument/implementation",
+        },
+        ["gt"] = {
+          function() vim.lsp.buf.type_definition() end,
+          desc = "Definition of current type",
+          cond = "textDocument/typeDefinition",
+        },
+        ["gs"] = {
+          function() vim.lsp.buf.signature_help() end,
+          desc = "Signature help",
+          cond = "textDocument/signatureHelp",
+        },
+        ["<Leader>ti"] = {
+          function() require("astrolsp.toggles").buffer_inlay_hints() end,
+          desc = "Toggle LSP inlay hints (buffer)",
+          cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
+        },
+        ["<Leader>tI"] = {
+          function() require("astrolsp.toggles").inlay_hints() end,
+          desc = "Toggle LSP inlay hints (global)",
+          cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
+        },
+        ["<Leader>tY"] = {
+          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
+          desc = "Toggle LSP semantic highlight (buffer)",
+          cond = function(client)
+            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
+          end,
+        },
+      },
+      x = {
+        ["<Leader>la"] = {
+          function() vim.lsp.buf.code_action() end,
+          desc = "LSP code action",
+          cond = "textDocument/codeAction",
+        },
+      },
+    },
   },
 }

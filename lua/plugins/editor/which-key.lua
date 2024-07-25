@@ -21,4 +21,11 @@ return {
       { "z", group = "Fold" },
     },
   },
+  keys = {
+    {
+      "<leader>?",
+      function() require("which-key").show { global = false } end,
+      desc = "Buffer Keymaps (which-key)",
+    },
+  },
 }

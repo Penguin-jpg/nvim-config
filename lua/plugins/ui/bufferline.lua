@@ -1,6 +1,6 @@
 return {
   "akinsho/bufferline.nvim",
-  event = "VeryLazy",
+  event = require("utils.lazy").LazyFile,
   keys = {
     { "<Leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
     { "<Leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },

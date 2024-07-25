@@ -60,12 +60,38 @@ return {
   -- completion engine
   {
     "hrsh7th/nvim-cmp",
+    version = false,
     event = "InsertEnter",
     dependencies = {
       -- sources for completion
       { "hrsh7th/cmp-nvim-lsp", lazy = true },
       { "hrsh7th/cmp-buffer", lazy = true },
       { "hrsh7th/cmp-path", lazy = true },
+    },
+    specs = {
+      {
+        "AstroNvim/astrolsp",
+        optional = true,
+        opts = function(_, opts)
+          opts.capabilities = require("utils.table").extend_table(opts.capabilities, {
+            textDocument = {
+              completion = {
+                completionItem = {
+                  documentationFormat = { "markdown", "plaintext" },
+                  snippetSupport = true,
+                  preselectSupport = true,
+                  insertReplaceSupport = true,
+                  labelDetailsSupport = true,
+                  deprecatedSupport = true,
+                  commitCharactersSupport = true,
+                  tagSupport = { valueSet = { 1 } },
+                  resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } },
+                },
+              },
+            },
+          })
+        end,
+      },
     },
     config = function()
       -- See `:help cmp`

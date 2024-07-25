@@ -22,6 +22,13 @@ return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     lazy = true,
+    cmd = {
+      "MasonToolsInstall",
+      "MasonToolsInstallSync",
+      "MasonToolsUpdate",
+      "MasonToolsUpdateSync",
+      "MasonToolsClean",
+    },
     opts = function(_, opts)
       opts.ensure_installed = {
         -- lua
@@ -33,7 +40,7 @@ return {
         "clang-format",
         "codelldb",
         -- python
-        "ruff",
+        "ruff-lsp",
         "black",
         -- json
         "json-lsp",
