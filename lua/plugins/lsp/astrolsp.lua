@@ -145,18 +145,13 @@ return {
           cond = "textDocument/signatureHelp",
         },
         ["<Leader>ti"] = {
-          function() require("astrolsp.toggles").buffer_inlay_hints() end,
-          desc = "Toggle LSP inlay hints (buffer)",
-          cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
-        },
-        ["<Leader>tI"] = {
           function() require("astrolsp.toggles").inlay_hints() end,
-          desc = "Toggle LSP inlay hints (global)",
+          desc = "Toggle LSP inlay hints",
           cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
         },
-        ["<Leader>tY"] = {
+        ["<Leader>ts"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
-          desc = "Toggle LSP semantic highlight (buffer)",
+          desc = "Toggle LSP semantic highlight",
           cond = function(client)
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
           end,

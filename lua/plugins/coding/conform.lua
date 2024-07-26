@@ -11,22 +11,11 @@ return {
     {
       "<Leader>tf",
       function()
-        if vim.b.autoformat == nil then
-          if vim.g.autoformat == nil then vim.g.autoformat = true end
-          vim.b.autoformat = vim.g.autoformat
-        end
-        vim.b.autoformat = not vim.b.autoformat
-      end,
-      desc = "Toggle autoformatting (buffer)",
-    },
-    {
-      "<Leader>tF",
-      function()
         if vim.g.autoformat == nil then vim.g.autoformat = true end
         vim.g.autoformat = not vim.g.autoformat
         vim.b.autoformat = nil
       end,
-      desc = "Toggle autoformatting (global)",
+      desc = "Toggle autoformatting",
     },
   },
   opts = {

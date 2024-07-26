@@ -1,5 +1,13 @@
 local set_map = vim.keymap.set
 
+-- move
+for _, mode in pairs { "n", "x" } do
+  set_map(mode, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+  set_map(mode, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+  set_map(mode, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+  set_map(mode, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+end
+
 -- write/ close
 set_map("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 set_map("n", "<C-q>", "<Cmd>confirm q<CR>", { desc = "Quit file" })
@@ -15,21 +23,19 @@ set_map("v", "<Tab>", ">gv", { desc = "Indent line" })
 set_map("v", "<S-Tab>", "<gv", { desc = "Unindent line" })
 
 -- separate cut and delete motion
-set_map("n", "d", '"_d', { desc = "Delete" })
-set_map("n", "X", "d", { desc = "Cut" })
-set_map("v", "d", '"_d', { desc = "Delete" })
-set_map("v", "X", "d", { desc = "Cut" })
+for _, mode in pairs { "n", "v" } do
+  set_map(mode, "d", '"_d', { desc = "Delete" })
+  set_map(mode, "X", "d", { desc = "Cut" })
+end
 
 -- jump / select
 set_map("n", "ga", "ggVG", { desc = "Select all lines" })
-set_map("n", "H", "^", { desc = "Jump to beginning of line" })
-set_map("n", "L", "$", { desc = "Jump to end of line" })
-set_map("n", "K", "5k", { desc = "Move up 5 lines" })
-set_map("n", "J", "5j", { desc = "Move down 5 lines" })
-set_map("v", "H", "^", { desc = "Jump to beginning of line" })
-set_map("v", "L", "$", { desc = "Jump to end of line" })
-set_map("v", "K", "5k", { desc = "Move up 5 lines" })
-set_map("v", "J", "5j", { desc = "Move down 5 lines" })
+for _, mode in pairs { "n", "v" } do
+  set_map(mode, "H", "^", { desc = "Jump to beginning of line" })
+  set_map(mode, "L", "$", { desc = "Jump to end of line" })
+  set_map(mode, "K", "5k", { desc = "Move up 5 lines" })
+  set_map(mode, "J", "5j", { desc = "Move down 5 lines" })
+end
 
 -- split
 set_map("n", "|", "<Cmd>vsplit<CR>", { desc = "Vertical split" })

@@ -23,7 +23,14 @@ return {
         disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter" } },
       },
       sections = {
-        lualine_a = { { "mode", separator = { left = "", right = "" }, padding = { left = 0, right = 0 } } },
+        lualine_a = {
+          {
+            "mode",
+            separator = { left = "", right = "" },
+            padding = { left = 0, right = 0 },
+            color = { gui = "bold" },
+          },
+        },
         lualine_b = {
           {
             "filetype",
@@ -45,6 +52,7 @@ return {
             padding = { left = 2, right = 1 },
             color = { fg = "#d3879a", bg = "none" },
           },
+          "%=",
           {
             "diagnostics",
             symbols = {
@@ -81,25 +89,47 @@ return {
             timeout = 500,
             color = { fg = "#f7768e", bg = "none" },
           },
+          {
+            function()
+              local buf_ft = vim.api.nvim_get_option_value("filetype", {})
+              local clients = vim.lsp.get_clients()
+
+              if next(clients) == nil then return "No Activate LSP" end
+
+              local names = {}
+
+              for _, client in ipairs(clients) do
+                local filetypes = client.config.filetypes
+                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then table.insert(names, client.name) end
+              end
+              return table.concat(names, " ")
+            end,
+            separator = { left = "", right = "" },
+            padding = { left = 0, right = 0 },
+            icon = get_icon("lsp", "ActiveLSP"),
+            color = { fg = "black", bg = "#7fb4ca" },
+          },
         },
         lualine_y = {
           {
             "encoding",
             fmt = string.upper,
             icon = get_icon("misc", "FileEncoding"),
-            color = { fg = "#c7d1d9", bg = "none" },
+            padding = { left = 2, right = 1 },
+            color = { fg = "#60b2a7", bg = "none" },
           },
           {
             "bo:tabstop",
             icon = get_icon("misc", "TabWidth"),
-            color = { fg = "#c7d1d9", bg = "none" },
+            padding = { left = 0, right = 2 },
+            color = { fg = "#60b2a7", bg = "none" },
           },
         },
         lualine_z = {
           {
             "location",
             separator = { left = "" },
-            padding = { left = 1, right = 1 },
+            padding = { left = 0, right = 1 },
             color = { fg = "black", bg = "#97c568" },
           },
           {

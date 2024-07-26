@@ -6,7 +6,7 @@ local icons = {
     ActiveTS = "",
   },
   git = {
-    hub = "",
+    Github = "",
     Add = "",
     Branch = "",
     Change = "",

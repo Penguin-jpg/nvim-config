@@ -24,15 +24,9 @@ return {
     },
     {
       "<Leader>th",
-      function() require("illuminate").toggle_buf() end,
-      mode = { "n" },
-      desc = "Toggle reference highlighting (buffer)",
-    },
-    {
-      "<Leader>tH",
       function() require("illuminate").toggle() end,
       mode = { "n" },
-      desc = "Toggle reference highlighting (global)",
+      desc = "Toggle reference highlighting",
     },
   },
 }
