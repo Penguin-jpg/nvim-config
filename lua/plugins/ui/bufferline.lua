@@ -2,15 +2,14 @@ return {
   "akinsho/bufferline.nvim",
   event = require("utils.lazy").LazyFile,
   keys = {
-    { "<Leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-    { "<Leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+    { "<Leader>bp", "<Cmd>BufferLinePick<CR>", desc = "Pick a buffer" },
     { "<Leader>bc", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
     { "<Leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
     { "<Leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-    { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+    { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
     { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-    { "<b", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-    { ">b", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+    { "<b", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer to left" },
+    { ">b", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer to right" },
   },
   opts = {
     options = {
@@ -29,6 +28,9 @@ return {
           highlight = "Directory",
           text_align = "left",
         },
+      },
+      indicator = {
+        style = "underline",
       },
     },
   },
