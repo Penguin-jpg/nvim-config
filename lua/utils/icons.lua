@@ -6,7 +6,7 @@ local icons = {
     ActiveTS = "",
   },
   git = {
-    Github = "",
+    Github = "",
     Add = "",
     Branch = "",
     Change = "",
@@ -94,6 +94,7 @@ local icons = {
     WordSearch = "󱎸",
     Evil = "",
     Selected = "❯",
+    Fix = "󱍼",
   },
 }
 

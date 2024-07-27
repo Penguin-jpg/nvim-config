@@ -31,10 +31,9 @@ return {
       lua = { "stylua" },
       c = { "clang-format" },
       cpp = { "clang-format" },
-      -- python = { "black" },
       python = { "black" },
       json = { "prettier" },
-      markdown = { { "prettierd", "prettier" } },
+      markdown = { "prettierd", "prettier" },
     },
   },
 }

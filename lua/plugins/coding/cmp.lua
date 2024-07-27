@@ -73,7 +73,7 @@ return {
         "AstroNvim/astrolsp",
         optional = true,
         opts = function(_, opts)
-          opts.capabilities = require("utils.table").extend_table(opts.capabilities, {
+          opts.capabilities = vim.tbl_deep_extend("force", opts.capabilities, {
             textDocument = {
               completion = {
                 completionItem = {

@@ -41,7 +41,7 @@ return {
           {
             "filename",
             padding = { left = 0, right = 0 },
-            color = { fg = "#c7d1d9", bg = "none" },
+            color = { fg = "#b0baf2", bg = "none" },
             cond = conditions.buffer_not_empty,
           },
         },
@@ -50,7 +50,7 @@ return {
             "branch",
             icon = get_icon("git", "Branch"),
             padding = { left = 2, right = 1 },
-            color = { fg = "#d3879a", bg = "none" },
+            color = { fg = "#d183e8", bg = "none" },
           },
           "%=",
           {
@@ -61,6 +61,8 @@ return {
               info = get_icon("diagnostic", "Info") .. " ",
               hint = get_icon("diagnostic", "Hint") .. " ",
             },
+            icon = get_icon("misc", "Fix"),
+            color = { fg = "#f1a185" },
           },
           {
             "diff",
@@ -69,6 +71,8 @@ return {
               modified = get_icon("git", "Change") .. " ",
               removed = get_icon("git", "Delete") .. " ",
             },
+            icon = get_icon("git", "Github"),
+            color = { fg = "#f1a185" },
             cond = conditions.hide_in_width,
             source = function()
               local gitsigns = vim.b.gitsigns_status_dict
@@ -102,7 +106,7 @@ return {
                 local filetypes = client.config.filetypes
                 if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then table.insert(names, client.name) end
               end
-              return table.concat(names, " ")
+              return table.concat(names, ", ")
             end,
             separator = { left = "", right = "" },
             padding = { left = 0, right = 0 },
@@ -121,7 +125,7 @@ return {
           {
             "bo:tabstop",
             icon = get_icon("misc", "TabWidth"),
-            padding = { left = 0, right = 2 },
+            padding = { left = 1, right = 2 },
             color = { fg = "#60b2a7", bg = "none" },
           },
         },

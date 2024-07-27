@@ -1,6 +1,13 @@
 return {
   "RRethy/vim-illuminate",
   event = require("utils.lazy").LazyFile,
+  specs = {
+    {
+      "neovim/nvim-lspconfig",
+      optional = true,
+      opts = { document_highlight = { enabled = false } },
+    },
+  },
   opts = {
     delay = 200,
     min_count_to_highlight = 2,
