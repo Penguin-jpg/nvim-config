@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   desc = "Make q close help, man, quickfix, dap floats",
   group = "q_close_windows",
   callback = function(event)
-    if vim.tbl_contains({ "help", "nofile", "quickfix" }, vim.bo[event.buf].buftype) then
+    if vim.tbl_contains({ "help", "nofile", "quickfix", "grug-far" }, vim.bo[event.buf].buftype) then
       vim.keymap.set("n", "q", "<Cmd>close<CR>", {
         desc = "Close window",
         buffer = event.buf,
