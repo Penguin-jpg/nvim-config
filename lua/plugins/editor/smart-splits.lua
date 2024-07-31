@@ -12,7 +12,7 @@ return {
     {
       "<C-l>",
       function() require("smart-splits").move_cursor_right() end,
-      mode = { "n", "t" },
+      mode = { "n" },
       desc = "Move to right split",
     },
     {
