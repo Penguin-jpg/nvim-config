@@ -20,7 +20,7 @@ return {
       lua_ls = require "plugins.lsp.configs.lua_ls",
       clangd = require "plugins.lsp.configs.clangd",
       basedpyright = require "plugins.lsp.configs.basedpyright",
-      ruff_lsp = require "plugins.lsp.configs.ruff",
+      ruff = require "plugins.lsp.configs.ruff",
     },
     handlers = {
       -- customize how language servers are attached

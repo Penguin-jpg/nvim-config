@@ -31,7 +31,7 @@ return {
       lua = { "stylua" },
       c = { "clang-format" },
       cpp = { "clang-format" },
-      python = { "black" },
+      python = { "ruff_organize_imports", "ruff_format" },
       json = { "prettier" },
       markdown = { "prettierd", "prettier" },
     },

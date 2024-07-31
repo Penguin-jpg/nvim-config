@@ -13,9 +13,7 @@ return {
         ensure_installed = {},
         handlers = { function(server) require("astrolsp").lsp_setup(server) end },
       },
-      config = function(_, opts)
-        require("mason-lspconfig").setup(opts)
-      end,
+      config = function(_, opts) require("mason-lspconfig").setup(opts) end,
     },
     {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -37,8 +35,8 @@ return {
           "clang-format",
           "codelldb",
           -- python
-          "ruff-lsp",
-          "black",
+          "ruff",
+          "basedpyright",
           -- json
           "json-lsp",
           -- markdown
