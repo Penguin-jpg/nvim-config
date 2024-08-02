@@ -60,6 +60,8 @@ return {
       }
     end,
     config = function(_, opts)
+      require("mini.ai").setup(opts)
+
       -- register to which-key
       local objects = {
         { " ", desc = "whitespace" },
