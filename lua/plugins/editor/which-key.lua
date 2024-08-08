@@ -14,8 +14,9 @@ return {
       { "<Leader>f", group = "Find", icon = { icon = " " } },
       { "<Leader>g", group = "Git", icon = { icon = "󰊢 " } },
       { "<Leader>l", group = "LSP", icon = { icon = " " } },
+      { "<Leader>s", group = "Session", icon = { icon = "󰆓 " } },
       { "<leader>t", group = "Toggle", icon = { icon = "󰔡 " } },
-      { "<leader>x", group = "Diagnostics/quickfix", icon = { icon = "󰒡 " } },
+      { "<leader>x", group = "Diagnostics/Quickfix", icon = { icon = "󰒡 " } },
       { "[", group = "Previous" },
       { "]", group = "Next" },
       { "g", group = "Goto" },
@@ -27,7 +28,7 @@ return {
     {
       "<leader>?",
       function() require("which-key").show { global = false } end,
-      desc = "Buffer Keymaps (which-key)",
+      desc = "Buffer keymaps (which-key)",
     },
   },
 }

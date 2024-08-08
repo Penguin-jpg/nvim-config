@@ -94,7 +94,7 @@ local icons = {
     WordSearch = "󱎸",
     Evil = "",
     Selected = "❯",
-    Fix = "󱍼",
+    Save = "󰆓",
   },
 }
 

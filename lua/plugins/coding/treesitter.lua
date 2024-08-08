@@ -40,6 +40,7 @@ return {
         "jsonc",
         "markdown",
         "markdown_inline",
+        "html",
       },
       highlight = { enable = true },
       incremental_selection = { enable = true },

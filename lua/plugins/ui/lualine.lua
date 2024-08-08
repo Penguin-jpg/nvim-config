@@ -61,7 +61,7 @@ return {
               info = get_icon("diagnostic", "Info") .. " ",
               hint = get_icon("diagnostic", "Hint") .. " ",
             },
-            icon = get_icon("misc", "Fix"),
+            icon = get_icon("diagnostic", "Diagnostic"),
             color = { fg = "#f1a185" },
           },
           {
@@ -72,7 +72,8 @@ return {
               removed = get_icon("git", "Delete") .. " ",
             },
             icon = get_icon("git", "Github"),
-            color = { fg = "#f1a185" },
+            -- color = { fg = "#f1a185" },
+            color = { fg = "#bb49b3" },
             cond = conditions.hide_in_width,
             source = function()
               local gitsigns = vim.b.gitsigns_status_dict

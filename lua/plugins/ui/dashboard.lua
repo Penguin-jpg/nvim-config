@@ -29,6 +29,12 @@ return {
             icon = get_icon("misc", "WordSearch") .. " ",
             key = "w",
           },
+          {
+            action = function() require("persistence").load { last = true } end,
+            desc = "Load last session",
+            icon = get_icon("misc", "Save") .. " ",
+            key = "s",
+          },
           { action = "qa", desc = "Quit", icon = get_icon("diagnostic", "Error") .. " ", key = "q" },
         },
         footer = function()

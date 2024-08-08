@@ -14,14 +14,14 @@ return {
     },
     keys = {
       {
-        "<Leader>ud",
+        "<Leader>d",
         function() require("notify").dismiss { pending = true, silent = true } end,
         mode = { "n" },
         desc = "Dismiss notifications",
       },
       {
         "<Leader>fn",
-        function() require("telescope.builtin").extensions.nofity.nofity() end,
+        "<Cmd>Telescope notify<CR>",
         mode = { "n" },
         desc = "Find notifications",
       },

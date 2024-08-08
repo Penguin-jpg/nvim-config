@@ -6,12 +6,12 @@ return {
       {
         "<leader>e",
         function() require("yazi").yazi() end,
-        desc = "Open the file manager",
+        desc = "Open file manager",
       },
       {
         "<leader>E",
         function() require("yazi").yazi(nil, vim.fn.getcwd()) end,
-        desc = "Open the file manager in nvim's working directory",
+        desc = "Open file manager in nvim's working directory",
       },
     },
     opts = {
