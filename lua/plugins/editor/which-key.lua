@@ -22,6 +22,7 @@ return {
       { "g", group = "Goto" },
       { "gs", group = "Surround" },
       { "z", group = "Fold" },
+      { "<Leader>gh", group = "Gitsigns" },
     },
   },
   keys = {

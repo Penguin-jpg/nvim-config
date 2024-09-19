@@ -1,0 +1,37 @@
+return {
+  "stevearc/oil.nvim",
+  cmd = "Oil",
+  dependencies = { "echasnovski/mini.icons" },
+  opts = {
+    skip_confirm_for_simple_edits = true,
+    columns = { "icon", "permissions", "size" },
+    keymaps = {
+      ["l"] = "actions.select",
+      ["h"] = "actions.parent",
+      ["q"] = "actions.close",
+      ["?"] = "actions.show_help",
+      ["yp"] = "actions.yank_entry",
+      ["<\\>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+      ["<|>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+      ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+      ["<C-p>"] = "actions.preview",
+      ["<C-l>"] = "actions.refresh",
+      ["<C-s>"] = false,
+      ["-"] = "actions.parent",
+      ["_"] = "actions.open_cwd",
+      ["`"] = "actions.cd",
+      ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
+      ["gs"] = "actions.change_sort",
+      ["gx"] = "actions.open_external",
+      ["g."] = "actions.toggle_hidden",
+      ["g\\"] = "actions.toggle_trash",
+    },
+  },
+  keys = {
+    {
+      "<leader>e",
+      function() require("oil").open() end,
+      desc = "Open Oil",
+    },
+  },
+}

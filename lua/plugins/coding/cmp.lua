@@ -129,10 +129,6 @@ return {
         },
         completion = { completeopt = "menu,menuone,noinsert" },
 
-        -- For an understanding of why these mappings were
-        -- chosen, you will need to read `:help ins-completion`
-        --
-        -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = {
           -- esc to close completion menu
           ["<Esc>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
