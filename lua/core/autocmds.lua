@@ -9,6 +9,7 @@ create_augroup "q_close_windows"
 create_augroup "clear_last_search"
 create_augroup "highlight_yank"
 create_augroup "highlight_search"
+create_augroup "remove_trailing_whitespace"
 create_augroup "dashboard_when_no_buffer"
 
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -92,6 +93,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
   group = "highlight_yank",
   callback = function() vim.highlight.on_yank() end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  desc = "Remove trailing whitespaces on save",
+  group = "remove_trailing_whitespace",
+  pattern = "*",
+  callback = function()
+    -- save cursor position to later restore
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    -- Search and replace trailing whitespace
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.api.nvim_win_set_cursor(0, cursor_pos)
+  end,
 })
 
 vim.api.nvim_create_autocmd("User", {

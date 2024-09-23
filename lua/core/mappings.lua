@@ -8,11 +8,16 @@ for _, mode in pairs { "n", "x" } do
   set_map(mode, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 end
 
--- write/ close
+-- write/close
 set_map("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 set_map("n", "<C-q>", "<Cmd>confirm q<CR>", { desc = "Quit file" })
 set_map("i", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 set_map("n", "<Leader>c", "<Cmd>bdelete<CR>", { desc = "Close buffer" })
+
+-- yank/paste
+for _, mode in pairs { "n", "v" } do
+  set_map(mode, "y", "mmy`m", { desc = "Yank without moving back cursor" })
+end
 
 -- common motions
 set_map("n", "<C-z>", "u", { desc = "Undo" })
@@ -28,7 +33,7 @@ for _, mode in pairs { "n", "v" } do
   set_map(mode, "X", "d", { desc = "Cut" })
 end
 
--- jump / select
+-- jump/select
 set_map("n", "ga", "ggVG", { desc = "Select all lines" })
 for _, mode in pairs { "n", "v" } do
   set_map(mode, "H", "^", { desc = "Jump to beginning of line" })
