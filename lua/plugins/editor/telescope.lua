@@ -13,7 +13,7 @@ return {
   },
   opts = function()
     local actions = require "telescope.actions"
-    local selected_icon = require("utils.icons").get_icon("misc", "Selected") .. " "
+    local selected_icon = require("utils.ui").get_icon("misc", "Selected") .. " "
 
     local open_selected = function(prompt_bufnr)
       local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)

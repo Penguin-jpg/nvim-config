@@ -15,9 +15,9 @@ set_map("i", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 set_map("n", "<Leader>c", "<Cmd>bdelete<CR>", { desc = "Close buffer" })
 
 -- yank/paste
-for _, mode in pairs { "n", "v" } do
-  set_map(mode, "y", "mmy`m", { desc = "Yank without moving back cursor" })
-end
+-- for _, mode in pairs { "n", "v" } do
+--   set_map(mode, "y", "mmy`m", { desc = "Yank without moving back cursor" })
+-- end
 
 -- common motions
 set_map("n", "<C-z>", "u", { desc = "Undo" })

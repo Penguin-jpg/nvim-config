@@ -5,7 +5,7 @@ return {
     { "lewis6991/gitsigns.nvim", optional = true, opts = { trouble = true } },
   },
   opts = function(_, opts)
-    local get_icon = require("utils.icons").get_icon
+    local get_icon = require("utils.ui").get_icon
     local lspkind_available, lspkind = pcall(require, "lspkind")
     opts.icons = {
       indent = {

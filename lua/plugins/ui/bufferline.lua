@@ -16,7 +16,7 @@ return {
       diagnostics = "nvim_lsp",
       always_show_bufferline = true,
       diagnostics_indicator = function(_, _, diag)
-        local get_icon = require("utils.icons").get_icon
+        local get_icon = require("utils.ui").get_icon
         local ret = (diag.error and get_icon("diagnostic", "Error") .. " " .. diag.error .. " " or "")
           .. (diag.warning and get_icon("diagnostic", "Warn") .. " " .. diag.warning or "")
         return vim.trim(ret)

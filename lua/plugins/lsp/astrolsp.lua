@@ -9,7 +9,24 @@ return {
       inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
+    capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
+      textDocument = {
+        completion = {
+          completionItem = {
+            documentationFormat = { "markdown", "plaintext" },
+            snippetSupport = true,
+            preselectSupport = true,
+            insertReplaceSupport = true,
+            labelDetailsSupport = true,
+            deprecatedSupport = true,
+            commitCharactersSupport = true,
+            tagSupport = { valueSet = { 1 } },
+            resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } },
+          },
+        },
+        foldingRange = { dynamicRegistration = false, lineFoldingOnly = true },
+      },
+    }),
     -- use conform.nvim for formatting
     formatting = { disabled = true },
     -- enable servers that you already have installed without mason
@@ -37,12 +54,7 @@ return {
     autocmds = {
       -- first key is the `augroup` to add the auto commands to (:h augroup)
       lsp_document_highlight = {
-        -- Optional condition to create/delete auto command group
-        -- can either be a string of a client capability or a function of `fun(client, bufnr): boolean`
-        -- condition will be resolved for each client on each execution and if it ever fails for all clients,
-        -- the auto commands will be deleted for that buffer
         cond = "textDocument/documentHighlight",
-        -- cond = function(client, bufnr) return client.name == "lua_ls" end,
         -- list of auto commands to set
         {
           -- events to trigger

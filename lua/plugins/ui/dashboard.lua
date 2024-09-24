@@ -2,8 +2,8 @@ return {
   "nvimdev/dashboard-nvim",
   lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
   opts = function()
-    local header = require("utils.dashboard").get_header "OH"
-    local get_icon = require("utils.icons").get_icon
+    local header = require("utils.ui").get_header "OH"
+    local get_icon = require("utils.ui").get_icon
 
     local opts = {
       theme = "doom",

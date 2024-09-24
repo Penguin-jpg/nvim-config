@@ -94,7 +94,6 @@ return {
       }
 
       local ret = { mode = { "o", "x" } }
-      ---@type table<string, string>
       local mappings = vim.tbl_extend("force", {}, {
         around = "a",
         inside = "i",

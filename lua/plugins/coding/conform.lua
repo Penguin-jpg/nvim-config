@@ -14,6 +14,7 @@ return {
         if vim.g.autoformat == nil then vim.g.autoformat = true end
         vim.g.autoformat = not vim.g.autoformat
         vim.b.autoformat = nil
+        require("utils.common").notify(string.format("Formatting %s", require("utils.common").bool2str(vim.g.autoformat)))
       end,
       desc = "Toggle autoformatting",
     },

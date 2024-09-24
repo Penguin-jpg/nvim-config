@@ -68,31 +68,6 @@ return {
       { "hrsh7th/cmp-buffer", lazy = true },
       { "hrsh7th/cmp-path", lazy = true },
     },
-    specs = {
-      {
-        "AstroNvim/astrolsp",
-        optional = true,
-        opts = function(_, opts)
-          opts.capabilities = vim.tbl_deep_extend("force", opts.capabilities, {
-            textDocument = {
-              completion = {
-                completionItem = {
-                  documentationFormat = { "markdown", "plaintext" },
-                  snippetSupport = true,
-                  preselectSupport = true,
-                  insertReplaceSupport = true,
-                  labelDetailsSupport = true,
-                  deprecatedSupport = true,
-                  commitCharactersSupport = true,
-                  tagSupport = { valueSet = { 1 } },
-                  resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } },
-                },
-              },
-            },
-          })
-        end,
-      },
-    },
     config = function()
       -- See `:help cmp`
       local cmp = require "cmp"

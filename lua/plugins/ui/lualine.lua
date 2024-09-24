@@ -12,8 +12,8 @@ return {
     end
   end,
   opts = function()
-    local conditions = require("utils.lualine").conditions
-    local get_icon = require("utils.icons").get_icon
+    local conditions = require("utils.ui").conditions
+    local get_icon = require("utils.ui").get_icon
 
     local opts = {
       options = {
