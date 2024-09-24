@@ -33,6 +33,10 @@ for _, mode in pairs { "n", "v" } do
   set_map(mode, "X", "d", { desc = "Cut" })
 end
 
+-- navigation
+set_map("n", "[t", function() vim.cmd.tabprevious() end, { desc = "Previous tab" })
+set_map("n", "]t", function() vim.cmd.tabnext() end, { desc = "Next tab" })
+
 -- jump/select
 set_map("n", "ga", "ggVG", { desc = "Select all lines" })
 for _, mode in pairs { "n", "v" } do

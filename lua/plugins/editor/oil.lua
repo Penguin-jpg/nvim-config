@@ -4,7 +4,7 @@ return {
   dependencies = { "echasnovski/mini.icons" },
   opts = {
     skip_confirm_for_simple_edits = true,
-    columns = { "icon", "permissions", "size" },
+    columns = { "permissions", "size", "icon" },
     keymaps = {
       ["l"] = "actions.select",
       ["h"] = "actions.parent",

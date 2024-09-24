@@ -1,5 +1,12 @@
 return {
   "sindrets/diffview.nvim",
-  event = "User GitFile",
-  cmd = { "DiffviewOpen" },
+  cmd = {
+    "DiffviewOpen",
+    "DiffviewClose",
+    "DiffviewLog",
+    "DiffviewFileHistory",
+    "DiffviewFocusFile",
+    "DiffviewRefresh",
+    "DiffviewToggleFiles",
+  },
 }
