@@ -35,7 +35,7 @@ return {
   },
   {
     "echasnovski/mini.ai",
-    event = require("utils.lazy").LazyFile,
+    event = "User File",
     opts = function()
       -- define custom textobjects
       local ai = require "mini.ai"

@@ -5,7 +5,7 @@ return {
     "nvim-telescope/telescope.nvim", -- optional
     "sindrets/diffview.nvim", -- optional
   },
-  event = require("utils.lazy").LazyFile,
+  event = "User GitFile",
   config = true,
   keys = {
     { "<Leader>gg", "<Cmd>Neogit<CR>", desc = "Open Neogit" },

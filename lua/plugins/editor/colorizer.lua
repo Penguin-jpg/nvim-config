@@ -1,6 +1,6 @@
 return {
   "brenoprata10/nvim-highlight-colors",
-  event = require("utils.lazy").LazyFile,
+  event = "User File",
   cmd = "HighlightColors",
   opts = { enabled_named_colors = false },
   keys = {

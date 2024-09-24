@@ -1,6 +1,6 @@
 return {
   "mfussenegger/nvim-lint",
-  event = require("utils.lazy").LazyFile,
+  event = "User File",
   config = function(_, opts)
     local lint = require "lint"
 

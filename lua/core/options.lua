@@ -46,6 +46,7 @@ vim.opt.updatetime = 250 -- length of time to wait before triggering the plugin
 vim.opt.virtualedit = "block" -- allow going past end of line in visual block mode
 vim.opt.wrap = false -- disable wrapping of lines longer than the width of window
 vim.opt.writebackup = false -- disable making a backup before overwriting a file
+vim.opt.swapfile = false -- ask what state to recover when opening a file that was not saved
 -- set how neovim will display certain whitespace characters in the editor
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }

@@ -3,7 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     main = "nvim-treesitter.configs",
     dependencies = { { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true } },
-    event = require("utils.lazy").LazyFile,
+    event = "User File",
     cmd = {
       "TSBufDisable",
       "TSBufEnable",
@@ -119,7 +119,7 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
-    event = require("utils.lazy").LazyFile,
+    event = "User File",
     opts = {},
   },
 }

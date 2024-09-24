@@ -1,6 +1,6 @@
 return {
   "windwp/nvim-autopairs",
-  event = require("utils.lazy").LazyFile,
+  event = "User File",
   opts = {
     check_ts = true,
     ts_config = { java = false },

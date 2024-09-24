@@ -1,6 +1,6 @@
 return {
   "stevearc/conform.nvim",
-  event = require("utils.lazy").LazyFile,
+  event = "User File",
   keys = {
     {
       "<leader>lf",

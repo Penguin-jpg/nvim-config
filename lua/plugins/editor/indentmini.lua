@@ -1,7 +1,7 @@
 return {
   {
     "nvimdev/indentmini.nvim",
-    event = require("utils.lazy").LazyFile,
+    event = "User File",
     opts = {
       char = "┃",
       exclude = {},

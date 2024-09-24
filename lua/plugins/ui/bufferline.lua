@@ -1,6 +1,6 @@
 return {
   "akinsho/bufferline.nvim",
-  event = require("utils.lazy").LazyFile,
+  event = "User File",
   keys = {
     { "<Leader>bp", "<Cmd>BufferLinePick<CR>", desc = "Pick a buffer" },
     { "<Leader>bc", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },

@@ -1,5 +1,5 @@
 return {
   "sindrets/diffview.nvim",
-  event = require("utils.lazy").LazyFile,
+  event = "User GitFile",
   cmd = { "DiffviewOpen" },
 }

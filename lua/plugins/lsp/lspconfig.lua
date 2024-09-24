@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = require("utils.lazy").LazyFile,
+  event = "User File",
   dependencies = {
     { "AstroNvim/astrolsp", opts = {} },
     {

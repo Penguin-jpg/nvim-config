@@ -1,6 +1,6 @@
 return {
   "RRethy/vim-illuminate",
-  event = require("utils.lazy").LazyFile,
+  event = "User File",
   specs = {
     {
       "neovim/nvim-lspconfig",

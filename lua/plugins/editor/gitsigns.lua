@@ -1,6 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
-  event = require("utils.lazy").LazyFile,
+  event = "User GitFile",
   opts = {
     signs = {
       add = { text = "┃" },
