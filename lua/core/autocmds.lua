@@ -12,21 +12,6 @@ create_augroup "clear_last_search"
 create_augroup "highlight_yank"
 create_augroup "highlight_search"
 create_augroup "remove_trailing_whitespace"
-create_augroup "dashboard_when_no_buffer"
-
-create_autocmd("BufDelete", {
-  desc = "Custom BufDeletePost user event",
-  group = "custom_user_events",
-  callback = function()
-    vim.schedule(
-      function()
-        vim.api.nvim_exec_autocmds("User", {
-          pattern = "BufDeletePost",
-        })
-      end
-    )
-  end,
-})
 
 -- modified from https://github.com/NormalNvim/NormalNvim/blob/main/lua/base/3-autocmds.lua
 create_autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
@@ -90,7 +75,7 @@ create_autocmd("BufWinEnter", {
   callback = function(event)
     if
       vim.tbl_contains(
-        { "help", "nofile", "quickfix", "checkhealth", "lspinfo", "grug-far", "gitsigns.blame" },
+        { "help", "nofile", "quickfix", "checkhealth", "lspinfo", "gitsigns.blame" },
         vim.bo[event.buf].buftype
       )
     then
@@ -127,18 +112,5 @@ create_autocmd("BufWritePre", {
     -- Search and replace trailing whitespace
     vim.cmd [[keeppatterns %s/\s\+$//e]]
     vim.api.nvim_win_set_cursor(0, cursor_pos)
-  end,
-})
-
-create_autocmd("User", {
-  desc = "Open dashboard when no available buffers",
-  group = "dashboard_when_no_buffer",
-  pattern = "BufDeletePost",
-  callback = function(event)
-    local deleted_name = vim.api.nvim_buf_get_name(event.buf)
-    local deleted_ft = vim.api.nvim_get_option_value("filetype", { buf = event.buf })
-    local deleted_bt = vim.api.nvim_get_option_value("buftype", { buf = event.buf })
-    local dashboard_on_empty = deleted_name == "" and deleted_ft == "" and deleted_bt == ""
-    if dashboard_on_empty then vim.cmd "Dashboard" end
   end,
 })

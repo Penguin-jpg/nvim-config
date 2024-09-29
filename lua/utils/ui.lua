@@ -135,6 +135,7 @@ M.icons = {
     Grapple = "󰓹",
     Codeium = "󱚝",
     Yazi = "󰇥",
+    Oil = "",
   },
   misc = {
     Mode = "󰊠",

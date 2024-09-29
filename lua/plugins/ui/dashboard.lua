@@ -16,9 +16,9 @@ return {
         header = vim.split(header, "\n"),
         center = {
           {
-            action = function() require("yazi").yazi() end,
+            action = "Oil",
             desc = "File Explorer",
-            icon = get_icon("plugins", "Yazi") .. " ",
+            icon = get_icon("plugins", "Oil") .. " ",
             key = "e",
           },
           { action = "ene", desc = "New File", icon = get_icon("files", "Default") .. " ", key = "n" },
