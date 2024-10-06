@@ -1,5 +1,6 @@
 local M = {}
 
+-----------------dashboard----------------------
 M.headers = {
   UWU = [[
     "⡆⣐⢕⢕⢕⢕⢕⢕⢕⢕⠅⢗⢕⢕⢕⢕⢕⢕⢕⠕⠕⢕⢕⢕⢕⢕⢕⢕⢕⢕"
@@ -40,7 +41,9 @@ function M.get_header(name)
   if M.headers[name] ~= nil then header = M.headers[name] end
   return string.rep("\n", 5) .. header .. "\n\n"
 end
+------------------------------------------------
 
+--------------------lualine---------------------
 M.conditions = {
   buffer_not_empty = function() return vim.fn.empty(vim.fn.expand "%:t") ~= 1 end,
   hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
@@ -50,7 +53,9 @@ M.conditions = {
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
 }
+-------------------------------------------------
 
+--------------------icons------------------------
 M.icons = {
   lsp = {
     ActiveLSP = "",
@@ -147,6 +152,7 @@ M.icons = {
     Evil = "",
     Selected = "❯",
     Save = "󰆓",
+    Recording = "",
   },
 }
 
@@ -155,5 +161,6 @@ function M.get_icon(type, name)
   if name == nil then return M.icons[type] end
   return M.icons[type][name]
 end
+------------------------------------------------
 
 return M

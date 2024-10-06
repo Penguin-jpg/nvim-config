@@ -52,6 +52,15 @@ return {
             padding = { left = 2, right = 1 },
             color = { fg = "#d183e8", bg = "none" },
           },
+          {
+            function()
+              local reg = vim.fn.reg_recording()
+              if reg == "" then return "" end -- not recording
+              return "Recording @" .. reg
+            end,
+            icon = get_icon("misc", "Recording"),
+            color = { fg = "#60b2a7", bg = "none" },
+          },
           "%=",
           {
             "diagnostics",
