@@ -12,15 +12,22 @@ return {
     build = vim.fn.has "win32" == 0
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
       or nil,
-    dependencies = { { "rafamadriz/friendly-snippets", lazy = true } },
-    specs = {
+    dependencies = {
+      {
+        "rafamadriz/friendly-snippets",
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load { paths = { vim.fn.stdpath "config" .. "/snippets" } }
+        end,
+      },
       {
         "hrsh7th/nvim-cmp",
-        optional = true,
-        dependencies = { { "saadparwaiz1/cmp_luasnip", lazy = true } },
+        dependencies = { "saadparwaiz1/cmp_luasnip" },
         opts = function(_, opts)
           local luasnip, cmp = require "luasnip", require "cmp"
 
+          opts.snippet = {
+            expand = function(args) luasnip.lsp_expand(args.body) end,
+          }
           if not opts.snippet then opts.snippet = {} end
           opts.snippet.expand = function(args) luasnip.lsp_expand(args.body) end
 
@@ -64,9 +71,9 @@ return {
     event = "InsertEnter",
     dependencies = {
       -- sources for completion
-      { "hrsh7th/cmp-nvim-lsp", lazy = true },
-      { "hrsh7th/cmp-buffer", lazy = true },
-      { "hrsh7th/cmp-path", lazy = true },
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
     },
     config = function()
       -- See `:help cmp`
@@ -74,12 +81,21 @@ return {
       local luasnip = require "luasnip"
       luasnip.config.setup {}
 
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
       cmp.setup {
+        sources = {
+          { name = "nvim_lsp", priority = 1000 },
+          { name = "luasnip", priority = 750 },
+          { name = "buffer", priority = 500 },
+          { name = "path", priority = 250 },
+        },
         snippet = {
           expand = function(args) luasnip.lsp_expand(args.body) end,
         },
         window = {
           completion = cmp.config.window.bordered {
+            scrollbar = false,
             col_offset = -2,
             side_padding = 0,
             border = "rounded",
@@ -87,23 +103,35 @@ return {
           },
           documentation = cmp.config.window.bordered {
             border = "rounded",
-            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+            winhighlight = "Normal:CmpDoc,FloatBorder:CmpDocBorder",
           },
         },
         formatting = {
           -- show icon at the beginning and menu at the end
-          fields = { "kind", "abbr", "menu" },
+          fields = { "abbr", "kind", "menu" },
           format = function(entry, vim_item)
-            local kind = require("lspkind").cmp_format { mode = "symbol_text", maxwidth = 50 }(entry, vim_item)
-            local strings = vim.split(kind.kind, "%s", { trimetry = true })
-            kind.kind = " " .. (strings[1] or "") .. " "
-            kind.menu = " [" .. (strings[2] or "") .. "]"
-            return kind
+            local kind_icon = require("utils.ui").get_icon("kind", vim_item.kind)
+            local source = ({
+              buffer = "[Buffer]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[LuaSnip]",
+              nvim_lua = "[Lua]",
+              latex_symbols = "[LaTeX]",
+            })[entry.source.name]
+
+            vim_item.menu = vim_item.kind
+            vim_item.menu_hl_group = "CmpItemKind" .. vim_item.kind
+            vim_item.kind = " " .. kind_icon
+            return vim_item
           end,
           expandable_indicator = true,
         },
+        experimental = {
+          ghost_text = {
+            hl_group = "CmpGhostText",
+          },
+        },
         completion = { completeopt = "menu,menuone,noinsert" },
-
         mapping = {
           -- esc to close completion menu
           ["<Esc>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
@@ -140,11 +168,6 @@ return {
               fallback()
             end
           end, { "i", "s" }),
-        },
-        sources = {
-          { name = "nvim_lsp", priority = 1000 },
-          { name = "buffer", priority = 500 },
-          { name = "path", priority = 250 },
         },
       }
     end,
