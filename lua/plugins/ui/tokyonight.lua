@@ -23,5 +23,8 @@ return {
         delete = "#c34043",
       }
     end,
+    on_highlights = function(hl, c)
+      hl.PmenuSel = { fg = c.bg_dark, bg = "#7aa2f7" }
+    end,
   },
 }

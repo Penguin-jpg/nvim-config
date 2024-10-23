@@ -47,10 +47,10 @@ M.headers = {
   ]],
 }
 
-function M.get_header(name)
+function M.get_header(name, num_head_lines, num_footer_lines)
   local header = M.headers["UWU"]
   if M.headers[name] ~= nil then header = M.headers[name] end
-  return string.rep("\n", 5) .. header .. "\n\n"
+  return string.rep("\n", num_head_lines or 5) .. header .. string.rep("\n", num_footer_lines or 2)
 end
 ------------------------------------------------
 

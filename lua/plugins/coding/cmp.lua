@@ -14,9 +14,25 @@ return {
     event = "InsertEnter",
     dependencies = {
       -- sources for completion
-      { "hrsh7th/cmp-nvim-lsp", lazy = true },
-      { "hrsh7th/cmp-buffer", lazy = true },
-      { "hrsh7th/cmp-path", lazy = true },
+      -- { "hrsh7th/cmp-nvim-lsp", lazy = true },
+      -- { "hrsh7th/cmp-buffer", lazy = true },
+      -- { "hrsh7th/cmp-path", lazy = true },
+      { "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", lazy = true, opts = {} },
+      { "iguanacucumber/mag-buffer", name = "cmp-buffer", lazy = true },
+      { "FelipeLema/cmp-async-path", lazy = true },
+      -- lua source
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        cmd = "LazyDev",
+        opts = {
+          library = {
+            { path = "luvit-meta/library", words = { "vim%.uv" } },
+          },
+        },
+      },
+      -- manage libuv types with lazy, this plugin will never be loaded
+      { "Bilal2453/luvit-meta", lazy = true },
     },
     opts_extend = { "sources" },
     config = function()
@@ -31,7 +47,9 @@ return {
           { name = "nvim_lsp", priority = 1000 },
           { name = "luasnip", priority = 750 },
           { name = "buffer", priority = 500, group_index = 2 },
-          { name = "path", priority = 250 },
+          -- { name = "path", priority = 250 },
+          { name = "async_path", priority = 250 }, -- better than cmp-path
+          { name = "lazydev", group_index = 0 },
         },
         snippet = {
           expand = function(args) luasnip.lsp_expand(args.body) end,
@@ -54,13 +72,13 @@ return {
           fields = { "abbr", "kind", "menu" },
           format = function(entry, vim_item)
             local kind_icon = require("utils.ui").get_icon("kind", vim_item.kind)
-            local source = ({
-              buffer = "[Buffer]",
-              nvim_lsp = "[LSP]",
-              luasnip = "[LuaSnip]",
-              nvim_lua = "[Lua]",
-              latex_symbols = "[LaTeX]",
-            })[entry.source.name]
+            -- local source = ({
+            --   buffer = "[Buffer]",
+            --   nvim_lsp = "[LSP]",
+            --   luasnip = "[LuaSnip]",
+            --   nvim_lua = "[Lua]",
+            --   latex_symbols = "[LaTeX]",
+            -- })[entry.source.name]
 
             vim_item.menu = vim_item.kind
             vim_item.menu_hl_group = "CmpItemKind" .. vim_item.kind
@@ -127,7 +145,7 @@ return {
       {
         -- "hrsh7th/nvim-cmp",
         "iguanacucumber/magazine.nvim",
-        name = "nvim-cmp", -- Otherwise highlighting gets messed up
+        name = "nvim-cmp",
         dependencies = { { "saadparwaiz1/cmp_luasnip", lazy = true } },
         opts = function(_, opts)
           local luasnip, cmp = require "luasnip", require "cmp"
@@ -171,24 +189,5 @@ return {
       require("luasnip").config.setup(opts)
       require("luasnip.loaders.from_vscode").lazy_load { paths = { vim.fn.stdpath "config" .. "/snippets" } }
     end,
-  },
-  {
-    "folke/lazydev.nvim",
-    ft = "lua",
-    cmd = "LazyDev",
-    opts = {
-      library = {
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
-      },
-    },
-  },
-  -- manage libuv types with lazy, this plugin will never be loaded
-  { "Bilal2453/luvit-meta", lazy = true },
-  -- add lazydev source to cmp
-  {
-    -- "hrsh7th/nvim-cmp",
-    "iguanacucumber/magazine.nvim",
-    name = "nvim-cmp", -- Otherwise highlighting gets messed up
-    opts = function(_, opts) table.insert(opts.sources, { name = "lazydev", group_index = 0 }) end,
   },
 }

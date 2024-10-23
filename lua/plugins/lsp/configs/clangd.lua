@@ -9,7 +9,7 @@ return {
     "--all-scopes-completion",
     "--header-insertion=iwyu",
     "--completion-style=detailed",
-    "--fallback-style=Microsoft",
+    "--fallback-style=llvm",
   },
   init_options = {
     clangdFileStatus = true,

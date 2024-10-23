@@ -26,6 +26,8 @@ set_map("i", "<C-Del>", "<C-o>dw", { desc = "Delete a word backward" })
 set_map("i", "<S-Tab>", "<C-d>", { desc = "Unindent line" })
 set_map("v", "<Tab>", ">gv", { desc = "Indent line" })
 set_map("v", "<S-Tab>", "<gv", { desc = "Unindent line" })
+set_map("v", ">", ">gv", { desc = "Indent line" })
+set_map("v", "<", "<gv", { desc = "Unindent line" })
 
 -- separate cut and delete motion
 for _, mode in pairs { "n", "v" } do
@@ -34,17 +36,21 @@ for _, mode in pairs { "n", "v" } do
 end
 
 -- navigation
+set_map("n", "[b", "<Cmd>bprev<CR>", { desc = "Previous buffer" })
+set_map("n", "]b", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 set_map("n", "[t", function() vim.cmd.tabprevious() end, { desc = "Previous tab" })
 set_map("n", "]t", function() vim.cmd.tabnext() end, { desc = "Next tab" })
 
 -- jump/select
 set_map("n", "ga", "ggVG", { desc = "Select all lines" })
 for _, mode in pairs { "n", "v" } do
-  set_map(mode, "H", "^", { desc = "Jump to beginning of line" })
+  set_map(mode, "H", "_", { desc = "Jump to beginning of line" })
   set_map(mode, "L", "$", { desc = "Jump to end of line" })
   set_map(mode, "K", "5k", { desc = "Move up 5 lines" })
   set_map(mode, "J", "5j", { desc = "Move down 5 lines" })
 end
+set_map("n", "<C-u>", "<C-u>zz", { desc = "Center cursor after jumping up" })
+set_map("n", "<C-d>", "<C-d>zz", { desc = "Center cursor after jumping down" })
 
 -- split
 set_map("n", "|", "<Cmd>vsplit<CR>", { desc = "Vertical split" })
