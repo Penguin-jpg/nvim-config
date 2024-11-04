@@ -12,14 +12,15 @@ return {
     end
   end,
   opts = function()
-    local conditions = require("utils.ui").conditions
+    local conditions = require("utils.ui").lualine.conditions
     local get_icon = require("utils.ui").get_icon
+    local colors = require("tokyonight.colors").setup()
 
     local opts = {
       options = {
+        theme = "auto",
         component_separators = "",
         section_separators = "",
-        theme = "auto",
         disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter" } },
       },
       sections = {
@@ -36,21 +37,21 @@ return {
             "filetype",
             icon_only = true,
             padding = { left = 1, right = 0 },
-            color = { bg = "none" },
+            color = { bg = colors.bg_dark },
           },
           {
             "filename",
             padding = { left = 0, right = 0 },
-            color = { fg = "#b0baf2", bg = "none" },
+            color = { fg = "#b0baf2", bg = colors.bg_dark },
             cond = conditions.buffer_not_empty,
           },
         },
         lualine_c = {
           {
             "branch",
-            icon = get_icon("git", "Branch"),
+            icon = get_icon "GitBranch",
             padding = { left = 2, right = 1 },
-            color = { fg = "#d183e8", bg = "none" },
+            color = { fg = "#d183e8", bg = colors.bg_dark },
           },
           {
             function()
@@ -58,30 +59,29 @@ return {
               if reg == "" then return "" end -- not recording
               return "Recording @" .. reg
             end,
-            icon = get_icon("misc", "Recording"),
-            color = { fg = "#60b2a7", bg = "none" },
+            icon = "",
+            color = { fg = "#60b2a7", bg = colors.bg_dark },
           },
           "%=",
           {
             "diagnostics",
             symbols = {
-              error = get_icon("diagnostic", "Error") .. " ",
-              warn = get_icon("diagnostic", "Warn") .. " ",
-              info = get_icon("diagnostic", "Info") .. " ",
-              hint = get_icon("diagnostic", "Hint") .. " ",
+              error = get_icon("DiagnosticError", 1),
+              warn = get_icon("DiagnosticWarn", 1),
+              info = get_icon("DiagnosticInfo", 1),
+              hint = get_icon("DiagnosticHint", 1),
             },
-            icon = get_icon("diagnostic", "Diagnostic"),
+            icon = get_icon "Diagnostic",
             color = { fg = "#f1a185" },
           },
           {
             "diff",
             symbols = {
-              added = get_icon("git", "Add") .. " ",
-              modified = get_icon("git", "Change") .. " ",
-              removed = get_icon("git", "Delete") .. " ",
+              added = get_icon("GitAdd", 1),
+              modified = get_icon("GitChange", 1),
+              removed = get_icon("GitDelete", 1),
             },
-            icon = get_icon("git", "Github"),
-            -- color = { fg = "#f1a185" },
+            icon = get_icon "Github",
             color = { fg = "#bb49b3" },
             cond = conditions.hide_in_width,
             source = function()
@@ -101,14 +101,14 @@ return {
             "searchcount",
             maxcount = 999,
             timeout = 500,
-            color = { fg = "#f7768e", bg = "none" },
+            color = { fg = "#f7768e", bg = colors.bg_dark },
           },
           {
             function()
               local buf_ft = vim.api.nvim_get_option_value("filetype", {})
               local clients = vim.lsp.get_clients()
 
-              if next(clients) == nil then return "No Activate LSP" end
+              if next(clients) == nil then return "No Active LSP" end
 
               local names = {}
 
@@ -120,7 +120,7 @@ return {
             end,
             separator = { left = "", right = "" },
             padding = { left = 0, right = 0 },
-            icon = get_icon("lsp", "ActiveLSP"),
+            icon = "",
             color = { fg = "black", bg = "#7fb4ca" },
           },
         },
@@ -128,15 +128,25 @@ return {
           {
             "encoding",
             fmt = string.upper,
-            icon = get_icon("misc", "FileEncoding"),
+            icon = "",
             padding = { left = 2, right = 1 },
-            color = { fg = "#60b2a7", bg = "none" },
+            color = { fg = "#60b2a7", bg = colors.bg_dark },
           },
           {
             "bo:tabstop",
-            icon = get_icon("misc", "TabWidth"),
+            icon = "",
+            padding = { left = 1, right = 1 },
+            color = { fg = "#60b2a7", bg = colors.bg_dark },
+          },
+          {
+            "fileformat",
+            symbols = {
+              unix = " LF",
+              dos = " CRLF",
+              mac = " CR",
+            },
             padding = { left = 1, right = 2 },
-            color = { fg = "#60b2a7", bg = "none" },
+            color = { fg = "#60b2a7", bg = colors.bg_dark },
           },
         },
         lualine_z = {
@@ -154,6 +164,7 @@ return {
           },
         },
       },
+      extensions = { "lazy" },
     }
 
     return opts

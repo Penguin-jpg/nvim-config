@@ -6,6 +6,7 @@ create_augroup "custom_user_events"
 create_augroup "on_buffer_enter"
 create_augroup "on_filetypes"
 create_augroup "on_buffer_delete"
+create_augroup "bigfile"
 create_augroup "to_last_position"
 create_augroup "q_close_windows"
 create_augroup "clear_last_search"
@@ -60,6 +61,26 @@ create_autocmd("FileType", {
   group = "on_filetypes",
   pattern = "oil",
   callback = function(args) vim.b[args.buf].view_activated = false end,
+})
+
+vim.filetype.add {
+  pattern = {
+    [".*"] = {
+      function(path, buf)
+        return vim.bo[buf].filetype ~= "bigfile" and path and vim.fn.getfsize(path) > vim.g.bigfile_size and "bigfile"
+          or nil
+      end,
+    },
+  },
+}
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = "bigfile",
+  pattern = "bigfile",
+  callback = function(ev)
+    vim.b.minianimate_disable = true
+    vim.schedule(function() vim.bo[ev.buf].syntax = vim.filetype.match { buf = ev.buf } or "" end)
+  end,
 })
 
 create_autocmd("BufWinEnter", {

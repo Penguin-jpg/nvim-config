@@ -47,7 +47,7 @@ return {
       ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", silent = true }),
       ["textDocument/signatureHelp"] = vim.lsp.with(
         vim.lsp.handlers.signature_help,
-        { border = "rounded", silent = true }
+        { border = "rounded", silent = true, focusable = false }
       ),
     },
     -- configure buffer local auto commands to add when attaching a language server
@@ -79,7 +79,6 @@ return {
           end,
         },
       },
-      -- disable inlay hints in insert mode
       disable_inlay_hints_on_insert = {
         -- only create for language servers that support inlay hints
         -- (and only if vim.lsp.inlay_hint is available)

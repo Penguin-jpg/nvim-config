@@ -13,7 +13,7 @@ return {
   },
   opts = function()
     local actions = require "telescope.actions"
-    local selected_icon = require("utils.ui").get_icon("misc", "Selected") .. " "
+    local selected_icon = "❯ "
 
     local open_selected = function(prompt_bufnr)
       local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
@@ -33,6 +33,9 @@ return {
       open_selected(prompt_bufnr)
     end
 
+    local h_percent = 0.90
+    local w_percent = 0.80
+
     return {
       defaults = {
         prompt_prefix = selected_icon,
@@ -40,12 +43,17 @@ return {
         multi_icon = selected_icon,
         path_display = { "truncate" },
         sorting_strategy = "ascending",
+        preview = { hide_on_startup = true },
+        layout_strategy = "vertical",
         layout_config = {
-          horizontal = { prompt_position = "top", preview_width = 0.55 },
-          vertical = { mirror = false },
-          width = 0.87,
-          height = 0.80,
-          preview_cutoff = 120,
+          vertical = {
+            mirror = true,
+            prompt_position = "top",
+            width = function(_, cols, _) return math.floor(cols * w_percent) end,
+            height = function(_, _, rows) return math.floor(rows * h_percent) end,
+            preview_cutoff = 10,
+            preview_height = 0.4,
+          },
         },
         mappings = {
           i = {

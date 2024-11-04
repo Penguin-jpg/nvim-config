@@ -11,6 +11,7 @@ return {
     spec = {
       mode = { "n", "v" },
       { "<Leader>b", group = "Buffer", icon = { icon = " " } },
+      { "<Leader>d", group = "Debugger", icon = { icon = " " } },
       { "<Leader>f", group = "Find", icon = { icon = " " } },
       { "<Leader>g", group = "Git", icon = { icon = "󰊢 " } },
       { "<Leader>l", group = "LSP", icon = { icon = " " } },

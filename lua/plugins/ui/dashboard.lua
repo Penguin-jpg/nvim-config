@@ -18,24 +18,24 @@ return {
           {
             action = "Oil",
             desc = "File Explorer",
-            icon = get_icon("plugins", "Oil") .. " ",
+            icon = " ",
             key = "e",
           },
-          { action = "ene", desc = "New File", icon = get_icon("files", "Default") .. " ", key = "n" },
-          { action = "Telescope find_files", desc = "Find File", icon = get_icon("misc", "Search") .. " ", key = "f" },
+          { action = "ene", desc = "New File", icon = get_icon("FileDefault", 1), key = "n" },
+          { action = "Telescope find_files", desc = "Find File", icon = " ", key = "f" },
           {
             action = "Telescope live_grep",
             desc = "Find Word",
-            icon = get_icon("misc", "WordSearch") .. " ",
+            icon = "󱎸 ",
             key = "w",
           },
           {
             action = function() require("persistence").load { last = true } end,
             desc = "Load last session",
-            icon = get_icon("misc", "Save") .. " ",
+            icon = "󰆓 ",
             key = "s",
           },
-          { action = "qa", desc = "Quit", icon = get_icon("diagnostic", "Error") .. " ", key = "q" },
+          { action = "qa", desc = "Quit", icon = get_icon("DiagnosticError", 1) .. " ", key = "q" },
         },
         footer = function()
           local stats = require("lazy").stats()

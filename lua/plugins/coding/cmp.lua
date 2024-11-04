@@ -20,27 +20,17 @@ return {
       { "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", lazy = true, opts = {} },
       { "iguanacucumber/mag-buffer", name = "cmp-buffer", lazy = true },
       { "FelipeLema/cmp-async-path", lazy = true },
-      -- lua source
-      {
-        "folke/lazydev.nvim",
-        ft = "lua",
-        cmd = "LazyDev",
-        opts = {
-          library = {
-            { path = "luvit-meta/library", words = { "vim%.uv" } },
-          },
-        },
-      },
-      -- manage libuv types with lazy, this plugin will never be loaded
-      { "Bilal2453/luvit-meta", lazy = true },
     },
     opts_extend = { "sources" },
     config = function()
       -- See `:help cmp`
       local cmp = require "cmp"
       local luasnip = require "luasnip"
+      local get_icon = require("utils.ui").get_icon
 
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+      local pmenu_hl = vim.api.nvim_get_hl(0, { name = "PmenuSel" })
+      vim.api.nvim_set_hl(0, "CmpSel", { fg = pmenu_hl.fg, bg = pmenu_hl.bg, bold = true })
 
       cmp.setup {
         sources = {
@@ -60,7 +50,8 @@ return {
             col_offset = -2,
             side_padding = 0,
             border = "rounded",
-            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+            -- winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:CmpSel,Search:None",
           },
           documentation = cmp.config.window.bordered {
             border = "rounded",
@@ -71,7 +62,7 @@ return {
           -- show icon at the beginning and menu at the end
           fields = { "abbr", "kind", "menu" },
           format = function(entry, vim_item)
-            local kind_icon = require("utils.ui").get_icon("kind", vim_item.kind)
+            local kind_icon = get_icon(vim_item.kind)
             -- local source = ({
             --   buffer = "[Buffer]",
             --   nvim_lsp = "[LSP]",
@@ -189,5 +180,30 @@ return {
       require("luasnip").config.setup(opts)
       require("luasnip.loaders.from_vscode").lazy_load { paths = { vim.fn.stdpath "config" .. "/snippets" } }
     end,
+  },
+  -- lua source
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    cmd = "LazyDev",
+    dependencies = {
+      {
+        "hrsh7th/nvim-cmp",
+        opts = function(_, opts)
+          opts.sources = opts.sources or {}
+          table.insert(opts.sources, { name = "lazydev", group_index = 0 })
+        end,
+      },
+    },
+    specs = {
+      -- manage libuv types with lazy, this plugin will never be loaded
+      { "Bilal2453/luvit-meta", lazy = true },
+    },
+    opts = {
+      library = {
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        { path = "lazy.nvim", words = { "Lazy" } },
+      },
+    },
   },
 }

@@ -1,20 +1,25 @@
 return {
   "folke/trouble.nvim",
   Cmd = "Trouble",
-  specs = {
-    { "lewis6991/gitsigns.nvim", optional = true, opts = { trouble = true } },
-  },
-  opts = function(_, opts)
+  specs = { { "lewis6991/gitsigns.nvim", opts = { trouble = true } } },
+  opts = function()
     local get_icon = require("utils.ui").get_icon
     local lspkind_available, lspkind = pcall(require, "lspkind")
-    opts.icons = {
-      indent = {
-        fold_open = get_icon("files", "FoldOpened"),
-        fold_closed = get_icon("files", "FoldClosed"),
+    return {
+      focus = true,
+      keys = {
+        ["<Esc>"] = "close",
+        ["q"] = "close",
       },
-      folder_closed = get_icon("files", "FolderClosed"),
-      folder_open = get_icon("files", "FolderOpen"),
-      kinds = lspkind_available and lspkind.symbol_map,
+      icons = {
+        indent = {
+          fold_open = get_icon("FoldOpened"),
+          fold_closed = get_icon("FoldClosed"),
+        },
+        folder_closed = get_icon("FolderClosed"),
+        folder_open = get_icon("FolderOpen"),
+        kinds = lspkind_available and lspkind.symbol_map,
+      },
     }
   end,
   keys = {

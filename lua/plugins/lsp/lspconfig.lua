@@ -37,6 +37,7 @@ return {
           -- python
           "ruff",
           "basedpyright",
+          "debugpy",
           -- json
           "json-lsp",
           -- markdown

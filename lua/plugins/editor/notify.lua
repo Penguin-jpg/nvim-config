@@ -2,9 +2,7 @@ return {
   {
     "rcarriga/nvim-notify",
     lazy = true,
-    specs = {
-      { "nvim-lua/plenary.nvim", lazy = true },
-    },
+    depenedencies = { { "nvim-lua/plenary.nvim", lazy = true } },
     opts = {
       stages = "static",
       timeout = 3000,

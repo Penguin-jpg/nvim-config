@@ -29,7 +29,7 @@ return {
   },
   keys = {
     {
-      "<leader>e",
+      "<Leader>e",
       function() require("oil").open() end,
       desc = "Open Oil",
     },

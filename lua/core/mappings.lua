@@ -32,6 +32,7 @@ set_map("v", "<", "<gv", { desc = "Unindent line" })
 -- separate cut and delete motion
 for _, mode in pairs { "n", "v" } do
   set_map(mode, "d", '"_d', { desc = "Delete" })
+  set_map(mode, "c", '"_c', { desc = "Delete and start insert" })
   set_map(mode, "X", "d", { desc = "Cut" })
 end
 
@@ -49,8 +50,8 @@ for _, mode in pairs { "n", "v" } do
   set_map(mode, "K", "5k", { desc = "Move up 5 lines" })
   set_map(mode, "J", "5j", { desc = "Move down 5 lines" })
 end
-set_map("n", "<C-u>", "<C-u>zz", { desc = "Center cursor after jumping up" })
-set_map("n", "<C-d>", "<C-d>zz", { desc = "Center cursor after jumping down" })
+-- set_map("n", "<C-u>", "<C-u>zz", { desc = "Center cursor after jumping up" })
+-- set_map("n", "<C-d>", "<C-d>zz", { desc = "Center cursor after jumping down" })
 
 -- split
 set_map("n", "|", "<Cmd>vsplit<CR>", { desc = "Vertical split" })

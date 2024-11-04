@@ -5,11 +5,13 @@ return {
   cmd = {
     "clangd",
     "--background-index",
+    "-j=4",
     "--clang-tidy",
     "--all-scopes-completion",
     "--header-insertion=iwyu",
     "--completion-style=detailed",
-    "--fallback-style=llvm",
+    "--function-arg-placeholders=0",
+    "--fallback-style=LLVM",
   },
   init_options = {
     clangdFileStatus = true,
