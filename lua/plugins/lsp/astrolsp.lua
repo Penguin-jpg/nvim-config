@@ -8,6 +8,7 @@ return {
       codelens = true, -- enable/disable codelens refresh on start
       inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
+      -- signature_help = true, -- enable/disable automatic signature help popup globally on startup
     },
     capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
       textDocument = {
@@ -43,13 +44,13 @@ return {
       -- customize how language servers are attached
       function(server, server_opts) require("lspconfig")[server].setup(server_opts) end,
     },
-    lsp_handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", silent = true }),
-      ["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        { border = "rounded", silent = true, focusable = false }
-      ),
-    },
+    -- lsp_handlers = {
+    --   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", silent = true }),
+    --   ["textDocument/signatureHelp"] = vim.lsp.with(
+    --     vim.lsp.handlers.signature_help,
+    --     { border = "rounded", silent = true, focusable = false }
+    --   ),
+    -- },
     -- configure buffer local auto commands to add when attaching a language server
     autocmds = {
       -- first key is the `augroup` to add the auto commands to (:h augroup)
