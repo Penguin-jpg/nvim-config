@@ -53,6 +53,19 @@ return {
     },
   },
   config = function()
+    -- define diagnostic signs
+    local get_icon = require("utils.ui").get_icon
+    local signs = {
+      Error = get_icon("DiagnosticError", 1),
+      Warn = get_icon("DiagnosticWarn", 1),
+      Hint = get_icon("DiagnosticHint", 1),
+      Info = get_icon("DiagnosticInfo", 1),
+    }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
+
     -- set up servers configured with AstroLSP
     vim.tbl_map(require("astrolsp").lsp_setup, require("astrolsp").config.servers)
   end,

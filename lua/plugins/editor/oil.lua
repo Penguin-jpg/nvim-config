@@ -27,6 +27,32 @@ return {
       ["g\\"] = "actions.toggle_trash",
     },
   },
+  config = function(_, opts)
+    require("oil").setup(opts)
+
+    -- create autocommands for oil
+    vim.api.nvim_create_augroup("oil_settings", { clear = true })
+    vim.api.nvim_create_autocmd("FileType", {
+      desc = "Disable view saving for Oil buffers",
+      group = "oil_settings",
+      pattern = "oil",
+      callback = function(args) vim.b[args.buf].view_activated = false end,
+    })
+    vim.api.nvim_create_autocmd("User", {
+      desc = "Close buffers when files are deleted in Oil",
+      pattern = "OilActionsPost",
+      callback = function(args)
+        if args.data.err then return end
+        for _, action in ipairs(args.data.actions) do
+          if action.type == "delete" then
+            local _, path = require("oil.util").parse_url(action.url)
+            local bufnr = vim.fn.bufnr(path)
+            if bufnr ~= -1 then vim.api.nvim_buf_delete(bufnr, { force = true }) end
+          end
+        end
+      end,
+    })
+  end,
   keys = {
     {
       "<Leader>e",

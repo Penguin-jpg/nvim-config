@@ -1,14 +1,13 @@
 return {
   "AstroNvim/astrolsp",
   lazy = true,
-  ---@type AstroLSPOpts
   opts = {
     -- configuration table of features provided by AstroLSP
     features = {
       codelens = true, -- enable/disable codelens refresh on start
       inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
-      -- signature_help = true, -- enable/disable automatic signature help popup globally on startup
+      signature_help = true, -- enable/disable automatic signature help popup globally on startup
     },
     capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
       textDocument = {
@@ -44,13 +43,15 @@ return {
       -- customize how language servers are attached
       function(server, server_opts) require("lspconfig")[server].setup(server_opts) end,
     },
-    -- lsp_handlers = {
-    --   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", silent = true }),
-    --   ["textDocument/signatureHelp"] = vim.lsp.with(
-    --     vim.lsp.handlers.signature_help,
-    --     { border = "rounded", silent = true, focusable = false }
-    --   ),
-    -- },
+    lsp_handlers = {
+      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", silent = true }),
+      ["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help,
+        { border = "rounded", silent = true, focusable = false }
+      ),
+    },
+    -- configure buffer local user commands to add when attaching a language server
+    commands = {},
     -- configure buffer local auto commands to add when attaching a language server
     autocmds = {
       -- first key is the `augroup` to add the auto commands to (:h augroup)
@@ -78,6 +79,37 @@ return {
           callback = function(args)
             if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
           end,
+        },
+      },
+      lsp_auto_signature_help = {
+        cond = "textDocument/signatureHelp",
+        {
+          event = "TextChangedI",
+          desc = "Automatically show signature help if enabled",
+          callback = function(args)
+            local signature_help = vim.b[args.buf].signature_help
+            if signature_help == nil then signature_help = require("astrolsp").config.features.signature_help end
+            if signature_help then
+              local trigger = vim.b[args.buf].signature_help_triggerCharacters or {}
+              local retrigger = vim.b[args.buf].signature_help_retriggerCharacters or {}
+              local pos = vim.api.nvim_win_get_cursor(0)[2]
+              local cur_char = vim.api.nvim_get_current_line():sub(pos, pos)
+              if
+                vim.g.signature_help_triggered and (cur_char:match "%s" or retrigger[cur_char])
+                or trigger[cur_char]
+              then
+                vim.g.signature_help_triggered = true
+                vim.lsp.buf.signature_help()
+                return
+              end
+            end
+            vim.g.signature_help_triggered = false
+          end,
+        },
+        {
+          event = "InsertLeave",
+          desc = "Clear automatic signature help internals when leaving insert",
+          callback = function() vim.g.signature_help_triggered = false end,
         },
       },
       disable_inlay_hints_on_insert = {
@@ -162,6 +194,11 @@ return {
           cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
         },
         ["<Leader>ts"] = {
+          function() require("astrolsp.toggles").signature_help() end,
+          desc = "Toggle automatic signature help",
+          cond = "textDocument/signatureHelp",
+        },
+        ["<Leader>tt"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight",
           cond = function(client)

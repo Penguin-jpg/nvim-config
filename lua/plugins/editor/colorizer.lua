@@ -6,7 +6,7 @@ return {
     render = "virtual",
     virtual_symbol = "⬤",
     enabled_named_colors = false,
-    enabled_tailwind = true,
+    enabled_tailwind = false,
   },
   keys = {
     { "<Leader>tc", function() vim.cmd.HighlightColors "Toggle" end, desc = "Toggle color highlight" },

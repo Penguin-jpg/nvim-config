@@ -54,8 +54,11 @@ return {
             color = { fg = "#d183e8", bg = colors.bg_dark },
           },
           {
-            require("noice").api.statusline.mode.get,
-            cond = require("noice").api.statusline.mode.has,
+            function()
+              local reg = vim.fn.reg_recording()
+              if reg == "" then return "" end -- not recording
+              return "Recording @" .. reg
+            end,
             color = { fg = "#60b2a7", bg = colors.bg_dark },
           },
           "%=",
