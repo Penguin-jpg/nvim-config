@@ -28,7 +28,6 @@ return {
       local luasnip = require "luasnip"
       local get_icon = require("utils.ui").get_icon
 
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local pmenu_hl = vim.api.nvim_get_hl(0, { name = "PmenuSel" })
       vim.api.nvim_set_hl(0, "CmpSel", { fg = pmenu_hl.fg, bg = pmenu_hl.bg, bold = true })
 
@@ -77,11 +76,6 @@ return {
             return vim_item
           end,
           expandable_indicator = true,
-        },
-        experimental = {
-          ghost_text = {
-            hl_group = "CmpGhostText",
-          },
         },
         completion = { completeopt = "menu,menuone,noinsert" },
         mapping = {
