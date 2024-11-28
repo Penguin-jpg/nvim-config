@@ -40,6 +40,7 @@ return {
         "jsonc",
         "markdown",
         "markdown_inline",
+        "latex",
         "html",
       },
       highlight = { enable = true },

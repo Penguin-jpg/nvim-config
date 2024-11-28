@@ -35,6 +35,7 @@ vim.opt.shortmess = vim.tbl_deep_extend("force", vim.opt.shortmess:get(), { s = 
 vim.opt.showmode = false -- disable showing modes in command line
 vim.opt.showtabline = 2 -- always display tabline
 vim.opt.signcolumn = "yes" -- always show the sign column
+vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]] -- use snack's statuscolumn
 vim.opt.smartcase = true -- case sensitive searching
 vim.opt.splitbelow = true -- splitting a new window below the current one
 vim.opt.splitright = true -- splitting a new window at the right of the current one

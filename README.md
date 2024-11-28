@@ -35,12 +35,14 @@ My personal neovim config
   ```shell
   sudo apt install python3-dev python3-pip python3-venv
   pip install pynvim
+  pip install pylatexenc
   ```
 
 - Node
 
   ```shell
   npm install -g neovim
+  npm install -g tree-sitter-cli
   ```
 
 - Cargo

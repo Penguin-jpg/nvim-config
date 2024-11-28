@@ -77,10 +77,8 @@ return {
   config = function(_, opts)
     local telescope = require "telescope"
     telescope.setup(opts)
-
     -- enable Telescope extensions if they are installed
     pcall(telescope.load_extension "fzf")
-    pcall(telescope.load_extension "notify")
   end,
   keys = {
     {

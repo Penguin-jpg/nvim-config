@@ -13,11 +13,11 @@ return {
       },
       icons = {
         indent = {
-          fold_open = get_icon("FoldOpened"),
-          fold_closed = get_icon("FoldClosed"),
+          fold_open = get_icon "FoldOpened",
+          fold_closed = get_icon "FoldClosed",
         },
-        folder_closed = get_icon("FolderClosed"),
-        folder_open = get_icon("FolderOpen"),
+        folder_closed = get_icon "FolderClosed",
+        folder_open = get_icon "FolderOpen",
         kinds = lspkind_available and lspkind.symbol_map,
       },
     }
@@ -46,12 +46,6 @@ return {
       "<Cmd>Trouble symbols toggle focus=false<CR>",
       mode = { "n" },
       desc = "Trouble symbols",
-    },
-    {
-      "<Leader>xl",
-      "<Cmd>Trouble lsp toggle focus=false win.position=right<CR>",
-      mode = { "n" },
-      desc = "Trouble LSP definitions / references / ...",
     },
     {
       "<Leader>xL",
