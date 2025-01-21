@@ -19,7 +19,6 @@ return {
       "TSUpdate",
       "TSUpdateSync",
     },
-    build = ":TSUpdate",
     init = function(plugin)
       -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
       -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
@@ -36,7 +35,6 @@ return {
         "bash",
         "vim",
         "vimdoc",
-        "query",
         "regex",
         "c",
         "cpp",
