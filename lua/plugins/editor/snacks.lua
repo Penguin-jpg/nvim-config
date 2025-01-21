@@ -1,5 +1,4 @@
 local function term_nav(dir)
-  ---@param self snacks.terminal
   return function(self)
     return self:is_floating() and "<C-" .. dir .. ">" or vim.schedule(function() vim.cmd.wincmd(dir) end)
   end
@@ -11,12 +10,31 @@ return {
   lazy = false,
   opts = {
     bigfile = { enabled = true },
+    indent = {
+      enabled = true,
+      scope = {
+        enabled = true,
+        char = "┃",
+      },
+      chunk = {
+        enabled = true,
+        char = {
+          corner_top = "┏",
+          corner_bottom = "┗",
+          horizontal = "━",
+          vertical = "┃",
+          arrow = "▶",
+        },
+      },
+    },
+    input = { enabled = true },
     notifier = {
       enabled = true,
       style = "fancy",
     },
     quickfile = { enabled = true },
     statuscolumn = { enabled = false }, -- set in options.lua
+    scroll = { enabled = true },
     terminal = {
       win = {
         keys = {
@@ -28,6 +46,7 @@ return {
       },
     },
     words = { enabled = true },
+    -- TODO: configure picker
   },
   config = function(_, opts)
     local notify = vim.notify

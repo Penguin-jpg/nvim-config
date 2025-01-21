@@ -6,7 +6,12 @@ return {
     local map = vim.keymap.set
     neocodeium.setup()
 
-    map("n", "<Leader>t;", function() require("neocodeium.commands").toggle() end, { desc = "Toggle neocodeium" })
+    map("n", "<Leader>t;", function()
+      if vim.g.enable_codeium == nil then vim.g.enable_codeium = true end
+      vim.g.enable_codeium = not vim.g.enable_codeium
+      require("neocodeium.commands").toggle()
+      require("utils").notify(string.format("Codeium %s", require("utils").bool2str(vim.g.enable_codeium)))
+    end, { desc = "Toggle neocodeium" })
     map("i", "<A-a>", function() require("neocodeium").accept() end, { desc = "Accept current suggestion" })
     map(
       "i",

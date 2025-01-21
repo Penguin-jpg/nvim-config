@@ -29,9 +29,21 @@ return {
     )
     map(
       { "n", "v" },
+      "<Leader>mn",
+      function() mc.matchSkipCursor(1) end,
+      "Skip to next word"
+    )
+    map(
+      { "n", "v" },
       "<C-p>",
       function() mc.matchAddCursor(-1) end,
       "Add a cursor and jump to previous word"
+    )
+    map(
+      { "n", "v" },
+      "<Leader>mp",
+      function() mc.matchSkipCursor(-1) end,
+      "Skip to previous word"
     )
     map({ "n", "v" }, "<C-A>", mc.matchAllAddCursors, "Add all matches")
     map({ "n", "v" }, "<C-Left>", mc.prevCursor, "Switch to previous cursor")
