@@ -1,5 +1,7 @@
 return {
   "stevearc/conform.nvim",
+  lazy = true,
+  dependencies = { "williamboman/mason.nvim" },
   event = "BufWritePre",
   cmd = "ConformInfo",
   keys = {
