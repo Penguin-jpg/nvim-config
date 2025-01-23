@@ -34,7 +34,7 @@ return {
     },
     quickfile = { enabled = true },
     statuscolumn = { enabled = false }, -- set in options.lua
-    scroll = { enabled = true },
+    scroll = { enabled = false },
     terminal = {
       win = {
         keys = {
@@ -73,7 +73,7 @@ return {
     },
     {
       "<Leader>fn",
-      function() Snacks.notifier.get_history() end,
+      function() Snacks.notifier.show_history() end,
       desc = "Find notifications",
     },
     {
