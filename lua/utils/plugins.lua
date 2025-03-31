@@ -14,7 +14,7 @@ end
 
 function M.get_opts(plugin)
   local spec = M.get_plugin(plugin)
-  return spec and require("lazy.core.config").values(spec, "opts") or {}
+  return spec and require("lazy.core.plugin").values(spec, "opts") or {}
 end
 
 return M

@@ -4,7 +4,10 @@ return {
     dependencies = {
       {
         "jay-babu/mason-nvim-dap.nvim",
-        dependencies = { "williamboman/mason.nvim" },
+        dependencies = {
+          { "williamboman/mason.nvim" },
+          { "nvim-lua/plenary.nvim", lazy = true },
+        },
         cmd = { "DapInstall", "DapUninstall" },
         opts_extend = { "ensure_installed" },
         opts = {

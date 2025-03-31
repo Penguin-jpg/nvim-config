@@ -7,26 +7,26 @@ return {
       codelens = true, -- enable/disable codelens refresh on start
       inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
-      signature_help = true, -- enable/disable automatic signature help popup globally on startup
+      -- signature_help = true, -- enable/disable automatic signature help popup globally on startup
     },
-    capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
-      textDocument = {
-        completion = {
-          completionItem = {
-            documentationFormat = { "markdown", "plaintext" },
-            snippetSupport = true,
-            preselectSupport = true,
-            insertReplaceSupport = true,
-            labelDetailsSupport = true,
-            deprecatedSupport = true,
-            commitCharactersSupport = true,
-            tagSupport = { valueSet = { 1 } },
-            resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } },
-          },
-        },
-        foldingRange = { dynamicRegistration = false, lineFoldingOnly = true },
-      },
-    }),
+    -- capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
+    --   textDocument = {
+    --     completion = {
+    --       completionItem = {
+    --         documentationFormat = { "markdown", "plaintext" },
+    --         snippetSupport = true,
+    --         preselectSupport = true,
+    --         insertReplaceSupport = true,
+    --         labelDetailsSupport = true,
+    --         deprecatedSupport = true,
+    --         commitCharactersSupport = true,
+    --         tagSupport = { valueSet = { 1 } },
+    --         resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } },
+    --       },
+    --     },
+    --     foldingRange = { dynamicRegistration = false, lineFoldingOnly = true },
+    --   },
+    -- }),
     -- use conform.nvim for formatting
     formatting = { disabled = true },
     -- enable servers that you already have installed without mason
@@ -81,37 +81,37 @@ return {
           end,
         },
       },
-      lsp_auto_signature_help = {
-        cond = "textDocument/signatureHelp",
-        {
-          event = "TextChangedI",
-          desc = "Automatically show signature help if enabled",
-          callback = function(args)
-            local signature_help = vim.b[args.buf].signature_help
-            if signature_help == nil then signature_help = require("astrolsp").config.features.signature_help end
-            if signature_help then
-              local trigger = vim.b[args.buf].signature_help_triggerCharacters or {}
-              local retrigger = vim.b[args.buf].signature_help_retriggerCharacters or {}
-              local pos = vim.api.nvim_win_get_cursor(0)[2]
-              local cur_char = vim.api.nvim_get_current_line():sub(pos, pos)
-              if
-                vim.g.signature_help_triggered and (cur_char:match "%s" or retrigger[cur_char])
-                or trigger[cur_char]
-              then
-                vim.g.signature_help_triggered = true
-                vim.lsp.buf.signature_help()
-                return
-              end
-            end
-            vim.g.signature_help_triggered = false
-          end,
-        },
-        {
-          event = "InsertLeave",
-          desc = "Clear automatic signature help internals when leaving insert",
-          callback = function() vim.g.signature_help_triggered = false end,
-        },
-      },
+      -- lsp_auto_signature_help = {
+      --   cond = "textDocument/signatureHelp",
+      --   {
+      --     event = "TextChangedI",
+      --     desc = "Automatically show signature help if enabled",
+      --     callback = function(args)
+      --       local signature_help = vim.b[args.buf].signature_help
+      --       if signature_help == nil then signature_help = require("astrolsp").config.features.signature_help end
+      --       if signature_help then
+      --         local trigger = vim.b[args.buf].signature_help_triggerCharacters or {}
+      --         local retrigger = vim.b[args.buf].signature_help_retriggerCharacters or {}
+      --         local pos = vim.api.nvim_win_get_cursor(0)[2]
+      --         local cur_char = vim.api.nvim_get_current_line():sub(pos, pos)
+      --         if
+      --           vim.g.signature_help_triggered and (cur_char:match "%s" or retrigger[cur_char])
+      --           or trigger[cur_char]
+      --         then
+      --           vim.g.signature_help_triggered = true
+      --           vim.lsp.buf.signature_help()
+      --           return
+      --         end
+      --       end
+      --       vim.g.signature_help_triggered = false
+      --     end,
+      --   },
+      --   {
+      --     event = "InsertLeave",
+      --     desc = "Clear automatic signature help internals when leaving insert",
+      --     callback = function() vim.g.signature_help_triggered = false end,
+      --   },
+      -- },
       disable_inlay_hints_on_insert = {
         -- only create for language servers that support inlay hints
         -- (and only if vim.lsp.inlay_hint is available)
@@ -183,7 +183,7 @@ return {
           desc = "Definition of current type",
           cond = "textDocument/typeDefinition",
         },
-        ["gs"] = {
+        ["gH"] = {
           function() vim.lsp.buf.signature_help() end,
           desc = "Signature help",
           cond = "textDocument/signatureHelp",

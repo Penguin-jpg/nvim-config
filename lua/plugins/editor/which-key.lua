@@ -14,6 +14,7 @@ return {
       { "<Leader>d", group = "Debugger", icon = { icon = " " } },
       { "<Leader>f", group = "Find", icon = { icon = " " } },
       { "<Leader>g", group = "Git", icon = { icon = "󰊢 " } },
+      { "<Leader>gh", group = "Gitsigns" },
       { "<Leader>l", group = "LSP", icon = { icon = " " } },
       { "<Leader>m", group = "Multi-cursor", icon = { icon = "󰇀 " } },
       { "<Leader>s", group = "Search/Replace", icon = { icon = "󰛔 " } },
@@ -25,7 +26,6 @@ return {
       { "g", group = "Goto" },
       { "gs", group = "Surround" },
       { "z", group = "Fold" },
-      { "<Leader>gh", group = "Gitsigns" },
     },
   },
   keys = {
