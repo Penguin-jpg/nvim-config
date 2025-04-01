@@ -1,3 +1,5 @@
+local get_icon = require("utils.ui").get_icon
+
 return {
   "neovim/nvim-lspconfig",
   event = "User File",
@@ -13,7 +15,12 @@ return {
         -- use AstroLSP setup for mason-lspconfig
         handlers = { function(server) require("astrolsp").lsp_setup(server) end },
       },
-      config = function(_, opts) require("mason-lspconfig").setup(opts) end,
+      config = function(_, opts)
+        local is_available = require("utils.plugins").is_available
+        if is_available "mason-tool-installer.nvim" then opts.ensure_installed = nil end
+        if is_available "astrolsp" then require("astrolsp.mason-lspconfig").register_servers() end
+        require("mason-lspconfig").setup(opts)
+      end,
     },
     {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -52,20 +59,30 @@ return {
       end,
     },
   },
-  config = function()
-    -- define diagnostic signs
-    local get_icon = require("utils.ui").get_icon
-    local signs = {
-      Error = get_icon("DiagnosticError", 1),
-      Warn = get_icon("DiagnosticWarn", 1),
-      Hint = get_icon("DiagnosticHint", 1),
-      Info = get_icon("DiagnosticInfo", 1),
-    }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
+  opts = {
+    -- options for vim.diagnostic.config()
+    diagnostics = {
+      underline = true,
+      update_in_insert = false,
+      virtual_text = {
+        spacing = 2,
+        -- source = "if_many",
+        prefix = "●",
+      },
+      severity_sort = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = get_icon("DiagnosticError", 1),
+          [vim.diagnostic.severity.WARN] = get_icon("DiagnosticWarn", 1),
+          [vim.diagnostic.severity.HINT] = get_icon("DiagnosticHint", 1),
+          [vim.diagnostic.severity.INFO] = get_icon("DiagnosticInfo", 1),
+        },
+      },
+    },
+  },
+  config = function(_, opts)
+    -- config diagnostic
+    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
     -- set up servers configured with AstroLSP
     vim.tbl_map(require("astrolsp").lsp_setup, require("astrolsp").config.servers)
   end,

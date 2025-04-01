@@ -5,15 +5,13 @@ end
 
 return {
   "Saghen/blink.cmp",
+  version = "*",
   event = "InsertEnter",
-  version = "0.*",
+  opts_extend = { "sources.default", "cmdline.sources", "term.sources" },
   opts = {
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "lazydev" },
-      cmdline = {},
-      providers = {
-        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
-      },
+      default = { "lsp", "path", "snippets", "buffer" },
+      providers = {},
     },
     snippets = { preset = "luasnip" },
     keymap = {
@@ -44,6 +42,7 @@ return {
         "fallback",
       },
     },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
     appearance = {
       use_nvim_cmp_as_default = false,
       nerd_font_variant = "mono",
@@ -78,6 +77,20 @@ return {
         border = "rounded",
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
       },
+    },
+  },
+  specs = {
+    {
+      "AstroNvim/astrolsp",
+      opts = function(_, opts)
+        opts.capabilities = require("blink.cmp").get_lsp_capabilities(opts.capabilities)
+        -- disable AstroLSP signature help if `blink.cmp` is providing it
+        local blink_opts = require("utils.plugins").get_opts "blink.cmp"
+        if vim.tbl_get(blink_opts, "signature", "enabled") == true then
+          if not opts.features then opts.features = {} end
+          opts.features.signature_help = false
+        end
+      end,
     },
   },
 }

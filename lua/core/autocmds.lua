@@ -6,6 +6,8 @@ create_augroup "custom_user_events"
 create_augroup "on_buffer_enter"
 create_augroup "on_filetypes"
 create_augroup "on_buffer_delete"
+create_augroup "on_lsp_attach"
+create_augroup "on_lsp_detach"
 create_augroup "bigfile"
 create_augroup "to_last_position"
 create_augroup "q_close_windows"
@@ -63,6 +65,20 @@ create_autocmd("FileType", {
   callback = function(args) vim.b[args.buf].view_activated = false end,
 })
 
+-- prefer LSP folding if client supports it
+create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client ~= nil and client:supports_method "textDocument/foldingRange" then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+    end
+  end,
+})
+
+-- recover the default foldexpr
+create_autocmd("LspDetach", { command = "setl foldexpr<" })
+
 vim.filetype.add {
   pattern = {
     [".*"] = {
@@ -73,7 +89,6 @@ vim.filetype.add {
     },
   },
 }
-
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = "bigfile",
   pattern = "bigfile",

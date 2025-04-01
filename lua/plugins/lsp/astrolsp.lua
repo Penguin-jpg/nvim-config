@@ -7,26 +7,9 @@ return {
       codelens = true, -- enable/disable codelens refresh on start
       inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
-      -- signature_help = true, -- enable/disable automatic signature help popup globally on startup
     },
-    -- capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
-    --   textDocument = {
-    --     completion = {
-    --       completionItem = {
-    --         documentationFormat = { "markdown", "plaintext" },
-    --         snippetSupport = true,
-    --         preselectSupport = true,
-    --         insertReplaceSupport = true,
-    --         labelDetailsSupport = true,
-    --         deprecatedSupport = true,
-    --         commitCharactersSupport = true,
-    --         tagSupport = { valueSet = { 1 } },
-    --         resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } },
-    --       },
-    --     },
-    --     foldingRange = { dynamicRegistration = false, lineFoldingOnly = true },
-    --   },
-    -- }),
+    -- lsp client capabilities
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
     -- use conform.nvim for formatting
     formatting = { disabled = true },
     -- enable servers that you already have installed without mason
@@ -39,19 +22,39 @@ return {
       basedpyright = require "plugins.lsp.configs.basedpyright",
       ruff = require "plugins.lsp.configs.ruff",
     },
+    -- customize how language servers are attached
     handlers = {
-      -- customize how language servers are attached
       function(server, server_opts) require("lspconfig")[server].setup(server_opts) end,
     },
-    lsp_handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", silent = true }),
-      ["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        { border = "rounded", silent = true, focusable = false }
-      ),
+    -- customize default options passed to servers
+    defaults = {
+      hover = {
+        border = "rounded",
+        silent = true,
+      },
+      signature_help = {
+        border = "rounded",
+        silent = true,
+        focusable = false,
+      },
     },
-    -- configure buffer local user commands to add when attaching a language server
-    commands = {},
+    -- configuration of LSP file operation functionality
+    file_operations = {
+      -- the timeout when executing LSP client operations
+      timeout = 10000,
+      -- fully disable/enable file operation methods
+      -- don't need any of these since oil already does these things
+      operations = {
+        willRename = false,
+        didRename = false,
+        willCreate = false,
+        didCreate = false,
+        willDelete = false,
+        didDelete = false,
+      },
+    },
+    -- custom `on_attach` function to be run after the default `on_attach` function, takes two parameters `client` and `bufnr`
+    on_attach = nil,
     -- configure buffer local auto commands to add when attaching a language server
     autocmds = {
       -- first key is the `augroup` to add the auto commands to (:h augroup)
@@ -74,44 +77,13 @@ return {
       lsp_codelens_refresh = {
         cond = "textDocument/codeLens",
         {
-          event = { "InsertLeave", "BufEnter" },
+          event = { "TextChanged", "InsertLeave", "BufEnter" },
           desc = "Refresh codelens (buffer)",
           callback = function(args)
             if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
           end,
         },
       },
-      -- lsp_auto_signature_help = {
-      --   cond = "textDocument/signatureHelp",
-      --   {
-      --     event = "TextChangedI",
-      --     desc = "Automatically show signature help if enabled",
-      --     callback = function(args)
-      --       local signature_help = vim.b[args.buf].signature_help
-      --       if signature_help == nil then signature_help = require("astrolsp").config.features.signature_help end
-      --       if signature_help then
-      --         local trigger = vim.b[args.buf].signature_help_triggerCharacters or {}
-      --         local retrigger = vim.b[args.buf].signature_help_retriggerCharacters or {}
-      --         local pos = vim.api.nvim_win_get_cursor(0)[2]
-      --         local cur_char = vim.api.nvim_get_current_line():sub(pos, pos)
-      --         if
-      --           vim.g.signature_help_triggered and (cur_char:match "%s" or retrigger[cur_char])
-      --           or trigger[cur_char]
-      --         then
-      --           vim.g.signature_help_triggered = true
-      --           vim.lsp.buf.signature_help()
-      --           return
-      --         end
-      --       end
-      --       vim.g.signature_help_triggered = false
-      --     end,
-      --   },
-      --   {
-      --     event = "InsertLeave",
-      --     desc = "Clear automatic signature help internals when leaving insert",
-      --     callback = function() vim.g.signature_help_triggered = false end,
-      --   },
-      -- },
       disable_inlay_hints_on_insert = {
         -- only create for language servers that support inlay hints
         -- (and only if vim.lsp.inlay_hint is available)
@@ -145,6 +117,11 @@ return {
           function() vim.lsp.buf.code_action() end,
           desc = "LSP code action",
           cond = "textDocument/codeAction",
+        },
+        ["<Leader>li"] = {
+          "<Cmd>LspInfo<CR>",
+          desc = "LSP information",
+          cond = function() return vim.fn.exists ":LspInfo" > 0 end,
         },
         ["<Leader>lr"] = {
           function() vim.lsp.buf.rename() end,

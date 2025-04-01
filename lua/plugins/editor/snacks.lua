@@ -46,7 +46,6 @@ return {
       },
     },
     words = { enabled = true },
-    -- TODO: configure picker
   },
   config = function(_, opts)
     local notify = vim.notify

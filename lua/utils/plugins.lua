@@ -7,11 +7,6 @@ end
 
 function M.is_available(plugin) return M.get_plugin(plugin) ~= nil end
 
-function M.is_loaded(plugin)
-  local available = M.is_available(plugin)
-  return available and require("lazy.core.config").spec.plugins[plugin]._.loaded
-end
-
 function M.get_opts(plugin)
   local spec = M.get_plugin(plugin)
   return spec and require("lazy.core.plugin").values(spec, "opts") or {}

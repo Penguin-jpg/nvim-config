@@ -10,9 +10,9 @@ set_map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = tr
 set_map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- write/close
-set_map("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
-set_map("n", "<C-q>", "<Cmd>confirm q<CR>", { desc = "Quit file" })
-set_map("i", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
+set_map("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save" })
+set_map("n", "<C-q>", "<Cmd>confirm q<CR>", { desc = "Quit" })
+set_map("i", "<C-s>", "<Cmd>w<CR>", { desc = "Save" })
 set_map("n", "<Leader>bc", "<Cmd>bdelete<CR>", { desc = "Close buffer" })
 
 -- yank/paste
@@ -68,10 +68,29 @@ set_map("n", "<A-Up>", "<Cmd>resize -2<CR>", { desc = "Resize split up" })
 set_map("n", "<A-Down>", "<Cmd>resize +2<CR>", { desc = "Resize split down" })
 
 -- buffer
-set_map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+set_map("n", "<Leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- quickfix and location list
-set_map("n", "<Leader>xl", "<Cmd>lopen<CR>", { desc = "Location List" })
-set_map("n", "<Leader>xq", "<Cmd>copen<CR>", { desc = "Quickfix List" })
-set_map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-set_map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+set_map("n", "<Leader>xl", "<Cmd>lopen<CR>", { desc = "Location list" })
+set_map("n", "<Leader>xq", "<Cmd>copen<CR>", { desc = "Quickfix list" })
+
+-- comments
+set_map("n", "<C-_>", "gcl", { desc = "Toggle comment line", remap = true })
+set_map("i", "<C-_>", "<C-o>gcl", { desc = "Toggle comment line", remap = true })
+set_map("x", "<C-_>", "gc", { desc = "Toggle comment", remap = true })
+set_map("n", "gco", "o<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>", { desc = "Add comment below" })
+set_map("n", "gcO", "O<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>", { desc = "Add comment above" })
+
+-- diagnostics
+local function diagnostic_jump(dir, severity)
+  local jump_opts = {}
+  if type(severity) == "string" then jump_opts.severity = vim.diagnostic.severity[severity] end
+  return function()
+    jump_opts.count = dir and vim.v.count1 or -vim.v.count1
+    vim.diagnostic.jump(jump_opts)
+  end
+end
+set_map("n", "[e", diagnostic_jump(false, "ERROR"), { desc = "Previous error" })
+set_map("n", "]e", diagnostic_jump(true, "ERROR"), { desc = "Next error" })
+set_map("n", "[w", diagnostic_jump(false, "WARN"), { desc = "Previous warning" })
+set_map("n", "]w", diagnostic_jump(true, "WARN"), { desc = "Next warning" })
