@@ -17,4 +17,5 @@ return {
     },
     hooks = { diff_buf_read = function(bufnr) vim.b[bufnr].view_activated = false end },
   },
+  keys = { { "<Leader>gd", "<Cmd>DiffviewOpen<CR>", desc = "Open Diffview" } },
 }

@@ -1,7 +1,7 @@
 return {
   "folke/snacks.nvim",
   opts = {
-    picker = {},
+    picker = { ui_select = true, layout = { preset = "sidebar" } },
   },
   keys = {
     -- find
@@ -28,9 +28,6 @@ return {
     { "<Leader>fp", function() Snacks.picker.projects() end, desc = "Find projects" },
     { "<Leader>fu", function() Snacks.picker.undo() end, desc = "Find undos" },
     { "<Leader>fl", function() require("snacks").picker.lines() end, desc = "Find lines" },
-    -- git
-    { "<Leader>gc", function() Snacks.picker.git_log() end, desc = "Git log" },
-    { "<Leader>gs", function() Snacks.picker.git_status() end, desc = "Git status" },
     -- Grep
     { "<Leader>fw", function() Snacks.picker.grep() end, desc = "Find words" },
     { "<Leader>fw", function() Snacks.picker.grep_word() end, desc = "Find selected words", mode = { "x" } },
@@ -40,6 +37,9 @@ return {
       desc = "Find words in all files",
     },
     -- LSP
-    { "<Leader>ls", function() Snacks.picker.lsp_symbols() end, desc = "Find LSP symbols" },
+    { "<Leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "Find LSP symbols" },
+    -- git
+    { "<Leader>gc", function() Snacks.picker.git_log() end, desc = "Git log" },
+    { "<Leader>gs", function() Snacks.picker.git_status() end, desc = "Git status" },
   },
 }

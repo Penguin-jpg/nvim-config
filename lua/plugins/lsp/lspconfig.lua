@@ -59,14 +59,14 @@ return {
       end,
     },
   },
-  opts = {
+  config = function(_, opts)
     -- options for vim.diagnostic.config()
-    diagnostics = {
+    local diagnostics_opts = {
       underline = true,
       update_in_insert = false,
       virtual_text = {
         spacing = 2,
-        -- source = "if_many",
+        source = "if_many",
         prefix = "●",
       },
       severity_sort = true,
@@ -78,11 +78,9 @@ return {
           [vim.diagnostic.severity.INFO] = get_icon("DiagnosticInfo", 1),
         },
       },
-    },
-  },
-  config = function(_, opts)
+    }
     -- config diagnostic
-    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+    vim.diagnostic.config(vim.deepcopy(diagnostics_opts))
     -- set up servers configured with AstroLSP
     vim.tbl_map(require("astrolsp").lsp_setup, require("astrolsp").config.servers)
   end,
