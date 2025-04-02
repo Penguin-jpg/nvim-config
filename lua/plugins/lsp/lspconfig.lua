@@ -59,16 +59,13 @@ return {
       end,
     },
   },
-  config = function(_, opts)
+  config = function()
     -- options for vim.diagnostic.config()
     local diagnostics_opts = {
       underline = true,
       update_in_insert = false,
-      virtual_text = {
-        spacing = 2,
-        source = "if_many",
-        prefix = "●",
-      },
+      virtual_text = true,
+      virtual_lines = false,
       severity_sort = true,
       signs = {
         text = {

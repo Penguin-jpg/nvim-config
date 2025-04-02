@@ -94,3 +94,10 @@ set_map("n", "[e", diagnostic_jump(false, "ERROR"), { desc = "Previous error" })
 set_map("n", "]e", diagnostic_jump(true, "ERROR"), { desc = "Next error" })
 set_map("n", "[w", diagnostic_jump(false, "WARN"), { desc = "Previous warning" })
 set_map("n", "]w", diagnostic_jump(true, "WARN"), { desc = "Next warning" })
+set_map(
+  "n",
+  "gl",
+  function() vim.diagnostic.config { virtual_text = false, virtual_lines = { current_line = true } } end,
+  { desc = "Show virtual lines" }
+)
+set_map("n", "gL", function() vim.diagnostic.open_float() end, { desc = "Hover diagnostics" })
