@@ -1,7 +1,10 @@
 return {
   "MagicDuck/grug-far.nvim",
-  cmd = "GrugFar",
-  opts = { headerMaxWidth = 80, transient = true, },
+  cmd = { "GrugFar", "GrugFarWithin" },
+  opts = {
+    headerMaxWidth = 80,
+    transient = true,
+  },
   keys = {
     {
       "<Leader>ss",

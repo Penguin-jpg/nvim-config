@@ -117,84 +117,84 @@ return {
         },
       },
     },
-  },
-  -- mappings to be set up on attaching of a language server
-  mappings = {
-    n = {
-      ["<Leader>la"] = {
-        function() vim.lsp.buf.code_action() end,
-        desc = "LSP code action",
-        cond = "textDocument/codeAction",
+    -- mappings to be set up on attaching of a language server
+    mappings = {
+      n = {
+        ["<Leader>la"] = {
+          function() vim.lsp.buf.code_action() end,
+          desc = "LSP code action",
+          cond = "textDocument/codeAction",
+        },
+        ["<Leader>li"] = {
+          "<Cmd>LspInfo<CR>",
+          desc = "LSP information",
+          cond = function() return vim.fn.exists ":LspInfo" > 0 end,
+        },
+        ["<Leader>lr"] = {
+          function() vim.lsp.buf.rename() end,
+          desc = "Rename current symbol",
+          cond = "textDocument/rename",
+        },
+        ["<Leader>lR"] = {
+          function() vim.lsp.buf.references() end,
+          desc = "Search references",
+          cond = "textDocument/references",
+        },
+        ["gd"] = {
+          function() vim.lsp.buf.definition() end,
+          desc = "Show the definition of current symbol",
+          cond = "textDocument/definition",
+        },
+        ["gD"] = {
+          function() vim.lsp.buf.declaration() end,
+          desc = "Declaration of current symbol",
+          cond = "textDocument/declaration",
+        },
+        ["gr"] = {
+          function() vim.lsp.buf.references() end,
+          desc = "Reference of current symbol",
+          cond = "textDocument/references",
+        },
+        ["gh"] = { function() vim.lsp.buf.hover() end, desc = "Hover symbol details", cond = "textDocument/hover" },
+        ["gi"] = {
+          function() vim.lsp.buf.implementation() end,
+          desc = "Implementation of current symbol",
+          cond = "textDocument/implementation",
+        },
+        ["gt"] = {
+          function() vim.lsp.buf.type_definition() end,
+          desc = "Definition of current type",
+          cond = "textDocument/typeDefinition",
+        },
+        ["gH"] = {
+          function() vim.lsp.buf.signature_help() end,
+          desc = "Signature help",
+          cond = "textDocument/signatureHelp",
+        },
+        ["<Leader>ti"] = {
+          function() require("astrolsp.toggles").inlay_hints() end,
+          desc = "Toggle LSP inlay hints",
+          cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
+        },
+        ["<Leader>ts"] = {
+          function() require("astrolsp.toggles").signature_help() end,
+          desc = "Toggle automatic signature help",
+          cond = "textDocument/signatureHelp",
+        },
+        ["<Leader>tt"] = {
+          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
+          desc = "Toggle LSP semantic highlight",
+          cond = function(client)
+            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
+          end,
+        },
       },
-      ["<Leader>li"] = {
-        "<Cmd>LspInfo<CR>",
-        desc = "LSP information",
-        cond = function() return vim.fn.exists ":LspInfo" > 0 end,
-      },
-      ["<Leader>lr"] = {
-        function() vim.lsp.buf.rename() end,
-        desc = "Rename current symbol",
-        cond = "textDocument/rename",
-      },
-      ["<Leader>lR"] = {
-        function() vim.lsp.buf.references() end,
-        desc = "Search references",
-        cond = "textDocument/references",
-      },
-      ["gd"] = {
-        function() vim.lsp.buf.definition() end,
-        desc = "Show the definition of current symbol",
-        cond = "textDocument/definition",
-      },
-      ["gD"] = {
-        function() vim.lsp.buf.declaration() end,
-        desc = "Declaration of current symbol",
-        cond = "textDocument/declaration",
-      },
-      ["gr"] = {
-        function() vim.lsp.buf.references() end,
-        desc = "Reference of current symbol",
-        cond = "textDocument/references",
-      },
-      ["gh"] = { function() vim.lsp.buf.hover() end, desc = "Hover symbol details", cond = "textDocument/hover" },
-      ["gi"] = {
-        function() vim.lsp.buf.implementation() end,
-        desc = "Implementation of current symbol",
-        cond = "textDocument/implementation",
-      },
-      ["gt"] = {
-        function() vim.lsp.buf.type_definition() end,
-        desc = "Definition of current type",
-        cond = "textDocument/typeDefinition",
-      },
-      ["gH"] = {
-        function() vim.lsp.buf.signature_help() end,
-        desc = "Signature help",
-        cond = "textDocument/signatureHelp",
-      },
-      ["<Leader>ti"] = {
-        function() require("astrolsp.toggles").inlay_hints() end,
-        desc = "Toggle LSP inlay hints",
-        cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
-      },
-      ["<Leader>ts"] = {
-        function() require("astrolsp.toggles").signature_help() end,
-        desc = "Toggle automatic signature help",
-        cond = "textDocument/signatureHelp",
-      },
-      ["<Leader>tt"] = {
-        function() require("astrolsp.toggles").buffer_semantic_tokens() end,
-        desc = "Toggle LSP semantic highlight",
-        cond = function(client)
-          return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
-        end,
-      },
-    },
-    x = {
-      ["<Leader>la"] = {
-        function() vim.lsp.buf.code_action() end,
-        desc = "LSP code action",
-        cond = "textDocument/codeAction",
+      x = {
+        ["<Leader>la"] = {
+          function() vim.lsp.buf.code_action() end,
+          desc = "LSP code action",
+          cond = "textDocument/codeAction",
+        },
       },
     },
   },

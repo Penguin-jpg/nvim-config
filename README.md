@@ -1,6 +1,10 @@
 # nvim-config
 
-My personal neovim config
+My personal Neovim config
+
+## Requirements
+
+- [Neovim](https://github.com/neovim/neovim) 0.11.0
 
 ## Installation
 
@@ -36,6 +40,7 @@ My personal neovim config
   sudo apt install python3-dev python3-pip python3-venv
   pip install pynvim
   pip install pylatexenc
+  pip install pre-commit
   ```
 
 - Node
@@ -46,11 +51,13 @@ My personal neovim config
   ```
 
 - Cargo
+
   ```shell
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   rustup update
   cargo install --locked yazi-fm yazi-cli
   ```
+
 - Optional
   - [ripgrep (for live grep)](https://github.com/BurntSushi/ripgrep)
   - [wezterm](https://wezfurlong.org/wezterm/index.html)

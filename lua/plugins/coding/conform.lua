@@ -37,7 +37,7 @@ return {
       cpp = { "clang-format" },
       python = { "ruff_organize_imports", "ruff_format" },
       json = { "prettier" },
-      markdown = { "prettierd", "prettier" },
+      markdown = { "prettierd", "prettier", stop_after_first = true },
     },
   },
 }

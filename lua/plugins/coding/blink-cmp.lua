@@ -76,6 +76,7 @@ return {
       window = {
         border = "rounded",
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+        show_documentation = true,
       },
     },
   },
