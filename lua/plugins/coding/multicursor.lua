@@ -11,15 +11,16 @@ return {
 
     map(
       { "n", "v" },
-      "<C-Up>",
-      function() mc.addCursor "k" end,
-      "Add a cursor above"
+      "<C-Down>",
+      function() mc.lineAddCursor(1) end,
+      "Add a cursor below"
     )
+
     map(
       { "n", "v" },
-      "<C-Down>",
-      function() mc.addCursor "j" end,
-      "Add a cursor below"
+      "<C-Up>",
+      function() mc.lineAddCursor(-1) end,
+      "Add a cursor above"
     )
     map(
       { "n", "v" },

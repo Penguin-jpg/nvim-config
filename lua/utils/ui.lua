@@ -149,6 +149,8 @@ function M.get_kind_icons() return M.icons["kind"] end
 ------------------------------------------------
 
 ------------------general-----------------------
+function M.get_colorscheme_name() return vim.api.nvim_get_var "colors_name" end
+
 function M.get_highlight(group_name) return vim.api.nvim_get_hl(0, { name = group_name }) end
 ------------------------------------------------
 

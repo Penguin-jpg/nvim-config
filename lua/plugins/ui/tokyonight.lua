@@ -1,14 +1,14 @@
 return {
   "folke/tokyonight.nvim",
-  lazy = false,
-  priority = 1000,
-  init = function() vim.cmd.colorscheme "tokyonight-night" end,
+  lazy = true,
+  -- priority = 1000,
+  -- init = function() vim.cmd "colorscheme tokyonight" end,
   opts = {
     style = "night",
     light_style = "day",
     styles = {
-      comments = { italic = false },
-      keywords = { italic = false },
+      -- comments = { italic = false },
+      -- keywords = { italic = false },
       sidebars = "transparent",
       floats = "transparent",
     },
@@ -23,8 +23,6 @@ return {
         delete = "#c34043",
       }
     end,
-    on_highlights = function(hl, c)
-      hl.PmenuSel = { fg = c.bg_dark, bg = "#7aa2f7" }
-    end,
+    on_highlights = function(hl, c) hl.PmenuSel = { fg = c.bg_dark, bg = "#7aa2f7" } end,
   },
 }

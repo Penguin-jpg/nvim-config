@@ -1,0 +1,98 @@
+return {
+  "catppuccin/nvim",
+  name = "catppuccin",
+  lazy = true,
+  priority = 1000,
+  init = function() vim.cmd "colorscheme catppuccin" end,
+  opts = {
+    background = {
+      light = "latte",
+      dark = "mocha",
+    },
+    term_colors = true,
+    dim_inactive = {
+      enabled = false,
+      shade = "dark",
+      percentage = 0.15,
+    },
+    no_underline = true,
+    default_integrations = false,
+    integrations = {
+      blink_cmp = true,
+      dap = true,
+      dap_ui = true,
+      diffview = true,
+      grug_far = true,
+      gitsigns = true,
+      lsp_trouble = true,
+      markdown = true,
+      mason = true,
+      native_lsp = {
+        enabled = true,
+        virtual_text = {
+          errors = { "italic" },
+          hints = { "italic" },
+          warnings = { "italic" },
+          information = { "italic" },
+          ok = { "italic" },
+        },
+        underlines = {
+          errors = { "underline" },
+          hints = { "underline" },
+          warnings = { "underline" },
+          information = { "underline" },
+          ok = { "underline" },
+        },
+        inlay_hints = {
+          background = false,
+        },
+      },
+      render_markdown = true,
+      semantic_tokens = true,
+      treesitter = true,
+      which_key = true,
+    },
+    color_overrides = {
+      mocha = {
+        rosewater = "#efc9c2",
+        flamingo = "#ebb2b2",
+        pink = "#f2a7de",
+        mauve = "#b889f4",
+        red = "#ea7183",
+        maroon = "#ea838c",
+        peach = "#f39967",
+        yellow = "#eaca89",
+        green = "#96d382",
+        teal = "#78cec1",
+        sky = "#91d7e3",
+        sapphire = "#68bae0",
+        blue = "#739df2",
+        lavender = "#a0a8f6",
+        text = "#b5c1f1",
+        subtext1 = "#a6b0d8",
+        subtext0 = "#959ec2",
+        overlay2 = "#848cad",
+        overlay1 = "#717997",
+        overlay0 = "#63677f",
+        surface2 = "#505469",
+        surface1 = "#3e4255",
+        surface0 = "#2c2f40",
+        base = "#1a1b26",
+        mantle = "#16161e",
+        crust = "#0c0e14",
+      },
+    },
+  },
+  specs = {
+    {
+      "akinsho/bufferline.nvim",
+      opts = function(_, opts)
+        return vim.tbl_extend(
+          "force",
+          opts,
+          { highlights = require("catppuccin.groups.integrations.bufferline").get() }
+        )
+      end,
+    },
+  },
+}

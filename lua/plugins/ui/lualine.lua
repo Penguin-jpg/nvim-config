@@ -2,26 +2,42 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   init = function()
-    vim.g.lualine_laststatus = vim.o.laststatus
+    vim.g.lualine_laststatus = vim.opt.laststatus
     if vim.fn.argc(-1) > 0 then
       -- set an empty statusline till lualine loads
-      vim.o.statusline = " "
+      vim.opt.statusline = " "
     else
       -- hide the statusline on the starter page
-      vim.o.laststatus = 0
+      vim.opt.laststatus = 0
     end
   end,
   opts = function()
-    local conditions = require("utils.ui").lualine.conditions
-    local get_icon = require("utils.ui").get_icon
-    local colors = require("tokyonight.colors").setup()
+    -- PERF: we don't need this lualine require madness
+    local lualine_require = require "lualine_require"
+    lualine_require.require = require
+
+    local ui_utils = require "utils.ui"
+    local conditions = ui_utils.lualine.conditions
+    local get_icon = ui_utils.get_icon
+    local colorscheme = ui_utils.get_colorscheme_name()
+    local bg_dark = "#16161e"
+    if colorscheme == "tokyonight" then
+      bg_dark = "#16161e"
+    elseif colorscheme == "kanagawa" then
+      bg_dark = "#2a2a37"
+    elseif colorscheme == "catppuccin" then
+      bg_dark = "#201c24"
+    else
+      bg_dark = "#1f1f28"
+    end
 
     local opts = {
       options = {
         theme = "auto",
+        globalstatus = vim.opt.laststatus == 3,
         component_separators = "",
         section_separators = "",
-        disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter" } },
+        disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
       },
       sections = {
         lualine_a = {
@@ -37,12 +53,12 @@ return {
             "filetype",
             icon_only = true,
             padding = { left = 1, right = 0 },
-            color = { bg = colors.bg_dark },
+            color = { bg = bg_dark },
           },
           {
             "filename",
             padding = { left = 0, right = 0 },
-            color = { fg = "#b0baf2", bg = colors.bg_dark },
+            color = { fg = "#b0baf2", bg = bg_dark },
             cond = conditions.buffer_not_empty,
           },
         },
@@ -51,7 +67,7 @@ return {
             "branch",
             icon = get_icon "GitBranch",
             padding = { left = 2, right = 1 },
-            color = { fg = "#d183e8", bg = colors.bg_dark },
+            color = { fg = "#d183e8" },
           },
           {
             function()
@@ -59,7 +75,7 @@ return {
               if reg == "" then return "" end -- not recording
               return "Recording @" .. reg
             end,
-            color = { fg = "#60b2a7", bg = colors.bg_dark },
+            color = { fg = "#60b2a7" },
           },
           "%=",
           {
@@ -100,7 +116,7 @@ return {
             "searchcount",
             maxcount = 999,
             timeout = 500,
-            color = { fg = "#f7768e", bg = colors.bg_dark },
+            color = { fg = "#f7768e", bg = bg_dark },
           },
           {
             function()
@@ -129,13 +145,13 @@ return {
             fmt = string.upper,
             icon = "",
             padding = { left = 2, right = 1 },
-            color = { fg = "#60b2a7", bg = colors.bg_dark },
+            color = { fg = "#60b2a7", bg = bg_dark },
           },
           {
             "bo:tabstop",
             icon = "",
             padding = { left = 1, right = 1 },
-            color = { fg = "#60b2a7", bg = colors.bg_dark },
+            color = { fg = "#60b2a7", bg = bg_dark },
           },
           {
             "fileformat",
@@ -145,7 +161,7 @@ return {
               mac = " CR",
             },
             padding = { left = 1, right = 2 },
-            color = { fg = "#60b2a7", bg = colors.bg_dark },
+            color = { fg = "#60b2a7", bg = bg_dark },
           },
         },
         lualine_z = {
