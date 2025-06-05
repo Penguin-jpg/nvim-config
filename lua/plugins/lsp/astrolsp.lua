@@ -185,7 +185,7 @@ return {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight",
           cond = function(client)
-            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
+            return client:supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
           end,
         },
       },

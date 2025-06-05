@@ -3,10 +3,13 @@ local get_icon = require("utils.ui").get_icon
 return {
   "neovim/nvim-lspconfig",
   event = "User File",
-  dependencies = {
+  specs = {
     { "AstroNvim/astrolsp", opts = {} },
+  },
+  dependencies = {
     {
       "williamboman/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
+      version = "^1",
       dependencies = { "williamboman/mason.nvim" },
       cmd = { "LspInstall", "LspUninstall" },
       opts_extend = { "ensure_installed" },
