@@ -18,4 +18,5 @@ return {
     usePlaceholders = false,
     completeUnimported = true,
   },
+  on_attach = function(client) require "clangd_extensions" end,
 }

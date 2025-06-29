@@ -10,14 +10,12 @@ return {
         diagnosticMode = "openFilesOnly",
         typeCheckingMode = "basic",
         autoImportCompletions = true,
-        autoSearchPath = true,
         inlayHints = {
           variableTypes = true,
           functionReturnTypes = true,
           callArgumentNames = true,
           pytestParameters = true,
         },
-        useLibraryCodeForTypes = true,
         diagnosticSeverityOverrides = {
           reportUnusedImport = "information",
           reportUnusedFunction = "information",
