@@ -1,5 +1,6 @@
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
+  version = "^1",
   cmd = {
     "Mason",
     "MasonInstall",

@@ -8,7 +8,7 @@ return {
   },
   dependencies = {
     {
-      "williamboman/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
+      "mason-org/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
       version = "^1",
       dependencies = { "williamboman/mason.nvim" },
       cmd = { "LspInstall", "LspUninstall" },
