@@ -87,11 +87,7 @@ return {
     {
       "akinsho/bufferline.nvim",
       opts = function(_, opts)
-        return vim.tbl_extend(
-          "force",
-          opts,
-          { highlights = require("catppuccin.groups.integrations.bufferline").get() }
-        )
+        return vim.tbl_extend("force", opts, { highlights = require("catppuccin.special.bufferline").get_theme() })
       end,
     },
   },

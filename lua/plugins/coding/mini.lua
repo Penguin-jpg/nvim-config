@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.move",
+    "nvim-mini/mini.move",
     opts = {},
     keys = {
       { "<A-h>", mode = { "n", "x" }, desc = "Move line/block left" },
@@ -10,7 +10,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     opts = {
       n_lines = 200,
       mappings = {
@@ -34,7 +34,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     event = "User File",
     opts = function()
       -- define custom textobjects
