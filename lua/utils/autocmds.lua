@@ -51,4 +51,19 @@ function M.trigger_event(event, is_urgent)
   end
 end
 
+--- Execute autocommand across all valid buffers
+---@param event string|string[] the event or events to execute
+---@param opts vim.api.keyset.exec_autocmds Dictionary of autocommnd options
+function M.exec_buffer_autocmds(event, opts)
+  opts = vim.tbl_deep_extend("force", opts, { modeline = false })
+  for _, tabpage in ipairs(vim.api.nvim_list_tabpages()) do
+    for _, bufnr in ipairs(vim.t[tabpage].bufs or {}) do
+      if vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].filetype then
+        opts.buffer = bufnr
+        pcall(vim.api.nvim_exec_autocmds, event, opts)
+      end
+    end
+  end
+end
+
 return M

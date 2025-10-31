@@ -22,12 +22,6 @@ return {
             desc = "Find Text",
           },
           { icon = " ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
-          {
-            icon = "󰆓 ",
-            key = "s",
-            section = "session",
-            desc = "Restore session",
-          },
           { icon = " ", key = "q", action = ":qa", desc = "Quit" },
         },
         header = get_header("OH", 0, 0),

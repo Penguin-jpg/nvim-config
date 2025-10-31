@@ -24,11 +24,7 @@ return {
     },
     -- customize how language servers are attached
     handlers = {
-      function(server, server_opts)
-        vim.lsp.config(server, server_opts)
-        vim.lsp.enable(server)
-        -- require("lspconfig")[server].setup(server_opts)
-      end,
+      function(server, server_opts) require("lspconfig")[server].setup(server_opts) end,
     },
     -- customize default options passed to servers
     defaults = {
