@@ -21,18 +21,43 @@ create_autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
   desc = "Nvim user events for file detection (File and GitFile)",
   group = "custom_user_events",
   callback = function(args)
-    local empty_buffer = vim.fn.resolve(vim.fn.expand "%") == ""
-    local greeter = vim.api.nvim_get_option_value("filetype", { buf = args.buf }) == "dashboard"
-    local git_repo =
-      utils.run_cmd({ "git", "-C", vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand "%"), ":p:h"), "rev-parse" }, false)
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(args.buf) then return end
+      local empty_buffer = vim.fn.resolve(vim.fn.expand "%") == ""
+      local greeter = vim.api.nvim_get_option_value("filetype", { buf = args.buf }) == "dashboard"
+      local git_repo = utils.run_cmd(
+        { "git", "-C", vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand "%"), ":p:h"), "rev-parse" },
+        false
+      )
+      -- for any file exept empty buffer, or the greeter (dashboard)
+      if not (empty_buffer or greeter) then
+        local skip_augroups = {}
+        for _, autocmd in ipairs(vim.api.nvim_get_autocmds { event = args.event }) do
+          if autocmd.group_name then skip_augroups[autocmd.group_name] = true end
+        end
+        skip_augroups["filetypedetect"] = false -- don't skip filetypedetect events
 
-    -- for any file exept empty buffer, or the greeter (dashboard)
-    if not (empty_buffer or greeter) then
-      utils.trigger_event "User File"
+        -- utils.trigger_event("User File", true)
+        utils.trigger_event "User File"
 
-      -- is the buffer part of a git repo?
-      if git_repo then utils.trigger_event "User GitFile" end
-    end
+        -- is the buffer part of a git repo?
+        if git_repo then utils.trigger_event "User GitFile" end
+
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(args.buf) and vim.bo[args.buf].buflisted then
+            for _, autocmd in ipairs(vim.api.nvim_get_autocmds { event = args.event }) do
+              if autocmd.group_name and not skip_augroups[autocmd.group_name] then
+                vim.api.nvim_exec_autocmds(
+                  args.event,
+                  { group = autocmd.group_name, buffer = args.buf, data = args.data }
+                )
+                skip_augroups[autocmd.group_name] = true
+              end
+            end
+          end
+        end)
+      end
+    end)
   end,
 })
 

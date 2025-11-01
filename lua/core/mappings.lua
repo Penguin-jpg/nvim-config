@@ -8,6 +8,10 @@ set_map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = 
 set_map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 set_map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 set_map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+set_map({ "i", "t" }, "<A-h>", "<Left>", { desc = "Move left in insert/terminal mode", remap = true })
+set_map({ "i", "t" }, "<A-l>", "<Right>", { desc = "Move right in insert/terminal mode", remap = true })
+set_map({ "i", "t" }, "<A-j>", "<Down>", { desc = "Move down in insert/terminal mode", remap = true })
+set_map({ "i", "t" }, "<A-k>", "<Up>", { desc = "Move up in insert/terminal mode", remap = true })
 
 -- write/close
 set_map("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save" })

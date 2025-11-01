@@ -58,7 +58,8 @@ return {
           {
             "filename",
             padding = { left = 0, right = 0 },
-            color = { fg = "#b0baf2", bg = bg_dark },
+            -- color = { fg = "#b0baf2", bg = bg_dark },
+            color = { bg = bg_dark },
             cond = conditions.buffer_not_empty,
           },
         },
