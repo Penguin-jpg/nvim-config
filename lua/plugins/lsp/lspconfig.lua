@@ -12,7 +12,6 @@ return {
   dependencies = {
     {
       "mason-org/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
-      version = "^1",
       dependencies = { "williamboman/mason.nvim" },
       cmd = { "LspInstall", "LspUninstall" },
       opts_extend = { "ensure_installed" },
@@ -28,42 +27,42 @@ return {
         require("mason-lspconfig").setup(opts)
       end,
     },
-    -- {
-    --   "WhoIsSethDaniel/mason-tool-installer.nvim",
-    --   cmd = {
-    --     "MasonToolsInstall",
-    --     "MasonToolsInstallSync",
-    --     "MasonToolsUpdate",
-    --     "MasonToolsUpdateSync",
-    --     "MasonToolsClean",
-    --   },
-    --   opts = {
-    --     ensure_installed = {
-    --       -- lua
-    --       "lua-language-server",
-    --       "stylua",
-    --       "selene",
-    --       -- c/cpp
-    --       "clangd",
-    --       "clang-format",
-    --       "codelldb",
-    --       -- python
-    --       "ruff",
-    --       "basedpyright",
-    --       "debugpy",
-    --       -- json
-    --       "json-lsp",
-    --       -- markdown
-    --       "marksman",
-    --       "prettierd",
-    --     },
-    --   },
-    --   config = function(_, opts)
-    --     local mason_tool_installer = require "mason-tool-installer"
-    --     mason_tool_installer.setup(opts)
-    --     if opts.run_on_start ~= false then mason_tool_installer.run_on_start() end
-    --   end,
-    -- },
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      cmd = {
+        "MasonToolsInstall",
+        "MasonToolsInstallSync",
+        "MasonToolsUpdate",
+        "MasonToolsUpdateSync",
+        "MasonToolsClean",
+      },
+      opts = {
+        ensure_installed = {
+          -- lua
+          "lua-language-server",
+          "stylua",
+          "selene",
+          -- c/cpp
+          "clangd",
+          "clang-format",
+          "codelldb",
+          -- python
+          "ruff",
+          "basedpyright",
+          "debugpy",
+          -- json
+          "json-lsp",
+          -- markdown
+          "marksman",
+          "prettierd",
+        },
+      },
+      config = function(_, opts)
+        local mason_tool_installer = require "mason-tool-installer"
+        mason_tool_installer.setup(opts)
+        if opts.run_on_start ~= false then mason_tool_installer.run_on_start() end
+      end,
+    },
   },
   config = function()
     -- options for vim.diagnostic.config()

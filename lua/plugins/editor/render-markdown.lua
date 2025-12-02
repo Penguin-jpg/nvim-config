@@ -6,5 +6,10 @@ return {
     local opts = require("lazy.core.plugin").values(plugin, "opts", false)
     return opts.file_types or { "markdown" }
   end,
-  opts = {},
+  opts = {
+    preset = "obsidian",
+    completions = {
+      lsp = { enabled = true },
+    },
+  },
 }

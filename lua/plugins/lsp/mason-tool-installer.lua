@@ -28,8 +28,6 @@ return {
       -- markdown
       "marksman",
       "prettierd",
-      -- copilot
-      "copilot-language-server",
     },
     integrations = {
       ["mason-lspconfig"] = false,

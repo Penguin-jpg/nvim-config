@@ -84,14 +84,14 @@ return {
       ["<C-h>"] = { "show", "show_documentation", "hide_documentation" },
       ["<Up>"] = { "select_prev", "fallback" },
       ["<Down>"] = { "select_next", "fallback" },
-      ["<C-n>"] = { "select_next", "show" },
-      ["<C-p>"] = { "select_prev", "show" },
+      ["<C-j>"] = { "select_next", "show" },
+      ["<C-k>"] = { "select_prev", "show" },
       ["<C-u>"] = { "scroll_documentation_up", "fallback" },
       ["<C-d>"] = { "scroll_documentation_down", "fallback" },
       ["<C-c>"] = { "hide", "fallback" },
       -- ["<Esc>"] = { "hide", "fallback" },
       ["<Tab>"] = { "accept", "fallback" },
-      ["<C-j>"] = {
+      ["<C-n>"] = {
         "select_next",
         "snippet_forward",
         function(cmp)
@@ -99,7 +99,7 @@ return {
         end,
         "fallback",
       },
-      ["<C-k>"] = {
+      ["<C-p>"] = {
         "select_prev",
         "snippet_backward",
         function(cmp)
