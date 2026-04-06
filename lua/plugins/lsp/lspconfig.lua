@@ -12,6 +12,7 @@ return {
   dependencies = {
     {
       "mason-org/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
+      version = "^1",
       dependencies = { "williamboman/mason.nvim" },
       cmd = { "LspInstall", "LspUninstall" },
       opts_extend = { "ensure_installed" },
@@ -69,7 +70,7 @@ return {
     local diagnostics_opts = {
       underline = true,
       update_in_insert = false,
-      virtual_text = true,
+      virtaul_text = false, -- use tiny-inline-diagnostic instead
       virtual_lines = false,
       severity_sort = true,
       signs = {

@@ -109,13 +109,6 @@ return {
           end,
         },
       },
-      disable_virtual_lines_on_cursor_move = {
-        {
-          event = "CursorMoved",
-          desc = "Disable virtual lines on cursor move",
-          callback = function() vim.diagnostic.config { virtual_lines = false, virtual_text = true } end,
-        },
-      },
     },
     -- mappings to be set up on attaching of a language server
     mappings = {
