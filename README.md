@@ -4,7 +4,7 @@ My personal Neovim config
 
 ## Requirements
 
-- [Neovim](https://github.com/neovim/neovim) 0.11.0
+- [Neovim](https://github.com/neovim/neovim) 0.12.0
 
 ## Installation
 

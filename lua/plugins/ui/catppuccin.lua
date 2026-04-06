@@ -3,7 +3,7 @@ return {
   name = "catppuccin",
   lazy = true,
   priority = 1000,
-  init = function() vim.cmd "colorscheme catppuccin" end,
+  init = function() vim.cmd "colorscheme catppuccin-mocha" end,
   opts = {
     background = {
       light = "latte",

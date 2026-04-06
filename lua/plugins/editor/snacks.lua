@@ -33,7 +33,19 @@ return {
       style = "fancy",
     },
     quickfile = { enabled = true },
-    statuscolumn = { enabled = false }, -- set in options.lua
+    statuscolumn = {
+      enabled = true,
+      left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+      right = { "fold", "git" }, -- priority of signs on the right (high to low)
+      folds = {
+        open = true, -- show open fold icons
+        git_hl = false, -- use Git Signs hl for fold icons
+      },
+      git = {
+        -- patterns to match Git signs
+        patterns = { "GitSign", "MiniDiffSign" },
+      },
+    },
     scroll = { enabled = false },
     terminal = {
       win = {

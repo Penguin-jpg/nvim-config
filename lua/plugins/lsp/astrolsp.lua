@@ -8,23 +8,23 @@ return {
       inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
-    -- lsp client capabilities
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
     -- use conform.nvim for formatting
     formatting = { disabled = true },
     -- enable servers that you already have installed without mason
     servers = {},
-    -- customize language server configuration options passed to `lspconfig`
-    ---@diagnostic disable: missing-fields
+    -- configure language servers with `vim.lsp.config`
     config = {
+      -- configure default capabilities
+      ["*"] = { capabilities = vim.lsp.protocol.make_client_capabilities() },
+      -- configure specific servers
       lua_ls = require "plugins.lsp.configs.lua_ls",
       clangd = require "plugins.lsp.configs.clangd",
       basedpyright = require "plugins.lsp.configs.basedpyright",
       ruff = require "plugins.lsp.configs.ruff",
     },
-    -- customize how language servers are attached
+    -- configure how language servers get set up
     handlers = {
-      function(server, server_opts) require("lspconfig")[server].setup(server_opts) end,
+      -- function(server, server_opts) require("lspconfig")[server].setup(server_opts) end,
     },
     -- customize default options passed to servers
     defaults = {
@@ -80,7 +80,7 @@ return {
           event = { "TextChanged", "InsertLeave", "BufEnter" },
           desc = "Refresh codelens (buffer)",
           callback = function(args)
-            if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
+            if require("astrolsp").config.features.codelens then vim.lsp.codelens.enable(true, { bufnr = args.buf }) end
           end,
         },
       },

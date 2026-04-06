@@ -25,20 +25,6 @@ local function get_kind_icon(CTX)
         end
       end
     end
-    if not icon_provider then
-      local lspkind_avail, lspkind = pcall(require, "lspkind")
-      if lspkind_avail then
-        icon_provider = function(ctx)
-          if ctx.item.source_name == "LSP" then
-            local icon = lspkind.symbolic(ctx.kind, { mode = "symbol" })
-            if icon then ctx.kind_icon = icon end
-          elseif ctx.item.source_name == "Snippets" then
-            local icon = lspkind.symbolic("snippet", { mode = "symbol" })
-            if icon then ctx.kind_icon = icon end
-          end
-        end
-      end
-    end
     if not icon_provider then icon_provider = function() end end
   end
   -- evaluate highlight provider
@@ -70,16 +56,15 @@ local function get_kind_icon(CTX)
 end
 
 return {
-  "Saghen/blink.cmp",
-  version = "*",
-  event = "InsertEnter",
+  "saghen/blink.cmp",
+  version = "^1", -- make sure to always set version to v1 even on development
+  event = { "InsertEnter", "CmdlineEnter" },
   opts_extend = { "sources.default", "cmdline.sources", "term.sources" },
   opts = {
+    -- remember to enable your providers here
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
-      providers = {},
     },
-    snippets = { preset = "luasnip" },
     keymap = {
       ["<C-h>"] = { "show", "show_documentation", "hide_documentation" },
       ["<Up>"] = { "select_prev", "fallback" },
@@ -108,12 +93,7 @@ return {
         "fallback",
       },
     },
-    fuzzy = { implementation = "prefer_rust_with_warning" },
-    appearance = {
-      use_nvim_cmp_as_default = false,
-      nerd_font_variant = "mono",
-      kind_icons = require("utils.ui").get_kind_icons(),
-    },
+    fuzzy = { implementation = "prefer_rust" },
     completion = {
       list = { selection = { preselect = true, auto_insert = true } },
       menu = {
@@ -133,7 +113,7 @@ return {
         },
       },
       accept = {
-        auto_brackets = { enabled = false },
+        auto_brackets = { enabled = true },
       },
       documentation = {
         auto_show = true,
@@ -143,6 +123,12 @@ return {
           winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
         },
       },
+    },
+    cmdline = {
+      keymap = {
+        ["<End>"] = { "hide", "fallback" },
+      },
+      completion = { ghost_text = { enabled = false } },
     },
     signature = {
       enabled = true,
@@ -157,7 +143,10 @@ return {
     {
       "AstroNvim/astrolsp",
       opts = function(_, opts)
-        opts.capabilities = require("blink.cmp").get_lsp_capabilities(opts.capabilities)
+        if not opts.config then opts.config = {} end
+        if not opts.config["*"] then opts.config["*"] = {} end
+        opts.config["*"].capabilities = require("blink.cmp").get_lsp_capabilities(opts.config.capabilities)
+
         -- disable AstroLSP signature help if `blink.cmp` is providing it
         local blink_opts = require("utils.plugins").get_opts "blink.cmp"
         if vim.tbl_get(blink_opts, "signature", "enabled") == true then

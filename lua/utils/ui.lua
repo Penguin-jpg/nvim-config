@@ -144,8 +144,6 @@ function M.get_icon(name, num_spaces)
   local result = M.icons[name] ~= nil and M.icons[name] or ""
   return result .. string.rep(" ", num_spaces or 0)
 end
-
-function M.get_kind_icons() return M.icons["kind"] end
 ------------------------------------------------
 
 ------------------general-----------------------
