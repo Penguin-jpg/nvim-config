@@ -3,6 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.g.have_nerd_font = true
 vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
+vim.g.nes_enabled = true
 
 -- options
 vim.opt.clipboard = "unnamedplus" -- sync clipboard between OS and neovim

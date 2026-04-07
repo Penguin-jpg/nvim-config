@@ -8,12 +8,12 @@ create_augroup "on_filetypes"
 create_augroup "on_buffer_delete"
 create_augroup "on_lsp_attach"
 create_augroup "on_lsp_detach"
-create_augroup "bigfile"
 create_augroup "to_last_position"
-create_augroup "q_close_windows"
+create_augroup "q_close_window"
 create_augroup "clear_last_search"
 create_augroup "highlight_yank"
-create_augroup "highlight_search"
+create_augroup "auto_parent_dir"
+create_augroup "checktime"
 create_augroup "remove_trailing_whitespace"
 
 -- modified from https://github.com/NormalNvim/NormalNvim/blob/main/lua/base/3-autocmds.lua
@@ -104,49 +104,29 @@ create_autocmd("LspAttach", {
 -- recover the default foldexpr
 create_autocmd("LspDetach", { command = "setl foldexpr<" })
 
-vim.filetype.add {
-  pattern = {
-    [".*"] = {
-      function(path, buf)
-        return vim.bo[buf].filetype ~= "bigfile" and path and vim.fn.getfsize(path) > vim.g.bigfile_size and "bigfile"
-          or nil
-      end,
-    },
-  },
-}
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = "bigfile",
-  pattern = "bigfile",
-  callback = function(ev)
-    vim.b.minianimate_disable = true
-    vim.schedule(function() vim.bo[ev.buf].syntax = vim.filetype.match { buf = ev.buf } or "" end)
+create_autocmd("BufReadPost", {
+  desc = "Jump to last position when opening a file",
+  group = "to_last_position",
+  callback = function(args)
+    local buf = args.buf
+    if vim.b[buf].last_loc_restored or vim.tbl_contains({ "gitcommit" }, vim.bo[buf].filetype) then return end
+    vim.b[buf].last_loc_restored = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(buf) then pcall(vim.api.nvim_win_set_cursor, 0, mark) end
   end,
 })
 
 create_autocmd("BufWinEnter", {
-  desc = "Jump to last position when reopening a file",
-  group = "to_last_position",
-  pattern = "*",
-  command = [[ if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
-})
-
-create_autocmd("BufWinEnter", {
   desc = "Make q close help, man, quickfix, dap floats",
-  group = "q_close_windows",
+  group = "q_close_window",
+  pattern = { "help", "nofile", "quickfix", "checkhealth", "lspinfo", "gitsigns.blame" },
   callback = function(event)
-    if
-      vim.tbl_contains(
-        { "help", "nofile", "quickfix", "checkhealth", "lspinfo", "gitsigns.blame" },
-        vim.bo[event.buf].buftype
-      )
-    then
-      vim.keymap.set("n", "q", "<Cmd>close<CR>", {
-        desc = "Close window",
-        buffer = event.buf,
-        silent = true,
-        nowait = true,
-      })
-    end
+    vim.keymap.set("n", "q", "<Cmd>Close<CR>", {
+      buffer = event.buf,
+      silent = true,
+      nowait = true,
+      desc = "Close window",
+    })
   end,
 })
 
@@ -161,6 +141,24 @@ create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
   group = "highlight_yank",
   callback = function() vim.highlight.on_yank() end,
+})
+
+create_autocmd("BufWritePre", {
+  desc = "Automatically create parent directories if they don't exist when saving a file",
+  group = "auto_parent_dir",
+  callback = function(event)
+    if event.match:match "^%w%w+:[\\/][\\/]" then return end
+    local file = vim.uv.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+})
+
+create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  desc = "Check if buffers changed on editor focus",
+  group = "checktime",
+  callback = function()
+    if vim.bo.buftype ~= "nofile" then vim.cmd "checktime" end
+  end,
 })
 
 create_autocmd("BufWritePre", {

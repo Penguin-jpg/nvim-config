@@ -1,3 +1,14 @@
 {
-  "format.enable": false
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime": {
+    "version": "LuaJIT"
+  },
+  "workspace": {
+    "ignoreDir": [
+      ".git",
+      "node_modules",
+      ".cache"
+    ],
+    "checkThirdParty": false
+  }
 }

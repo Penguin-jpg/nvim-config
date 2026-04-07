@@ -1,13 +1,32 @@
 return {
   "folke/sidekick.nvim",
+  event = "User File",
   opts = {
     cli = {
       mux = {
         enabled = true,
       },
     },
+    nes = {
+      enabled = vim.g.nes_enabled,
+    },
   },
+  init = function()
+    -- enable copilot_ls for NES
+    vim.lsp.enable "copilot_ls"
+  end,
   keys = {
+    {
+      "<Tab>",
+      function()
+        -- if there is a next edit, jump to it, otherwise apply it if any
+        if not require("sidekick").nes_jump_or_apply() then
+          return "<Tab>" -- fallback to normal tab
+        end
+      end,
+      expr = true,
+      desc = "Goto/Apply NES",
+    },
     {
       "<C-.>",
       function() require("sidekick.cli").focus() end,
@@ -54,7 +73,11 @@ return {
     },
     {
       "<Leader>tn",
-      function() require("sidekick.nes").toggle() end,
+      function()
+        vim.g.nes_enabled = not vim.g.nes_enabled
+        require("sidekick.nes").toggle()
+        require("utils").notify(string.format("NES %s", require("utils").bool2str(vim.g.nes_enabled)))
+      end,
       mode = { "n" },
       desc = "Toggle NES",
     },
@@ -63,6 +86,18 @@ return {
       function() require("sidekick.nes").update() end,
       mode = { "n" },
       desc = "Update NES",
+    },
+    {
+      "<Leader>ans",
+      function()
+        if require("sidekick.nes").have() then
+          require("utils").notify "Suggestions available"
+        else
+          require("utils").notify "No suggestions available"
+        end
+      end,
+      mode = { "n" },
+      desc = "Show active suggestions",
     },
   },
 }

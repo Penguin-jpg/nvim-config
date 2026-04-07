@@ -31,6 +31,27 @@ return {
           dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open {} end
           dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close {} end
           dap.listeners.before.event_exited["dapui_config"] = function() dapui.close {} end
+
+          -- configurations for languages
+          for _, lang in ipairs { "c", "cpp" } do
+            dap.configurations[lang] = {
+              {
+                type = "codelldb",
+                request = "launch",
+                name = "Launch file",
+                program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
+                cwd = "${workspaceFolder}",
+                stopOnEntry = false,
+              },
+              {
+                type = "codelldb",
+                request = "attach",
+                name = "Attach to process",
+                pid = require("dap.utils").pick_process,
+                cwd = "${workspaceFolder}",
+              },
+            }
+          end
         end,
         keys = {
           { "<Leader>du", function() require("dapui").toggle() end, mode = { "n" }, desc = "Toggle debugger UI" },
@@ -88,8 +109,6 @@ return {
       { "<Leader>di", function() require("dap").step_into() end, desc = "Step into" },
       { "<Leader>do", function() require("dap").step_out() end, desc = "Step out" },
       { "<Leader>dO", function() require("dap").step_over() end, desc = "Step over" },
-      -- { "<Leader>dk", function() require("dap").up() end, desc = "Up" },
-      -- { "<Leader>dj", function() require("dap").down() end, desc = "Down" },
       { "<Leader>dp", function() require("dap").pause() end, desc = "Pause" },
       { "<Leader>dr", function() require("dap").restart_frame() end, desc = "Restart" },
       { "<Leader>dR", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
@@ -104,6 +123,17 @@ return {
       { "<F8>", function() require("dap").step_into() end, desc = "Step into" },
       { "<F9>", function() require("dap").step_out() end, desc = "Step out" },
       { "<F10>", function() require("dap").step_over() end, desc = "Step over" },
+    },
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    config = function(_, opts)
+      local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+      require("dap-python").setup(path)
+    end,
+    keys = {
+      { "<Leader>dm", function() require("dap-python").test_method() end, desc = "Test method" },
     },
   },
 }
