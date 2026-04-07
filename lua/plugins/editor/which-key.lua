@@ -11,6 +11,7 @@ return {
     },
     spec = {
       mode = { "n", "v" },
+      { "<Leader>a", group = "AI", icon = { icon = " " } },
       { "<Leader>b", group = "Buffer", icon = { icon = " " } },
       { "<Leader>d", group = "Debugger", icon = { icon = " " } },
       { "<Leader>f", group = "Find", icon = { icon = " " } },

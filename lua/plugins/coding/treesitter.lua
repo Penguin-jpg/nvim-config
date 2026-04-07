@@ -20,7 +20,6 @@ return {
         "lua",
         "python",
         "json",
-        "jsonc",
         "markdown",
         "markdown_inline",
         "latex",
@@ -95,11 +94,6 @@ return {
   },
   {
     "folke/ts-comments.nvim",
-    event = "User File",
-    opts = {},
-  },
-  {
-    "windwp/nvim-ts-autotag",
     event = "User File",
     opts = {},
   },

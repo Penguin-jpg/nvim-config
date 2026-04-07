@@ -65,6 +65,7 @@ return {
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
     },
+    snippets = { preset = "luasnip" },
     keymap = {
       ["<C-h>"] = { "show", "show_documentation", "hide_documentation" },
       ["<Up>"] = { "select_prev", "fallback" },
@@ -113,7 +114,7 @@ return {
         },
       },
       accept = {
-        auto_brackets = { enabled = true },
+        auto_brackets = { enabled = false },
       },
       documentation = {
         auto_show = true,

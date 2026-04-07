@@ -53,6 +53,7 @@ vim.opt.undofile = true -- enable persistent undo
 vim.opt.updatetime = 250 -- length of time to wait before triggering the plugin
 vim.opt.virtualedit = "block" -- allow going past end of line in visual block mode
 vim.opt.scrolloff = 10 -- lines of context
+vim.opt.sidescrolloff = 8 -- same as scrolloff but for side
 vim.opt.wrap = false -- disable wrapping of lines longer than the width of window
 vim.opt.writebackup = false -- disable making a backup before overwriting a file
 vim.opt.swapfile = false -- ask what state to recover when opening a file that was not saved

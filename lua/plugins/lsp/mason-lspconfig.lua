@@ -9,8 +9,6 @@ return {
   opts_extend = { "ensure_installed" },
   opts = {
     ensure_installed = {},
-    -- use AstroLSP setup for mason-lspconfig
-    -- handlers = { function(server) require("astrolsp").lsp_setup(server) end },
   },
   config = function(_, opts)
     local mason_lsp_setup

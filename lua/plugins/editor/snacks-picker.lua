@@ -39,18 +39,16 @@ return {
       },
       -- LSP
       { "<Leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "Find LSP symbols" },
+      { "<Leader>fL", function() Snacks.picker.lsp_config() end, desc = "Find LSP config" },
       -- git
       { "<Leader>gc", function() Snacks.picker.git_log() end, desc = "Git log" },
       { "<Leader>gs", function() Snacks.picker.git_status() end, desc = "Git status" },
     },
-  },
-  {
-    "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope", "TodoLocList", "TodoQuickFix" },
-    event = "User File",
-    opts = {},
-    keys = {
-      { "<Leader>fT", function() Snacks.picker.todo_comments() end, desc = "Find Todos" },
+    spec = {
+      "folke/todo-comments.nvim",
+      keys = {
+        { "<Leader>fT", function() Snacks.picker.todo_comments() end, desc = "Find Todos" },
+      },
     },
   },
 }

@@ -23,9 +23,7 @@ return {
       ruff = require "plugins.lsp.configs.ruff",
     },
     -- configure how language servers get set up
-    handlers = {
-      -- function(server, server_opts) require("lspconfig")[server].setup(server_opts) end,
-    },
+    handlers = {},
     -- customize default options passed to servers
     defaults = {
       hover = {
