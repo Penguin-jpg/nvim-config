@@ -16,11 +16,6 @@ return {
     config = {
       -- configure default capabilities
       ["*"] = { capabilities = vim.lsp.protocol.make_client_capabilities() },
-      -- configure specific servers
-      lua_ls = require "plugins.lsp.configs.lua_ls",
-      clangd = require "plugins.lsp.configs.clangd",
-      basedpyright = require "plugins.lsp.configs.basedpyright",
-      ruff = require "plugins.lsp.configs.ruff",
     },
     -- configure how language servers get set up
     handlers = {},

@@ -21,7 +21,8 @@ return {
       "codelldb",
       -- python
       "ruff",
-      "basedpyright",
+      -- "basedpyright",
+      "ty",
       "debugpy",
       -- json
       "json-lsp",
