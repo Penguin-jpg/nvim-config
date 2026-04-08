@@ -3,12 +3,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = vim.fn.argc(-1) == 0, -- load treesitter immediately when opening a file from the cmdline
-    event = "VeryLazy",
+    event = "User File",
     cmd = { "TSInstall", "TSInstallFromGrammar", "TSUninstall", "TSUpdate", "TSLog" },
     build = ":TSUpdate",
-    opts = {
-      auto_install = true,
-      ensure_installed = {
+    config = function()
+      -- install parsers
+      local ensure_installed = {
         "bash",
         "vim",
         "vimdoc",
@@ -24,60 +24,29 @@ return {
         "markdown_inline",
         "latex",
         "html",
-      },
-      highlight = { enable = true },
-      incremental_selection = { enable = true },
-      indent = { enable = true },
-    },
+      }
+      local installed = require("nvim-treesitter.config").get_installed()
+      local to_install = vim
+        .iter(ensure_installed)
+        :filter(function(parser) return not vim.tbl_contains(installed, parser) end)
+        :totable()
+      require("nvim-treesitter").install(to_install)
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          -- enable treesitter highlighting and disable regex syntax
+          pcall(vim.treesitter.start)
+          -- enable treesitter-based indentation
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
     lazy = "User File",
-    opts = {
-      select = { lookahead = true },
-      move = {
-        enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
-        -- LazyVim extention to create buffer-local keymaps
-        keys = {
-          goto_next_start = {
-            ["]k"] = "@block.outer",
-            ["]f"] = "@function.outer",
-            ["]c"] = "@class.outer",
-            ["]a"] = "@parameter.inner",
-          },
-          goto_next_end = {
-            ["]K"] = "@block.outer",
-            ["]F"] = "@function.outer",
-            ["]C"] = "@class.outer",
-            ["]A"] = "@parameter.inner",
-          },
-          goto_previous_start = {
-            ["[k"] = "@block.outer",
-            ["[f"] = "@function.outer",
-            ["[c"] = "@class.outer",
-            ["[a"] = "@parameter.inner",
-          },
-          goto_previous_end = {
-            ["[K"] = "@block.outer",
-            ["[F"] = "@function.outer",
-            ["[C"] = "@class.outer",
-            ["[A"] = "@parameter.inner",
-          },
-          swap_next = {
-            [">k"] = "@block.outer",
-            [">f"] = "@function.outer",
-            [">a"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<k"] = "@block.outer",
-            ["<f"] = "@function.outer",
-            ["<a"] = "@parameter.inner",
-          },
-        },
-      },
-    },
+    opts = { select = { lookahead = true } },
   },
   {
     "nvim-treesitter/nvim-treesitter-context",

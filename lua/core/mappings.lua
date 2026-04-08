@@ -71,6 +71,23 @@ set_map("n", "<A-Right>", "<Cmd>vertical resize +2<CR>", { desc = "Resize split 
 set_map("n", "<A-Up>", "<Cmd>resize -2<CR>", { desc = "Resize split up" })
 set_map("n", "<A-Down>", "<Cmd>resize +2<CR>", { desc = "Resize split down" })
 
+-- incremental selection
+set_map({ "n", "x", "o" }, "<A-o>", function()
+  if vim.treesitter.get_parser(nil, nil, { error = false }) then
+    require("vim.treesitter._select").select_parent(vim.v.count1)
+  else
+    vim.lsp.buf.selection_range(vim.v.count1)
+  end
+end, { desc = "Select parent node or outer incremental lsp selections" })
+
+set_map({ "n", "x", "o" }, "<A-i>", function()
+  if vim.treesitter.get_parser(nil, nil, { error = false }) then
+    require("vim.treesitter._select").select_child(vim.v.count1)
+  else
+    vim.lsp.buf.selection_range(-vim.v.count1)
+  end
+end, { desc = "Select child node or inner incremental lsp selections" })
+
 -- buffer
 set_map("n", "<Leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
