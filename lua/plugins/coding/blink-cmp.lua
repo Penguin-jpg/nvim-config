@@ -140,21 +140,12 @@ return {
       },
     },
   },
-  specs = {
-    {
-      "AstroNvim/astrolsp",
-      opts = function(_, opts)
-        if not opts.config then opts.config = {} end
-        if not opts.config["*"] then opts.config["*"] = {} end
-        opts.config["*"].capabilities = require("blink.cmp").get_lsp_capabilities(opts.config.capabilities)
-
-        -- disable AstroLSP signature help if `blink.cmp` is providing it
-        local blink_opts = require("utils.plugins").get_opts "blink.cmp"
-        if vim.tbl_get(blink_opts, "signature", "enabled") == true then
-          if not opts.features then opts.features = {} end
-          opts.features.signature_help = false
-        end
-      end,
-    },
-  },
+  config = function(_, opts)
+    require("blink-cmp").setup(opts)
+    -- override default LSP capabilities
+    vim.lsp.config(
+      "*",
+      { capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()) }
+    )
+  end,
 }

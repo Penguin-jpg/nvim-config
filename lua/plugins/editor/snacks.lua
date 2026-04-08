@@ -103,6 +103,11 @@ return {
       desc = "Open lazygit",
     },
     {
+      "<Leader>ti",
+      function() Snacks.toggle.inlay_hints() end,
+      desc = "Toggle inlay hints",
+    },
+    {
       "`",
       function() Snacks.terminal() end,
       desc = "Toggle terminal",

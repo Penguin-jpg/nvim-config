@@ -11,10 +11,6 @@ return {
       enabled = vim.g.nes_enabled,
     },
   },
-  init = function()
-    -- enable copilot_ls for NES
-    vim.lsp.enable "copilot_ls"
-  end,
   keys = {
     {
       "<Tab>",

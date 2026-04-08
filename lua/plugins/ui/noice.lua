@@ -18,7 +18,7 @@ return {
         ["cmp.entry.get_documentation"] = true,
       },
       progress = { enabled = true },
-      hover = { enabled = false },
+      hover = { enabled = true },
       signature = { enabled = false },
     },
     messages = {
