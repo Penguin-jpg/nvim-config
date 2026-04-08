@@ -71,6 +71,12 @@ set_map("n", "<A-Right>", "<Cmd>vertical resize +2<CR>", { desc = "Resize split 
 set_map("n", "<A-Up>", "<Cmd>resize -2<CR>", { desc = "Resize split up" })
 set_map("n", "<A-Down>", "<Cmd>resize +2<CR>", { desc = "Resize split down" })
 
+-- move line/block
+set_map("n", "<A-k>", "<Cmd>execute 'move .-' . (v:count1 + 1)<CR>==", { desc = "Move line up" })
+set_map("n", "<A-j>", "<Cmd>execute 'move .+' . v:count1<CR>==", { desc = "Move line down" })
+set_map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<CR>gv=gv", { desc = "Move block up" })
+set_map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<CR>gv=gv", { desc = "Move block down" })
+
 -- incremental selection
 set_map({ "n", "x", "o" }, "<A-o>", function()
   if vim.treesitter.get_parser(nil, nil, { error = false }) then
