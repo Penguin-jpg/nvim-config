@@ -117,14 +117,19 @@ create_autocmd("BufReadPost", {
 create_autocmd("BufWinEnter", {
   desc = "Make q close help, man, quickfix, dap floats",
   group = "q_close_window",
-  pattern = { "help", "nofile", "quickfix", "checkhealth", "lspinfo", "gitsigns.blame" },
+  pattern = { "help", "nofile", "qf", "checkhealth", "lspinfo", "gitsigns.blame", "grug-far" },
   callback = function(event)
-    vim.keymap.set("n", "q", "<Cmd>Close<CR>", {
-      buffer = event.buf,
-      silent = true,
-      nowait = true,
-      desc = "Close window",
-    })
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+      vim.keymap.set("n", "q", function()
+        vim.cmd "close"
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, {
+        buffer = event.buf,
+        silent = true,
+        desc = "Close window",
+      })
+    end)
   end,
 })
 

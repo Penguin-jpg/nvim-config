@@ -109,8 +109,8 @@ return {
     },
     {
       "`",
-      function() Snacks.terminal() end,
-      desc = "Toggle terminal",
+      function() Snacks.terminal.open() end,
+      desc = "Open a new terminal",
     },
     {
       "[r",
