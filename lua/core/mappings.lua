@@ -14,9 +14,9 @@ set_map({ "i", "t" }, "<A-j>", "<Down>", { desc = "Move down in insert/terminal 
 set_map({ "i", "t" }, "<A-k>", "<Up>", { desc = "Move up in insert/terminal mode", remap = true })
 
 -- write/close
-set_map("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save" })
+set_map("n", "<C-s>", "<Cmd>silent! update! | redraw<CR>", { desc = "Save" })
 set_map("n", "<C-q>", "<Cmd>confirm q<CR>", { desc = "Quit" })
-set_map("i", "<C-s>", "<Cmd>w<CR>", { desc = "Save" })
+set_map("i", "<C-s>", "<Cmd>silent! update! | redraw<CR>", { desc = "Save" })
 set_map("n", "<Leader>bc", "<Cmd>bdelete<CR>", { desc = "Close buffer" })
 
 -- yank/paste

@@ -9,7 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+require("lazy").setup {
   spec = {
     -- folder of plugin configs
     { import = "plugins.ui" },
@@ -17,9 +17,9 @@ require("lazy").setup({
     { import = "plugins.coding" },
     { import = "plugins.editor" },
   },
-}, {
   -- configure any other `lazy.nvim` configuration options here
   ui = { backdrop = 100 },
+  change_detection = { notify = false },
   performance = {
     rtp = {
       -- disable some rtp plugins, add more to your liking
@@ -32,4 +32,4 @@ require("lazy").setup({
       },
     },
   },
-})
+}
