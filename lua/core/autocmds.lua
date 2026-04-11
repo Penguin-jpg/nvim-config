@@ -117,19 +117,34 @@ create_autocmd("BufReadPost", {
 create_autocmd("BufWinEnter", {
   desc = "Make q close help, man, quickfix, dap floats",
   group = "q_close_window",
-  pattern = { "help", "nofile", "qf", "checkhealth", "lspinfo", "gitsigns.blame", "grug-far" },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.schedule(function()
-      vim.keymap.set("n", "q", function()
-        vim.cmd "close"
-        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
-      end, {
-        buffer = event.buf,
-        silent = true,
+  callback = function(args)
+    -- add cache for buffers that have already had mappings created
+    if not vim.g.q_close_windows then vim.g.q_close_windows = {} end
+    -- if the buffer has been checked already, skip
+    if vim.g.q_close_windows[args.buf] then return end
+    -- mark the buffer as checked
+    vim.g.q_close_windows[args.buf] = true
+    -- if the buftype is a non-real file, create one
+    if
+      vim.tbl_contains(
+        { "help", "nofile", "qf", "checkhealth", "lspinfo", "gitsigns.blame", "grug-far" },
+        vim.bo[args.buf].buftype
+      )
+    then
+      vim.keymap.set("n", "q", "<Cmd>close<CR>", {
         desc = "Close window",
+        buffer = args.buf,
+        silent = true,
+        nowait = true,
       })
-    end)
+    end
+  end,
+})
+create_autocmd("BufDelete", {
+  desc = "Clean up q_close_window cache",
+  group = "q_close_window",
+  callback = function(args)
+    if vim.g.q_close_windows then vim.g.q_close_windows[args.buf] = nil end
   end,
 })
 

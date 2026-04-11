@@ -12,6 +12,20 @@ set_map({ "i", "t" }, "<A-h>", "<Left>", { desc = "Move left in insert/terminal 
 set_map({ "i", "t" }, "<A-l>", "<Right>", { desc = "Move right in insert/terminal mode", remap = true })
 set_map({ "i", "t" }, "<A-j>", "<Down>", { desc = "Move down in insert/terminal mode", remap = true })
 set_map({ "i", "t" }, "<A-k>", "<Up>", { desc = "Move up in insert/terminal mode", remap = true })
+set_map("n", "<A-k>", "<Cmd>silent execute 'move .-' . (v:count1 + 1)<CR>==", { desc = "Move line up" })
+set_map("n", "<A-j>", "<Cmd>silent execute 'move .+' . v:count1<CR>==", { desc = "Move line down" })
+set_map(
+  "v",
+  "<A-k>",
+  ":<C-u>silent execute \"'<,'>move '<-\" . (v:count1 + 1)<CR>gv=gv",
+  { desc = "Move block up", silent = true }
+)
+set_map(
+  "v",
+  "<A-j>",
+  ":<C-u>silent execute \"'<,'>move '>+\" . v:count1<CR>gv=gv",
+  { desc = "Move block down", silent = true }
+)
 
 -- write/close
 set_map("n", "<C-s>", "<Cmd>silent! update! | redraw<CR>", { desc = "Save" })
@@ -70,12 +84,6 @@ set_map("n", "<A-Left>", "<Cmd>vertical resize -2<CR>", { desc = "Resize split l
 set_map("n", "<A-Right>", "<Cmd>vertical resize +2<CR>", { desc = "Resize split right" })
 set_map("n", "<A-Up>", "<Cmd>resize -2<CR>", { desc = "Resize split up" })
 set_map("n", "<A-Down>", "<Cmd>resize +2<CR>", { desc = "Resize split down" })
-
--- move line/block
-set_map("n", "<A-k>", "<Cmd>execute 'move .-' . (v:count1 + 1)<CR>==", { desc = "Move line up" })
-set_map("n", "<A-j>", "<Cmd>execute 'move .+' . v:count1<CR>==", { desc = "Move line down" })
-set_map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<CR>gv=gv", { desc = "Move block up" })
-set_map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<CR>gv=gv", { desc = "Move block down" })
 
 -- incremental selection
 set_map({ "n", "x", "o" }, "<A-o>", function()

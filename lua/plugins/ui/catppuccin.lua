@@ -19,6 +19,7 @@ return {
     default_integrations = false,
     integrations = {
       blink_cmp = true,
+      blink_pairs = true,
       dap = true,
       dap_ui = true,
       diffview = true,
