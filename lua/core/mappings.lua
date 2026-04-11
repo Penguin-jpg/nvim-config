@@ -1,7 +1,9 @@
 local set_map = vim.keymap.set
 
 -- utilities
-set_map({ "i", "n" }, "<Esc>", "<Cmd>noh<CR><Esc>", { desc = "Escape and Clear hlsearch" })
+set_map({ "n", "i" }, "<Esc>", "<Cmd>noh<CR><Esc>", { desc = "Escape and Clear hlsearch" })
+set_map("n", "u", "<Cmd>silent undo<CR>", { desc = "Silent undo" })
+set_map({ "n", "i" }, "<C-r>", "<Cmd>silent redo<CR>", { desc = "Silent redo" })
 
 -- move
 set_map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -12,8 +14,8 @@ set_map({ "i", "t" }, "<A-h>", "<Left>", { desc = "Move left in insert/terminal 
 set_map({ "i", "t" }, "<A-l>", "<Right>", { desc = "Move right in insert/terminal mode", remap = true })
 set_map({ "i", "t" }, "<A-j>", "<Down>", { desc = "Move down in insert/terminal mode", remap = true })
 set_map({ "i", "t" }, "<A-k>", "<Up>", { desc = "Move up in insert/terminal mode", remap = true })
-set_map("n", "<A-k>", "<Cmd>silent execute 'move .-' . (v:count1 + 1)<CR>==", { desc = "Move line up" })
-set_map("n", "<A-j>", "<Cmd>silent execute 'move .+' . v:count1<CR>==", { desc = "Move line down" })
+set_map("n", "<A-k>", "<Cmd>execute 'move .-' . (v:count1 + 1)<CR>==", { desc = "Move line up" })
+set_map("n", "<A-j>", "<Cmd>execute 'move .+' . v:count1<CR>==", { desc = "Move line down" })
 set_map(
   "v",
   "<A-k>",

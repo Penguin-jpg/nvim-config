@@ -33,6 +33,7 @@ vim.opt.mouse = "a" -- enable mouse support
 vim.opt.preserveindent = true -- preserve indent structure as much as possible
 vim.opt.pumheight = 10 -- height of the pop up menu
 vim.opt.number = true -- show numberline
+vim.opt.report = 99999 -- only show messages when 99999 lines changed
 vim.opt.relativenumber = true -- show relative numberline
 vim.opt.shiftround = true -- round indentation with `>`/`<` to shiftwidth
 vim.opt.shiftwidth = 0 -- number of space inserted for indentation; when zero the 'tabstop' value will be used
