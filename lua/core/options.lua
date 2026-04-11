@@ -38,6 +38,7 @@ vim.opt.shiftround = true -- round indentation with `>`/`<` to shiftwidth
 vim.opt.shiftwidth = 0 -- number of space inserted for indentation; when zero the 'tabstop' value will be used
 vim.opt.tabstop = 2 -- set the number of space in a tab to 4
 vim.opt.softtabstop = 2 -- can be differnt from tabstop
+vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,terminal" -- things to save for sessions
 vim.opt.shortmess:append { s = true, I = true, c = true, C = true } -- disable search count wrap, startup messages, and completion messages
 vim.opt.showmode = false -- disable showing modes in command line
 vim.opt.showtabline = 2 -- always display tabline

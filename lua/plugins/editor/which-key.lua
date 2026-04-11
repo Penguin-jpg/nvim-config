@@ -20,6 +20,7 @@ return {
       { "<Leader>l", group = "LSP", icon = { icon = " " } },
       { "<Leader>m", group = "Multi-cursor", icon = { icon = "󰇀 " } },
       { "<Leader>s", group = "Search/Replace", icon = { icon = "󰛔 " } },
+      { "<Leader>S", group = "Session", icon = { icon = "󰆓 " } },
       { "<leader>t", group = "Toggle", icon = { icon = "󰔡 " } },
       { "<Leader>u", group = "Dismiss", icon = { icon = "󰪑 " } },
       { "<leader>x", group = "Diagnostics/Quickfix", icon = { icon = "󰒡 " } },

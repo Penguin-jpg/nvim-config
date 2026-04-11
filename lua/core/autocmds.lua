@@ -232,3 +232,11 @@ create_autocmd("LspProgress", {
     })
   end,
 })
+
+create_autocmd("BufEnter", {
+  desc = "Automatically detect project root",
+  callback = function()
+    local root = vim.fs.root(0, { ".git", "package.json", "Makefile", "pyproject.toml" }) or "."
+    vim.cmd.cd(root)
+  end,
+})

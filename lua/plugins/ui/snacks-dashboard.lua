@@ -22,6 +22,7 @@ return {
             desc = "Find Text",
           },
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = " ", key = "S", desc = "Load Session", action = ":lua require('persistence').load()" },
           { icon = " ", key = "q", action = ":qa", desc = "Quit" },
         },
         header = get_header("OH", 0, 0),
