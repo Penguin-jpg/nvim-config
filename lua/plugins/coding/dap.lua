@@ -22,15 +22,18 @@ return {
         config = function(_, opts) require("mason-nvim-dap").setup(opts) end,
       },
       {
-        "rcarriga/nvim-dap-ui",
-        dependencies = { { "nvim-neotest/nvim-nio", lazy = true } },
-        opts = { floating = { border = "rounded" } },
+        "igorlfs/nvim-dap-view",
+        lazy = true,
+        version = "1.*",
+        ---@module 'dap-view'
+        ---@type dapview.Config
+        opts = { virtual_text = { enabled = true } },
         config = function(_, opts)
-          local dap, dapui = require "dap", require "dapui"
-          dapui.setup(opts)
-          dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open {} end
-          dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close {} end
-          dap.listeners.before.event_exited["dapui_config"] = function() dapui.close {} end
+          local dap, dap_view = require "dap", require "dap-view"
+          dap_view.setup(opts)
+          dap.listeners.after.event_initialized["dapview_config"] = function() dap_view.open {} end
+          dap.listeners.before.event_terminated["dapview_config"] = function() dap_view.close {} end
+          dap.listeners.before.event_exited["dapview_config"] = function() dap_view.close {} end
 
           -- configurations for languages
           for _, lang in ipairs { "c", "cpp" } do
@@ -54,27 +57,16 @@ return {
           end
         end,
         keys = {
-          { "<Leader>du", function() require("dapui").toggle() end, mode = { "n" }, desc = "Toggle debugger UI" },
+          { "<Leader>du", function() require("dap-view").toggle() end, desc = "Toggle debugger UI" },
           {
             "<Leader>de",
             function()
               vim.ui.input({ prompt = "Expression: " }, function(expr)
-                if expr then require("dapui").eval(expr, { enter = true }) end
+                if expr then require("dap-view").add_expr(expr) end
               end)
             end,
-            mode = { "n" },
             desc = "Evaluate Input",
           },
-          { "<Leader>de", function() require("dapui").eval() end, mode = { "v" }, desc = "Evaluate Input" },
-        },
-      },
-      {
-        "theHamsta/nvim-dap-virtual-text",
-        lazy = true,
-        opts = {
-          commented = true,
-          enabled = true,
-          enabled_commands = true,
         },
       },
     },

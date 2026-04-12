@@ -127,7 +127,7 @@ create_autocmd("BufWinEnter", {
     -- if the buftype is a non-real file, create one
     if
       vim.tbl_contains(
-        { "help", "nofile", "qf", "checkhealth", "lspinfo", "gitsigns.blame", "grug-far" },
+        { "help", "nofile", "quickfix", "checkhealth", "lspinfo", "gitsigns.blame", "grug-far" },
         vim.bo[args.buf].buftype
       )
     then
