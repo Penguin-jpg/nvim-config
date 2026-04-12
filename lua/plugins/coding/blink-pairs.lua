@@ -2,6 +2,7 @@ return {
   "saghen/blink.pairs",
   version = "*",
   build = "cargo build --release",
+  event = "InsertEnter",
   opts = {
     mappings = {
       enabled = true,
