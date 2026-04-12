@@ -28,7 +28,6 @@ return {
       "json-lsp",
       -- markdown
       "marksman",
-      "prettierd",
       -- copilot
       "copilot-language-server",
     },

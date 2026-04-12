@@ -87,6 +87,7 @@ return {
       "clangd",
       "ty",
       "ruff",
+      "marksman",
     }
   end,
 }
