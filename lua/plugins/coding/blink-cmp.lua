@@ -64,6 +64,12 @@ return {
     -- remember to enable your providers here
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
+      providers = {
+        lsp = { score_offset = 0 },
+        path = { score_offset = 3 },
+        snippets = { score_offset = 5 },
+        buffer = { score_offset = -3 },
+      },
     },
     snippets = { preset = "luasnip" },
     keymap = {
@@ -127,7 +133,12 @@ return {
     },
     cmdline = {
       keymap = {
-        ["<End>"] = { "hide", "fallback" },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<C-j>"] = { "select_next", "show" },
+        ["<C-k>"] = { "select_prev", "show" },
+        ["<C-c>"] = { "hide", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
       },
       completion = { ghost_text = { enabled = false } },
     },
