@@ -47,6 +47,7 @@ return {
       },
     },
     scroll = { enabled = false },
+    image = { enabled = true },
     terminal = {
       win = {
         keys = {
@@ -102,6 +103,11 @@ return {
     },
     {
       "`",
+      function() Snacks.terminal() end,
+      desc = "Open existing terminal",
+    },
+    {
+      "~",
       function() Snacks.terminal.open() end,
       desc = "Open a new terminal",
     },

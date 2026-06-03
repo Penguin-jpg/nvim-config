@@ -1,5 +1,6 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
+  ft = "markdown",
   cmd = "RenderMarkdown",
   opts = {
     sign = { enabled = false },
@@ -89,6 +90,15 @@ return {
         head_border = true,
         head_background = true,
       },
+    },
+    latex = {
+      enabled = true,
+      render_modes = false,
+      converter = { "utftex", "latex2text" },
+      highlight = "RenderMarkdownMath",
+      position = "center",
+      top_pad = 0,
+      bottom_pad = 0,
     },
     -- https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/509
     win_options = { concealcursor = { rendered = "nvc" } },
